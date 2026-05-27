@@ -53,15 +53,15 @@ export function RsvpForm() {
 
     setSubmitting(true);
 
-    // Additional check in DB to be extra safe
+    // Additional check in DB: search by full name OR phone to avoid duplicates
     const { data: existing } = await supabase
       .from("rsvps")
       .select("id")
-      .eq("full_name", parsed.data.full_name)
+      .or(`full_name.eq."${parsed.data.full_name}",phone.eq."${parsed.data.phone}"`)
       .maybeSingle();
 
     if (existing) {
-      setError("Já existe uma confirmação com este nome.");
+      setError("Já existe uma confirmação com este nome ou telefone.");
       setSubmitting(false);
       return;
     }

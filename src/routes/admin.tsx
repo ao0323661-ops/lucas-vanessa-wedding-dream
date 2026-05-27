@@ -1,6 +1,7 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
 import { supabase } from "@/integrations/supabase/client";
+import { WEDDING } from "@/lib/wedding";
 
 type Rsvp = {
   id: string;
@@ -15,7 +16,7 @@ type Rsvp = {
 type Gift = { id: string; guest_name: string; gift_name: string; amount: number; created_at: string };
 
 export const Route = createFileRoute("/admin")({
-  head: () => ({ meta: [{ title: "Painel — Lucas & Vanessa" }, { name: "robots", content: "noindex" }] }),
+  head: () => ({ meta: [{ title: `Painel — ${WEDDING.names.full}` }, { name: "robots", content: "noindex" }] }),
   component: AdminPage,
 });
 
@@ -75,7 +76,7 @@ function AuthCard() {
       <div className="w-full max-w-md p-10 bg-background text-foreground rounded-md shadow-luxe">
         <Link to="/" className="text-xs uppercase tracking-[0.3em] text-muted-foreground hover:text-gold">← Voltar ao site</Link>
         <h1 className="mt-6 font-display text-4xl">Painel dos noivos</h1>
-        <p className="text-sm text-muted-foreground mt-2">Acesso restrito a Lucas & Vanessa.</p>
+        <p className="text-sm text-muted-foreground mt-2">Acesso restrito a {WEDDING.names.full}.</p>
 
         <form onSubmit={submit} className="mt-8 space-y-5">
           <input type="email" required placeholder="E-mail" value={email} onChange={(e) => setEmail(e.target.value)} className="w-full bg-transparent border-b border-border focus:border-gold outline-none py-3" />
@@ -166,7 +167,7 @@ function Dashboard() {
       <header className="border-b border-border bg-foreground text-background">
         <div className="max-w-6xl mx-auto px-6 py-5 flex items-center justify-between">
           <div>
-            <p className="font-script text-gold text-2xl leading-none">Lucas & Vanessa</p>
+            <p className="font-script text-gold text-2xl leading-none">{WEDDING.names.full}</p>
             <p className="text-xs uppercase tracking-[0.3em] text-background/60">Painel administrativo</p>
           </div>
           <div className="flex gap-2">

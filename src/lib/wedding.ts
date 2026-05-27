@@ -1,41 +1,58 @@
-// ============================================================================
-// CONFIGURAÇÃO DO CASAMENTO
-// ============================================================================
-// Altere os valores abaixo para personalizar o site com seus dados reais.
-// ============================================================================
+/**
+ * ============================================================================
+ * CONFIGURAÇÃO DO CASAMENTO — LUCAS & VANESSA
+ * ============================================================================
+ * 
+ * Este é o único arquivo que você precisa editar para personalizar o site.
+ * Altere os valores abaixo com as informações reais do seu grande dia.
+ */
+
+import heroImg from "@/assets/hero.jpg";
+import gallery1 from "@/assets/gallery1.jpg";
+import gallery2 from "@/assets/gallery2.jpg";
+import gallery3 from "@/assets/gallery3.jpg";
+import gallery4 from "@/assets/gallery4.jpg";
 
 export const WEDDING = {
-  // Nomes exibidos no site
-  brideAndGroom: "Lucas & Vanessa",
+  // 1. Nomes do Casal
+  names: {
+    bride: "Vanessa",
+    groom: "Lucas",
+    full: "Lucas & Vanessa"
+  },
   
-  // Data e hora do casamento (usado na contagem regressiva e labels)
-  // Formato: YYYY-MM-DDTHH:mm:ss-03:00 (o -03:00 é o fuso horário de Brasília)
+  // 2. Data e Hora
+  // Formato: YYYY-MM-DDTHH:mm:ss-03:00 (Brasília)
   date: new Date("2026-08-02T16:00:00-03:00"),
   dateLabel: "2 de Agosto de 2026",
+  timeLabel: "16:00h",
   
-  // Detalhes da Cerimônia
+  // 3. Frase de Destaque (Hero)
+  heroPhrase: "E entre todos os olhares do mundo, encontrei o seu.",
+  
+  // 4. Locais (Cerimônia e Festa)
   ceremony: {
-    name: "Igreja Nossa Senhora do Brasil",
-    address: "Praça Nossa Senhora do Brasil, 1 — São Paulo, SP",
+    name: "Igreja Matriz", // Substitua pelo nome real
+    address: "Rua Exemplo, 123 — Centro, Cidade, Estado",
     time: "16h00",
-    mapsUrl: "https://www.google.com/maps/search/?api=1&query=Igreja+Nossa+Senhora+do+Brasil+S%C3%A3o+Paulo",
+    mapsUrl: "https://www.google.com/maps", // Link do Google Maps
   },
   
-  // Detalhes da Recepção/Festa
   reception: {
-    name: "Casa Petra",
-    address: "Av. Santo Amaro, 6000 — São Paulo, SP",
+    name: "Espaço de Eventos", // Substitua pelo nome real
+    address: "Av. Exemplo, 456 — Bairro, Cidade, Estado",
     time: "19h00",
-    mapsUrl: "https://www.google.com/maps/search/?api=1&query=Casa+Petra+S%C3%A3o+Paulo",
+    mapsUrl: "https://www.google.com/maps",
   },
   
-  // Configuração de Presentes / PIX
+  // 5. Financeiro / Presentes
   pix: {
-    key: "lucasevanessa@casamento.com", // Chave PIX real aqui
+    key: "sua-chave-pix-aqui@exemplo.com", // CHAVE PIX REAL
     name: "Lucas & Vanessa",
+    bank: "Nome do Banco",
   },
   
-  // Linha do tempo do casal (Nossa História)
+  // 6. Nossa História (Linha do Tempo)
   timeline: [
     { 
       year: "2018", 
@@ -64,16 +81,26 @@ export const WEDDING = {
     },
   ],
   
-  // Lista de Cotas de Presentes (Lua de Mel)
+  // 7. Lista de Cotas de Presentes (Lua de Mel)
   gifts: [
-    { name: "Lua de mel — Jantar em Paris", amount: 200, description: "Uma noite romântica na cidade luz" },
-    { name: "Lua de mel — Passeio em gôndola", amount: 350, description: "Veneza nos espera" },
-    { name: "Lua de mel — Diária em hotel boutique", amount: 800, description: "Uma noite de luxo" },
-    { name: "Cota simbólica — Café da manhã", amount: 80, description: "Comece o dia conosco" },
-    { name: "Cota simbólica — Taça de espumante", amount: 50, description: "Um brinde à nossa história" },
-    { name: "Valor livre", amount: 0, description: "Contribua com o valor que desejar" },
+    { name: "Jantar Romântico em Paris", amount: 200, description: "Uma noite especial na cidade luz" },
+    { name: "Passeio em Gôndola em Veneza", amount: 350, description: "Um momento clássico na Itália" },
+    { name: "Diária em Hotel Boutique", amount: 800, description: "Uma noite de descanso e luxo" },
+    { name: "Cota Café da Manhã", amount: 80, description: "Para começarmos o dia bem" },
+    { name: "Brinde com Espumante", amount: 50, description: "Um brinde à nossa união" },
+    { name: "Contribuição Livre", amount: 0, description: "Contribua com o valor que desejar" },
   ],
   
-  // Imagens da Galeria (Devem estar em src/assets/)
-  // Se quiser trocar as fotos, coloque os arquivos na pasta e altere os imports no src/routes/index.tsx
+  // 8. Fotos do Site
+  photos: {
+    hero: heroImg,
+    gallery: [
+      gallery1, 
+      gallery2, 
+      gallery3, 
+      gallery4, 
+      gallery1, 
+      gallery3
+    ]
+  }
 };

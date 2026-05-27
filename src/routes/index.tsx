@@ -1,10 +1,5 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { motion } from "framer-motion";
-import heroImg from "@/assets/hero.jpg";
-import gallery1 from "@/assets/gallery1.jpg";
-import gallery2 from "@/assets/gallery2.jpg";
-import gallery3 from "@/assets/gallery3.jpg";
-import gallery4 from "@/assets/gallery4.jpg";
 import { Nav } from "@/components/Nav";
 import { Countdown } from "@/components/Countdown";
 import { Section } from "@/components/Section";
@@ -30,7 +25,7 @@ export const Route = createFileRoute("/")({
   component: Home,
 });
 
-const gallery = [gallery1, gallery2, gallery3, gallery4, gallery1, gallery3];
+const gallery = WEDDING.photos.gallery;
 
 function Home() {
   return (
@@ -40,8 +35,8 @@ function Home() {
       {/* HERO */}
       <section className="relative h-screen min-h-[640px] flex items-center justify-center overflow-hidden">
         <img
-          src={heroImg}
-          alt="Lucas e Vanessa"
+          src={WEDDING.photos.hero}
+          alt={WEDDING.names.full}
           width={1920}
           height={1080}
           className="absolute inset-0 w-full h-full object-cover"
@@ -58,12 +53,12 @@ function Home() {
             {WEDDING.dateLabel}
           </span>
           <h1 className="mt-8 font-display text-6xl sm:text-8xl md:text-9xl text-white leading-none">
-            Lucas
+            {WEDDING.names.groom}
             <span className="block font-script text-gold text-5xl sm:text-7xl md:text-8xl my-2 sm:my-4">&</span>
-            Vanessa
+            {WEDDING.names.bride}
           </h1>
           <p className="mt-6 max-w-md mx-auto text-white/80 italic font-display text-lg sm:text-xl">
-            "E entre todos os olhares do mundo, encontrei o seu."
+            "{WEDDING.heroPhrase}"
           </p>
 
           <div className="mt-12">
@@ -182,7 +177,7 @@ function Home() {
       </Section>
 
       <footer className="bg-foreground text-background py-12 px-6 text-center">
-        <p className="font-script text-gold text-4xl">Lucas & Vanessa</p>
+        <p className="font-script text-gold text-4xl">{WEDDING.names.full}</p>
         <p className="mt-2 text-sm text-background/60 tracking-[0.3em] uppercase">{WEDDING.dateLabel}</p>
         <Link to="/admin" className="mt-6 inline-block text-xs text-background/40 hover:text-gold uppercase tracking-[0.3em]">
           Área dos noivos
