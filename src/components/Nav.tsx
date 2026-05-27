@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 
 const links = [
   { href: "#historia", label: "Nossa História" },
@@ -51,20 +52,27 @@ export function Nav() {
           {open ? "Fechar" : "Menu"}
         </button>
       </div>
-      {open && (
-        <div className="md:hidden bg-background border-t border-border px-6 py-6 flex flex-col gap-4">
-          {links.map((l) => (
-            <a
-              key={l.href}
-              href={l.href}
-              onClick={() => setOpen(false)}
-              className="text-sm uppercase tracking-[0.25em] text-foreground/80 hover:text-gold"
-            >
-              {l.label}
-            </a>
-          ))}
-        </div>
-      )}
+      <AnimatePresence>
+        {open && (
+          <motion.div
+            initial={{ opacity: 0, y: -20 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -20 }}
+            className="md:hidden bg-background border-t border-border px-6 py-8 flex flex-col gap-6 shadow-xl"
+          >
+            {links.map((l) => (
+              <a
+                key={l.href}
+                href={l.href}
+                onClick={() => setOpen(false)}
+                className="text-sm uppercase tracking-[0.3em] text-foreground/80 hover:text-gold transition-colors"
+              >
+                {l.label}
+              </a>
+            ))}
+          </motion.div>
+        )}
+      </AnimatePresence>
     </header>
   );
 }

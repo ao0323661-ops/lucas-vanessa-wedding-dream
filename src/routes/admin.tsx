@@ -311,7 +311,7 @@ function Stat({ label, value, accent }: { label: string; value: number; accent?:
   );
 }
 
-const Th = ({ children, className = "", title }: { children: React.ReactNode; className?: string; title?: string }) => <th className={`text-left px-6 py-4 font-medium ${className}`} title={title}>{children}</th>;
-const Td = ({ children, className = "", title }: { children: React.ReactNode; className?: string; title?: string }) => <td className={`px-6 py-4 ${className}`} title={title}>{children}</td>;
+const Th = ({ children, className = "", title }: { children: React.ReactNode; className?: string; title?: string }) => <th className={`text-left px-6 py-4 font-medium whitespace-nowrap ${className}`} title={title}>{children}</th>;
+const Td = ({ children, className = "", title }: { children: React.ReactNode; className?: string; title?: string }) => <td className={`px-6 py-4 whitespace-nowrap ${className}`} title={title}>{children}</td>;
 
 
