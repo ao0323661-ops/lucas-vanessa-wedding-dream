@@ -1,8 +1,8 @@
 /**
  * ============================================================================
- * CONFIGURAÇÃO DO CASAMENTO — LUCAS & VANESSA
+ * CONFIGURAÇÃO DO CASAMENTO - LUCAS & VANESSA
  * ============================================================================
- * 
+ *
  * Este é o único arquivo que você precisa editar para personalizar o site.
  * Altere os valores abaixo com as informações reais do seu grande dia.
  */
@@ -14,93 +14,116 @@ import gallery3 from "@/assets/gallery3.jpg";
 import gallery4 from "@/assets/gallery4.jpg";
 
 export const WEDDING = {
-  // 1. Nomes do Casal
+  // 1. Nomes do casal
   names: {
     bride: "Vanessa",
     groom: "Lucas",
-    full: "Lucas & Vanessa"
+    full: "Lucas & Vanessa",
   },
-  
-  // 2. Data e Hora
+
+  // 2. Data e hora
   // Formato: YYYY-MM-DDTHH:mm:ss-03:00 (Brasília)
   date: new Date("2026-08-02T16:00:00-03:00"),
   dateLabel: "2 de Agosto de 2026",
   timeLabel: "16:00h",
-  
-  // 3. Frase de Destaque (Hero)
+
+  // 3. Frase de destaque (hero)
   heroPhrase: "E entre todos os olhares do mundo, encontrei o seu.",
-  
-  // 4. Locais (Cerimônia e Festa)
+
+  // 4. Locais (cerimônia e festa)
   ceremony: {
-    name: "Igreja Matriz", // Substitua pelo nome real
-    address: "Rua Exemplo, 123 — Centro, Cidade, Estado",
+    name: "Cerimônia de Lucas & Vanessa",
+    address: "Endereço da cerimônia será compartilhado pelos noivos",
     time: "16h00",
-    mapsUrl: "https://www.google.com/maps", // Link do Google Maps
+    mapsUrl: "https://www.google.com/maps",
   },
-  
+
   reception: {
-    name: "Espaço de Eventos", // Substitua pelo nome real
-    address: "Av. Exemplo, 456 — Bairro, Cidade, Estado",
+    name: "Celebração de Lucas & Vanessa",
+    address: "Endereço da festa será compartilhado pelos noivos",
     time: "19h00",
     mapsUrl: "https://www.google.com/maps",
   },
-  
-  // 5. Financeiro / Presentes
+
+  // 5. Financeiro / presentes
   pix: {
-    key: "sua-chave-pix-aqui@exemplo.com", // CHAVE PIX REAL
+    key: "sua-chave-pix-aqui@exemplo.com",
     name: "Lucas & Vanessa",
     bank: "Nome do Banco",
   },
-  
-  // 6. Nossa História (Linha do Tempo)
+
+  // 6. Nossa história (linha do tempo)
   timeline: [
-    { 
-      year: "2018", 
-      title: "Onde tudo começou", 
-      text: "Um olhar despretensioso numa noite de inverno mudou tudo." 
+    {
+      year: "2018",
+      title: "O primeiro capítulo",
+      text: "Lucas e Vanessa começaram a escrever uma história feita de encontros, cuidado e parceria.",
     },
-    { 
-      year: "2020", 
-      title: "Primeira viagem", 
-      text: "Lisboa nos ensinou que casa é a pessoa, não o lugar." 
+    {
+      year: "2020",
+      title: "Planos compartilhados",
+      text: "Entre conversas, sonhos e pequenas escolhas, o futuro dos dois foi ganhando forma.",
     },
-    { 
-      year: "2022", 
-      title: "Nossa primeira casa", 
-      text: "Um apartamento pequeno, um amor enorme." 
+    {
+      year: "2022",
+      title: "A vida a dois",
+      text: "A rotina mostrou que o amor também mora nos detalhes simples de todos os dias.",
     },
-    { 
-      year: "2024", 
-      title: "O pedido", 
-      text: "Ele se ajoelhou. Ela chorou. Ambos disseram sim." 
+    {
+      year: "2024",
+      title: "O pedido",
+      text: "Veio o sim que confirmou o que o coração dos dois já sabia.",
     },
-    { 
-      year: "2026", 
-      title: "O grande dia", 
-      text: "Agora celebramos com você, ao nosso lado." 
+    {
+      year: "2026",
+      title: "O grande dia",
+      text: "Lucas e Vanessa celebram essa nova etapa com as pessoas que fazem parte da história.",
     },
   ],
-  
-  // 7. Lista de Cotas de Presentes (Lua de Mel)
+
+  // 7. Lista de cotas de presentes (lua de mel)
   gifts: [
-    { name: "Jantar Romântico em Paris", amount: 200, description: "Uma noite especial na cidade luz" },
-    { name: "Passeio em Gôndola em Veneza", amount: 350, description: "Um momento clássico na Itália" },
-    { name: "Diária em Hotel Boutique", amount: 800, description: "Uma noite de descanso e luxo" },
-    { name: "Cota Café da Manhã", amount: 80, description: "Para começarmos o dia bem" },
-    { name: "Brinde com Espumante", amount: 50, description: "Um brinde à nossa união" },
-    { name: "Contribuição Livre", amount: 0, description: "Contribua com o valor que desejar" },
+    {
+      id: "jantar-paris",
+      name: "Jantar Romântico em Paris",
+      amount: 200,
+      description: "Um brinde aos primeiros dias de casados",
+    },
+    {
+      id: "gondola-veneza",
+      name: "Passeio em Gôndola em Veneza",
+      amount: 350,
+      description: "Uma lembrança especial da lua de mel",
+    },
+    {
+      id: "hotel-boutique",
+      name: "Diária em Hotel Boutique",
+      amount: 800,
+      description: "Uma noite de descanso para o casal",
+    },
+    {
+      id: "cafe-da-manha",
+      name: "Cota Café da Manhã",
+      amount: 80,
+      description: "Para Lucas e Vanessa começarem o dia com carinho",
+    },
+    {
+      id: "brinde-espumante",
+      name: "Brinde com Espumante",
+      amount: 50,
+      description: "Um brinde à nossa união",
+    },
+    {
+      id: "contribuicao-livre",
+      name: "Contribuição Livre",
+      amount: 0,
+      description: "Um carinho livre para a nova etapa do casal",
+    },
   ],
-  
-  // 8. Fotos do Site
+
+  // 8. Fotos do site
   photos: {
     hero: heroImg,
-    gallery: [
-      gallery1, 
-      gallery2, 
-      gallery3, 
-      gallery4, 
-      gallery1, 
-      gallery3
-    ]
-  }
+    gallery: [gallery1, gallery2, gallery3, gallery4, gallery1, gallery3],
+  },
 };

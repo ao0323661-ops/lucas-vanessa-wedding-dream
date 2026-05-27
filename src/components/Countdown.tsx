@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { motion } from "framer-motion";
 
 function getDiff(target: Date) {
   const ms = Math.max(0, target.getTime() - Date.now());
@@ -10,9 +11,14 @@ function getDiff(target: Date) {
 }
 
 export function Countdown({ target }: { target: Date }) {
-  const [t, setT] = useState(() => getDiff(target));
+  const [mounted, setMounted] = useState(false);
+  const [t, setT] = useState(() => ({ days: 0, hours: 0, minutes: 0, seconds: 0 }));
+
   useEffect(() => {
-    const i = setInterval(() => setT(getDiff(target)), 1000);
+    const update = () => setT(getDiff(target));
+    setMounted(true);
+    update();
+    const i = setInterval(update, 1000);
     return () => clearInterval(i);
   }, [target]);
 
@@ -24,19 +30,37 @@ export function Countdown({ target }: { target: Date }) {
   ];
 
   return (
-    <div className="flex items-center justify-center gap-3 sm:gap-6">
-      {items.map((it) => (
-        <div key={it.label} className="text-center">
-          <div className="min-w-[64px] sm:min-w-[88px] rounded-md border border-gold/40 bg-black/30 backdrop-blur px-3 py-4 sm:py-5">
-            <div className="font-display text-3xl sm:text-5xl text-gold tabular-nums">
-              {String(it.value).padStart(2, "0")}
+    <div
+      className="mx-auto w-full max-w-2xl"
+      role="timer"
+      aria-label="Contagem regressiva para o casamento"
+      aria-busy={!mounted}
+    >
+      <div className="mb-3 text-center">
+        <span className="glass-luxe inline-flex rounded-full px-4 py-2 text-[10px] uppercase tracking-[0.32em] text-white/80">
+          Faltam
+        </span>
+      </div>
+      <div className="grid grid-cols-4 gap-2.5 sm:gap-4">
+        {items.map((it) => (
+          <motion.div
+            key={it.label}
+            whileHover={{ y: -4 }}
+            transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
+            className="text-center"
+          >
+            <div className="shine-line glass-luxe relative flex min-h-[68px] items-center justify-center rounded-md px-2 py-3 sm:min-h-[82px] sm:px-4">
+              <div className="absolute inset-x-3 top-0 h-px bg-gradient-to-r from-transparent via-gold/70 to-transparent" />
+              <div className="font-display text-2xl leading-none text-gold tabular-nums sm:text-3xl">
+                {mounted ? String(it.value).padStart(2, "0") : "--"}
+              </div>
             </div>
-          </div>
-          <div className="mt-2 text-[10px] sm:text-xs uppercase tracking-[0.3em] text-white/70">
-            {it.label}
-          </div>
-        </div>
-      ))}
+            <div className="mt-2 text-[9px] uppercase tracking-[0.26em] text-white/70 sm:text-xs sm:tracking-[0.3em]">
+              {it.label}
+            </div>
+          </motion.div>
+        ))}
+      </div>
     </div>
   );
 }
