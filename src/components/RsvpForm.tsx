@@ -12,6 +12,14 @@ const schema = z.object({
   message: z.string().trim().max(600).optional().or(z.literal("")),
 });
 
+function isDuplicateRsvpError(error: { code?: string; message?: string } | null) {
+  return (
+    error?.code === "23505" ||
+    error?.message?.includes("rsvps_unique_normalized_phone_idx") ||
+    error?.message?.includes("rsvps_unique_no_phone_normalized_name_idx")
+  );
+}
+
 export function RsvpForm() {
   const [submitting, setSubmitting] = useState(false);
   const [done, setDone] = useState(false);
@@ -32,7 +40,7 @@ export function RsvpForm() {
   async function onSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
     setError(null);
-    
+
     if (alreadySent) {
       setError("Você já enviou sua confirmação.");
       return;
@@ -55,19 +63,6 @@ export function RsvpForm() {
 
     setSubmitting(true);
 
-    // Additional check in DB: search by full name OR phone to avoid duplicates
-    const { data: existing } = await supabase
-      .from("rsvps")
-      .select("id")
-      .or(`full_name.eq."${parsed.data.full_name}",phone.eq."${parsed.data.phone}"`)
-      .maybeSingle();
-
-    if (existing) {
-      setError("Já existe uma confirmação com este nome ou telefone.");
-      setSubmitting(false);
-      return;
-    }
-
     const { error: insertError } = await supabase.from("rsvps").insert({
       full_name: parsed.data.full_name,
       attending: parsed.data.attending === "yes",
@@ -80,7 +75,11 @@ export function RsvpForm() {
     setSubmitting(false);
 
     if (insertError) {
-      setError("Não conseguimos registrar agora. Tente novamente.");
+      setError(
+        isDuplicateRsvpError(insertError)
+          ? "Já existe uma confirmação com este telefone ou nome."
+          : "Não conseguimos registrar agora. Verifique os campos e tente novamente.",
+      );
       return;
     }
 
@@ -90,7 +89,7 @@ export function RsvpForm() {
   }
 
   if (done || alreadySent) {
-    const displayAttending = done ? attending : (storedAttending || "yes");
+    const displayAttending = done ? attending : storedAttending || "yes";
     return (
       <motion.div
         initial={{ opacity: 0, scale: 0.95 }}
@@ -106,8 +105,12 @@ export function RsvpForm() {
             ? "Mal podemos esperar para celebrar com você este dia tão especial."
             : "Sentiremos sua falta, mas agradecemos o carinho."}
         </p>
-        <button 
-          onClick={() => { localStorage.removeItem("rsvp_status"); setAlreadySent(false); setDone(false); }}
+        <button
+          onClick={() => {
+            localStorage.removeItem("rsvp_status");
+            setAlreadySent(false);
+            setDone(false);
+          }}
           className="mt-8 text-[10px] uppercase tracking-[0.3em] text-muted-foreground hover:text-gold transition-colors"
         >
           Enviar outra resposta
@@ -119,7 +122,13 @@ export function RsvpForm() {
   return (
     <form onSubmit={onSubmit} className="space-y-8">
       <Field label="Nome completo">
-        <input name="full_name" required maxLength={120} className={inputCls} placeholder="Como está no convite" />
+        <input
+          name="full_name"
+          required
+          maxLength={120}
+          className={inputCls}
+          placeholder="Como está no convite"
+        />
       </Field>
 
       <Field label="Você vai comparecer?">
@@ -154,17 +163,21 @@ export function RsvpForm() {
           >
             <Field label="Acompanhantes (além de você)">
               <div className="flex items-center gap-6 mt-2">
-                <button 
-                  type="button" 
-                  onClick={() => setCompanions(Math.max(0, companions - 1))} 
+                <button
+                  type="button"
+                  onClick={() => setCompanions(Math.max(0, companions - 1))}
                   className="w-12 h-12 rounded-full border border-border hover:border-gold hover:text-gold transition-all flex items-center justify-center text-xl"
-                >−</button>
+                >
+                  −
+                </button>
                 <span className="font-display text-4xl w-8 text-center">{companions}</span>
-                <button 
-                  type="button" 
-                  onClick={() => setCompanions(Math.min(10, companions + 1))} 
+                <button
+                  type="button"
+                  onClick={() => setCompanions(Math.min(10, companions + 1))}
                   className="w-12 h-12 rounded-full border border-border hover:border-gold hover:text-gold transition-all flex items-center justify-center text-xl"
-                >+</button>
+                >
+                  +
+                </button>
               </div>
             </Field>
           </motion.div>
@@ -177,18 +190,29 @@ export function RsvpForm() {
         </Field>
 
         <Field label="Restrição alimentar">
-          <input name="dietary_restrictions" maxLength={300} placeholder="Ex: Alérgico a camarão" className={inputCls} />
+          <input
+            name="dietary_restrictions"
+            maxLength={300}
+            placeholder="Ex: Alérgico a camarão"
+            className={inputCls}
+          />
         </Field>
       </div>
 
       <Field label="Mensagem para os noivos">
-        <textarea name="message" maxLength={600} rows={3} className={inputCls} placeholder="Deixe um carinho para nós..." />
+        <textarea
+          name="message"
+          maxLength={600}
+          rows={3}
+          className={inputCls}
+          placeholder="Deixe um carinho para nós..."
+        />
       </Field>
 
       {error && (
-        <motion.p 
-          initial={{ opacity: 0 }} 
-          animate={{ opacity: 1 }} 
+        <motion.p
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
           className="text-destructive text-xs uppercase tracking-widest text-center"
         >
           {error}
@@ -206,14 +230,16 @@ export function RsvpForm() {
   );
 }
 
-const inputCls = "w-full bg-transparent border-b border-border focus:border-gold outline-none px-1 py-4 text-foreground placeholder:text-muted-foreground/40 transition-all duration-300 font-light";
+const inputCls =
+  "w-full bg-transparent border-b border-border focus:border-gold outline-none px-1 py-4 text-foreground placeholder:text-muted-foreground/40 transition-all duration-300 font-light";
 
 function Field({ label, children }: { label: string; children: React.ReactNode }) {
   return (
     <div className="block">
-      <span className="block text-[10px] uppercase tracking-[0.3em] text-muted-foreground/80 mb-3">{label}</span>
+      <span className="block text-[10px] uppercase tracking-[0.3em] text-muted-foreground/80 mb-3">
+        {label}
+      </span>
       {children}
     </div>
   );
 }
-

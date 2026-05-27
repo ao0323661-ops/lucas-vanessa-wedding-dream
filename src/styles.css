@@ -40,19 +40,19 @@
 :root {
   --radius: 0.5rem;
   /* Black / Gold / White / Beige palette */
-  --background: oklch(0.985 0.005 80);          /* off-white */
-  --foreground: oklch(0.16 0.01 60);             /* near black */
+  --background: oklch(0.985 0.005 80); /* off-white */
+  --foreground: oklch(0.16 0.01 60); /* near black */
   --card: oklch(0.985 0.005 80);
   --card-foreground: oklch(0.16 0.01 60);
   --popover: oklch(0.985 0.005 80);
   --popover-foreground: oklch(0.16 0.01 60);
-  --primary: oklch(0.16 0.01 60);                /* black */
+  --primary: oklch(0.16 0.01 60); /* black */
   --primary-foreground: oklch(0.97 0.012 85);
-  --secondary: oklch(0.93 0.022 80);             /* beige */
+  --secondary: oklch(0.93 0.022 80); /* beige */
   --secondary-foreground: oklch(0.18 0.01 60);
   --muted: oklch(0.94 0.018 80);
   --muted-foreground: oklch(0.45 0.015 60);
-  --accent: oklch(0.78 0.13 80);                 /* gold accent */
+  --accent: oklch(0.78 0.13 80); /* gold accent */
   --accent-foreground: oklch(0.16 0.01 60);
   --destructive: oklch(0.55 0.22 27);
   --destructive-foreground: oklch(0.98 0 0);
@@ -90,30 +90,65 @@
 }
 
 @layer base {
-  * { border-color: var(--color-border); }
+  * {
+    border-color: var(--color-border);
+  }
   body {
     background-color: var(--color-background);
     color: var(--color-foreground);
     font-family: var(--font-sans);
     -webkit-font-smoothing: antialiased;
   }
-  h1, h2, h3, h4 { font-family: var(--font-display); font-weight: 400; letter-spacing: -0.01em; }
+  h1,
+  h2,
+  h3,
+  h4 {
+    font-family: var(--font-display);
+    font-weight: 400;
+    letter-spacing: -0.01em;
+  }
 }
 
 @layer utilities {
-  .font-display { font-family: var(--font-display); }
-  .font-script { font-family: var(--font-script); }
-  .text-gold { color: var(--gold); }
-  .bg-gold { background-color: var(--gold); }
-  .border-gold { border-color: var(--gold); }
-  .bg-gradient-gold { background-image: var(--gradient-gold); }
-  .bg-gradient-dark { background-image: var(--gradient-dark); }
-  .shadow-luxe { box-shadow: var(--shadow-luxe); }
-  .shadow-gold { box-shadow: var(--shadow-gold); }
-  .gold-divider {
-    display: inline-flex; align-items: center; gap: 1rem; color: var(--gold);
+  .font-display {
+    font-family: var(--font-display);
   }
-  .gold-divider::before, .gold-divider::after {
-    content: ""; height: 1px; width: 3rem; background: currentColor; opacity: 0.6;
+  .font-script {
+    font-family: var(--font-script);
+  }
+  .text-gold {
+    color: var(--gold);
+  }
+  .bg-gold {
+    background-color: var(--gold);
+  }
+  .border-gold {
+    border-color: var(--gold);
+  }
+  .bg-gradient-gold {
+    background-image: var(--gradient-gold);
+  }
+  .bg-gradient-dark {
+    background-image: var(--gradient-dark);
+  }
+  .shadow-luxe {
+    box-shadow: var(--shadow-luxe);
+  }
+  .shadow-gold {
+    box-shadow: var(--shadow-gold);
+  }
+  .gold-divider {
+    display: inline-flex;
+    align-items: center;
+    gap: 1rem;
+    color: var(--gold);
+  }
+  .gold-divider::before,
+  .gold-divider::after {
+    content: "";
+    height: 1px;
+    width: 3rem;
+    background: currentColor;
+    opacity: 0.6;
   }
 }

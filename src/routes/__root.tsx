@@ -73,17 +73,37 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
       { title: "Lovable App" },
-      { name: "description", content: "A modern, romantic wedding website for Lucas & Vanessa, featuring RSVP, gift registry, and guest messaging." },
+      {
+        name: "description",
+        content:
+          "A modern, romantic wedding website for Lucas & Vanessa, featuring RSVP, gift registry, and guest messaging.",
+      },
       { name: "author", content: "Lovable" },
       { property: "og:title", content: "Lovable App" },
-      { property: "og:description", content: "A modern, romantic wedding website for Lucas & Vanessa, featuring RSVP, gift registry, and guest messaging." },
+      {
+        property: "og:description",
+        content:
+          "A modern, romantic wedding website for Lucas & Vanessa, featuring RSVP, gift registry, and guest messaging.",
+      },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary" },
       { name: "twitter:site", content: "@Lovable" },
       { name: "twitter:title", content: "Lovable App" },
-      { name: "twitter:description", content: "A modern, romantic wedding website for Lucas & Vanessa, featuring RSVP, gift registry, and guest messaging." },
-      { property: "og:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/ee5eb26e-ebfe-4d4a-8cad-090ba91dab7a/id-preview-8cba81dc--0decd241-cafd-40f9-9c9d-1861834b0d9a.lovable.app-1779917501671.png" },
-      { name: "twitter:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/ee5eb26e-ebfe-4d4a-8cad-090ba91dab7a/id-preview-8cba81dc--0decd241-cafd-40f9-9c9d-1861834b0d9a.lovable.app-1779917501671.png" },
+      {
+        name: "twitter:description",
+        content:
+          "A modern, romantic wedding website for Lucas & Vanessa, featuring RSVP, gift registry, and guest messaging.",
+      },
+      {
+        property: "og:image",
+        content:
+          "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/ee5eb26e-ebfe-4d4a-8cad-090ba91dab7a/id-preview-8cba81dc--0decd241-cafd-40f9-9c9d-1861834b0d9a.lovable.app-1779917501671.png",
+      },
+      {
+        name: "twitter:image",
+        content:
+          "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/ee5eb26e-ebfe-4d4a-8cad-090ba91dab7a/id-preview-8cba81dc--0decd241-cafd-40f9-9c9d-1861834b0d9a.lovable.app-1779917501671.png",
+      },
     ],
     links: [
       {

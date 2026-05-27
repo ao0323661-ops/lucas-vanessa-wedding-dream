@@ -4,25 +4,33 @@ import { motion } from "framer-motion";
 import { WEDDING } from "@/lib/wedding";
 
 export function GiftList() {
-  const [selected, setSelected] = useState<typeof WEDDING.gifts[number] | null>(null);
+  const [selected, setSelected] = useState<(typeof WEDDING.gifts)[number] | null>(null);
   const [guestName, setGuestName] = useState("");
   const [amount, setAmount] = useState<number>(0);
   const [done, setDone] = useState(false);
   const [copied, setCopied] = useState(false);
+  const [error, setError] = useState<string | null>(null);
 
-  function open(g: typeof WEDDING.gifts[number]) {
+  function open(g: (typeof WEDDING.gifts)[number]) {
     setSelected(g);
     setAmount(g.amount);
     setDone(false);
+    setError(null);
   }
 
   async function confirm() {
     if (!selected || !guestName.trim() || amount <= 0) return;
-    await supabase.from("gift_contributions").insert({
+    setError(null);
+    const { error } = await supabase.from("gift_contributions").insert({
       guest_name: guestName.trim().slice(0, 120),
+      gift_id: selected.id,
       gift_name: selected.name,
       amount,
     });
+    if (error) {
+      setError("Não conseguimos registrar essa informação agora. Tente novamente.");
+      return;
+    }
     setDone(true);
   }
 
@@ -62,7 +70,10 @@ export function GiftList() {
       </div>
 
       {selected && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/70 backdrop-blur-sm" onClick={() => setSelected(null)}>
+        <div
+          className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/70 backdrop-blur-sm"
+          onClick={() => setSelected(null)}
+        >
           <motion.div
             initial={{ opacity: 0, scale: 0.95 }}
             animate={{ opacity: 1, scale: 1 }}
@@ -75,36 +86,77 @@ export function GiftList() {
             {!done ? (
               <div className="mt-6 space-y-5">
                 <label className="block">
-                  <span className="block text-[10px] uppercase tracking-[0.3em] text-muted-foreground mb-2">Seu nome</span>
-                  <input value={guestName} onChange={(e) => setGuestName(e.target.value)} className="w-full bg-transparent border-b border-border focus:border-gold outline-none py-2" />
+                  <span className="block text-[10px] uppercase tracking-[0.3em] text-muted-foreground mb-2">
+                    Seu nome
+                  </span>
+                  <input
+                    value={guestName}
+                    onChange={(e) => setGuestName(e.target.value)}
+                    className="w-full bg-transparent border-b border-border focus:border-gold outline-none py-2"
+                  />
                 </label>
                 <label className="block">
-                  <span className="block text-[10px] uppercase tracking-[0.3em] text-muted-foreground mb-2">Valor (R$)</span>
-                  <input type="number" min={1} value={amount || ""} onChange={(e) => setAmount(Number(e.target.value))} className="w-full bg-transparent border-b border-border focus:border-gold outline-none py-2" />
+                  <span className="block text-[10px] uppercase tracking-[0.3em] text-muted-foreground mb-2">
+                    Valor (R$)
+                  </span>
+                  <input
+                    type="number"
+                    min={1}
+                    value={amount || ""}
+                    onChange={(e) => setAmount(Number(e.target.value))}
+                    className="w-full bg-transparent border-b border-border focus:border-gold outline-none py-2"
+                  />
                 </label>
 
                 <div className="p-4 bg-secondary/50 rounded-md text-sm">
-                  <p className="text-xs uppercase tracking-[0.25em] text-muted-foreground mb-2">Chave Pix</p>
+                  <p className="text-xs uppercase tracking-[0.25em] text-muted-foreground mb-2">
+                    Chave Pix
+                  </p>
                   <div className="flex items-center justify-between gap-2">
                     <code className="text-foreground break-all">{WEDDING.pix.key}</code>
-                    <button onClick={copyPix} className="px-3 py-1.5 text-xs uppercase tracking-[0.2em] bg-foreground text-background hover:bg-gold hover:text-foreground transition">
+                    <button
+                      onClick={copyPix}
+                      className="px-3 py-1.5 text-xs uppercase tracking-[0.2em] bg-foreground text-background hover:bg-gold hover:text-foreground transition"
+                    >
                       {copied ? "Copiado" : "Copiar"}
                     </button>
                   </div>
+                  <p className="mt-3 text-xs text-muted-foreground">
+                    O botão abaixo apenas informa aos noivos que você enviou um Pix. A conferência
+                    do pagamento é manual.
+                  </p>
                 </div>
 
+                {error && <p className="text-xs text-destructive">{error}</p>}
+
                 <div className="flex gap-3 pt-2">
-                  <button onClick={() => setSelected(null)} className="flex-1 py-3 border border-border text-xs uppercase tracking-[0.3em]">Cancelar</button>
-                  <button onClick={confirm} disabled={!guestName.trim() || amount <= 0} className="flex-1 py-3 bg-foreground text-background text-xs uppercase tracking-[0.3em] hover:bg-gold hover:text-foreground transition disabled:opacity-50">
-                    Já enviei
+                  <button
+                    onClick={() => setSelected(null)}
+                    className="flex-1 py-3 border border-border text-xs uppercase tracking-[0.3em]"
+                  >
+                    Cancelar
+                  </button>
+                  <button
+                    onClick={confirm}
+                    disabled={!guestName.trim() || amount <= 0}
+                    className="flex-1 py-3 bg-foreground text-background text-xs uppercase tracking-[0.3em] hover:bg-gold hover:text-foreground transition disabled:opacity-50"
+                  >
+                    Informar envio
                   </button>
                 </div>
               </div>
             ) : (
               <div className="mt-6 text-center py-6">
                 <p className="font-display text-2xl">Obrigado, {guestName}!</p>
-                <p className="text-muted-foreground mt-2">Seu carinho ficará para sempre conosco.</p>
-                <button onClick={() => setSelected(null)} className="mt-6 px-8 py-3 bg-foreground text-background text-xs uppercase tracking-[0.3em] hover:bg-gold hover:text-foreground transition">Fechar</button>
+                <p className="text-muted-foreground mt-2">
+                  Registramos sua informação de envio. Os noivos farão a conferência manual do Pix.
+                </p>
+                <button
+                  onClick={() => setSelected(null)}
+                  className="mt-6 px-8 py-3 bg-foreground text-background text-xs uppercase tracking-[0.3em] hover:bg-gold hover:text-foreground transition"
+                >
+                  Fechar
+                </button>
               </div>
             )}
           </motion.div>

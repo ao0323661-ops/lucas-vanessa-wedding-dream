@@ -30,12 +30,10 @@ export function Section({
             transition={{ duration: 0.8, ease: "easeOut" }}
             className="text-center mb-14"
           >
-            {eyebrow && <span className="gold-divider text-xs uppercase tracking-[0.4em]">{eyebrow}</span>}
-            {title && (
-              <h2 className="mt-5 font-display text-4xl sm:text-6xl">
-                {title}
-              </h2>
+            {eyebrow && (
+              <span className="gold-divider text-xs uppercase tracking-[0.4em]">{eyebrow}</span>
             )}
+            {title && <h2 className="mt-5 font-display text-4xl sm:text-6xl">{title}</h2>}
           </motion.div>
         )}
         {children}

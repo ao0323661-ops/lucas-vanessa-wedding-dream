@@ -9,6 +9,8 @@ export function MessageWall() {
   const [name, setName] = useState("");
   const [message, setMessage] = useState("");
   const [sending, setSending] = useState(false);
+  const [sent, setSent] = useState(false);
+  const [error, setError] = useState<string | null>(null);
 
   async function load() {
     const { data } = await supabase
@@ -27,16 +29,30 @@ export function MessageWall() {
     e.preventDefault();
     if (!name.trim() || !message.trim()) return;
     setSending(true);
-    await supabase.from("messages").insert({ name: name.trim().slice(0, 80), message: message.trim().slice(0, 500) });
+    setSent(false);
+    setError(null);
+    const { error } = await supabase.from("messages").insert({
+      name: name.trim().slice(0, 80),
+      message: message.trim().slice(0, 500),
+      approved: false,
+    });
+    setSending(false);
+    if (error) {
+      setError("Não conseguimos enviar sua mensagem agora. Tente novamente.");
+      return;
+    }
     setName("");
     setMessage("");
-    setSending(false);
+    setSent(true);
     load();
   }
 
   return (
     <div className="grid lg:grid-cols-2 gap-12">
-      <form onSubmit={submit} className="space-y-5 p-8 border border-border rounded-md bg-secondary/30">
+      <form
+        onSubmit={submit}
+        className="space-y-5 p-8 border border-border rounded-md bg-secondary/30"
+      >
         <h3 className="font-display text-2xl">Deixe sua mensagem</h3>
         <input
           value={name}
@@ -55,9 +71,14 @@ export function MessageWall() {
           required
           className="w-full bg-transparent border-b border-border focus:border-gold outline-none py-3 resize-none"
         />
-        <button disabled={sending} className="px-8 py-3 bg-foreground text-background uppercase tracking-[0.3em] text-xs hover:bg-gold hover:text-foreground transition-colors">
+        <button
+          disabled={sending}
+          className="px-8 py-3 bg-foreground text-background uppercase tracking-[0.3em] text-xs hover:bg-gold hover:text-foreground transition-colors"
+        >
           {sending ? "Enviando…" : "Enviar"}
         </button>
+        {sent && <p className="text-xs text-muted-foreground">Mensagem enviada para aprovação.</p>}
+        {error && <p className="text-xs text-destructive">{error}</p>}
       </form>
 
       <div className="space-y-4 max-h-[520px] overflow-y-auto pr-2">

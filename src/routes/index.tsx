@@ -12,14 +12,21 @@ export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
       { title: "Lucas & Vanessa — Nosso Casamento" },
-      { name: "description", content: "Celebre conosco o início de uma nova história. Confirme sua presença, deixe uma mensagem e descubra todos os detalhes do nosso casamento." },
+      {
+        name: "description",
+        content:
+          "Celebre conosco o início de uma nova história. Confirme sua presença, deixe uma mensagem e descubra todos os detalhes do nosso casamento.",
+      },
       { property: "og:title", content: "Lucas & Vanessa — Nosso Casamento" },
       { property: "og:description", content: "Celebre conosco o início de uma nova história." },
     ],
     links: [
       { rel: "preconnect", href: "https://fonts.googleapis.com" },
       { rel: "preconnect", href: "https://fonts.gstatic.com", crossOrigin: "" },
-      { rel: "stylesheet", href: "https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600&family=Inter:wght@300;400;500;600&family=Great+Vibes&display=swap" },
+      {
+        rel: "stylesheet",
+        href: "https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600&family=Inter:wght@300;400;500;600&family=Great+Vibes&display=swap",
+      },
     ],
   }),
   component: Home,
@@ -54,7 +61,9 @@ function Home() {
           </span>
           <h1 className="mt-8 font-display text-6xl sm:text-8xl md:text-9xl text-white leading-none">
             {WEDDING.names.groom}
-            <span className="block font-script text-gold text-5xl sm:text-7xl md:text-8xl my-2 sm:my-4">&</span>
+            <span className="block font-script text-gold text-5xl sm:text-7xl md:text-8xl my-2 sm:my-4">
+              &
+            </span>
             {WEDDING.names.bride}
           </h1>
           <p className="mt-6 max-w-md mx-auto text-white/80 italic font-display text-lg sm:text-xl">
@@ -92,7 +101,9 @@ function Home() {
               className={`relative mb-12 sm:mb-16 pl-12 sm:pl-0 sm:flex ${i % 2 ? "sm:flex-row-reverse" : ""}`}
             >
               <div className="absolute left-4 sm:left-1/2 top-2 -translate-x-1/2 w-3 h-3 rounded-full bg-gold ring-4 ring-background" />
-              <div className={`sm:w-1/2 ${i % 2 ? "sm:pl-12 sm:text-left" : "sm:pr-12 sm:text-right"}`}>
+              <div
+                className={`sm:w-1/2 ${i % 2 ? "sm:pl-12 sm:text-left" : "sm:pr-12 sm:text-right"}`}
+              >
                 <div className="text-gold font-display text-4xl">{t.year}</div>
                 <h3 className="mt-2 font-display text-2xl">{t.title}</h3>
                 <p className="mt-2 text-muted-foreground">{t.text}</p>
@@ -159,7 +170,8 @@ function Home() {
       {/* PRESENTES */}
       <Section id="presentes" eyebrow="Lista de presentes" title="Cotas de lua de mel">
         <p className="text-center max-w-xl mx-auto text-muted-foreground mb-12">
-          Sua presença é o nosso maior presente. Mas se quiser nos ajudar a tornar a lua de mel inesquecível, escolha uma cota simbólica abaixo — pagamento via Pix.
+          Sua presença é o nosso maior presente. Mas se quiser nos ajudar a tornar a lua de mel
+          inesquecível, escolha uma cota simbólica abaixo — pagamento via Pix.
         </p>
         <GiftList />
       </Section>
@@ -178,8 +190,13 @@ function Home() {
 
       <footer className="bg-foreground text-background py-12 px-6 text-center">
         <p className="font-script text-gold text-4xl">{WEDDING.names.full}</p>
-        <p className="mt-2 text-sm text-background/60 tracking-[0.3em] uppercase">{WEDDING.dateLabel}</p>
-        <Link to="/admin" className="mt-6 inline-block text-xs text-background/40 hover:text-gold uppercase tracking-[0.3em]">
+        <p className="mt-2 text-sm text-background/60 tracking-[0.3em] uppercase">
+          {WEDDING.dateLabel}
+        </p>
+        <Link
+          to="/admin"
+          className="mt-6 inline-block text-xs text-background/40 hover:text-gold uppercase tracking-[0.3em]"
+        >
           Área dos noivos
         </Link>
       </footer>
