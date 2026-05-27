@@ -1,8 +1,8 @@
 // Wedding configuration - edit this to update everything
 export const WEDDING = {
   brideAndGroom: "Lucas & Vanessa",
-  date: new Date("2026-09-12T16:00:00-03:00"),
-  dateLabel: "12 de Setembro de 2026",
+  date: new Date("2026-08-02T16:00:00-03:00"),
+  dateLabel: "2 de Agosto de 2026",
   ceremony: {
     name: "Igreja Nossa Senhora do Brasil",
     address: "Praça Nossa Senhora do Brasil, 1 — São Paulo, SP",
