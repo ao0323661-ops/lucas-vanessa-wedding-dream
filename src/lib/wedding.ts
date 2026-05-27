@@ -32,15 +32,15 @@ export const WEDDING = {
 
   // 4. Locais (Cerimônia e Festa)
   ceremony: {
-    name: "Igreja Matriz", // Substitua pelo nome real
-    address: "Rua Exemplo, 123 — Centro, Cidade, Estado",
+    name: "Cerimônia de Lucas & Vanessa",
+    address: "Endereço da cerimônia será compartilhado pelos noivos",
     time: "16h00",
-    mapsUrl: "https://www.google.com/maps", // Link do Google Maps
+    mapsUrl: "https://www.google.com/maps",
   },
 
   reception: {
-    name: "Espaço de Eventos", // Substitua pelo nome real
-    address: "Av. Exemplo, 456 — Bairro, Cidade, Estado",
+    name: "Celebração de Lucas & Vanessa",
+    address: "Endereço da festa será compartilhado pelos noivos",
     time: "19h00",
     mapsUrl: "https://www.google.com/maps",
   },
@@ -56,28 +56,28 @@ export const WEDDING = {
   timeline: [
     {
       year: "2018",
-      title: "Onde tudo começou",
-      text: "Um olhar despretensioso numa noite de inverno mudou tudo.",
+      title: "O primeiro capítulo",
+      text: "Lucas e Vanessa começaram a escrever uma história feita de encontros, cuidado e parceria.",
     },
     {
       year: "2020",
-      title: "Primeira viagem",
-      text: "Lisboa nos ensinou que casa é a pessoa, não o lugar.",
+      title: "Planos compartilhados",
+      text: "Entre conversas, sonhos e pequenas escolhas, o futuro dos dois foi ganhando forma.",
     },
     {
       year: "2022",
-      title: "Nossa primeira casa",
-      text: "Um apartamento pequeno, um amor enorme.",
+      title: "A vida a dois",
+      text: "A rotina mostrou que o amor também mora nos detalhes simples de todos os dias.",
     },
     {
       year: "2024",
       title: "O pedido",
-      text: "Ele se ajoelhou. Ela chorou. Ambos disseram sim.",
+      text: "Veio o sim que confirmou o que o coração dos dois já sabia.",
     },
     {
       year: "2026",
       title: "O grande dia",
-      text: "Agora celebramos com você, ao nosso lado.",
+      text: "Lucas e Vanessa celebram essa nova etapa com as pessoas que fazem parte da história.",
     },
   ],
 
@@ -87,25 +87,25 @@ export const WEDDING = {
       id: "jantar-paris",
       name: "Jantar Romântico em Paris",
       amount: 200,
-      description: "Uma noite especial na cidade luz",
+      description: "Um brinde aos primeiros dias de casados",
     },
     {
       id: "gondola-veneza",
       name: "Passeio em Gôndola em Veneza",
       amount: 350,
-      description: "Um momento clássico na Itália",
+      description: "Uma lembrança especial da lua de mel",
     },
     {
       id: "hotel-boutique",
       name: "Diária em Hotel Boutique",
       amount: 800,
-      description: "Uma noite de descanso e luxo",
+      description: "Uma noite de descanso para o casal",
     },
     {
       id: "cafe-da-manha",
       name: "Cota Café da Manhã",
       amount: 80,
-      description: "Para começarmos o dia bem",
+      description: "Para Lucas e Vanessa começarem o dia com carinho",
     },
     {
       id: "brinde-espumante",
@@ -117,7 +117,7 @@ export const WEDDING = {
       id: "contribuicao-livre",
       name: "Contribuição Livre",
       amount: 0,
-      description: "Contribua com o valor que desejar",
+      description: "Um carinho livre para a nova etapa do casal",
     },
   ],
 

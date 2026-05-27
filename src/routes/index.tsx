@@ -15,10 +15,29 @@ export const Route = createFileRoute("/")({
       {
         name: "description",
         content:
-          "Celebre conosco o início de uma nova história. Confirme sua presença, deixe uma mensagem e descubra todos os detalhes do nosso casamento.",
+          "Celebre o casamento de Lucas & Vanessa. Confirme sua presença, veja os detalhes do grande dia, envie uma mensagem e participe das cotas de lua de mel.",
       },
       { property: "og:title", content: "Lucas & Vanessa — Nosso Casamento" },
-      { property: "og:description", content: "Celebre conosco o início de uma nova história." },
+      {
+        property: "og:description",
+        content: "Confirme sua presença e acompanhe os detalhes do casamento de Lucas & Vanessa.",
+      },
+      { property: "og:type", content: "website" },
+      { property: "og:locale", content: "pt_BR" },
+      { property: "og:site_name", content: "Lucas & Vanessa — Nosso Casamento" },
+      { property: "og:image", content: WEDDING.photos.hero },
+      { name: "twitter:card", content: "summary_large_image" },
+      { name: "twitter:title", content: "Lucas & Vanessa — Nosso Casamento" },
+      {
+        name: "twitter:description",
+        content: "Confirme sua presença e acompanhe os detalhes do casamento de Lucas & Vanessa.",
+      },
+      { name: "twitter:image", content: WEDDING.photos.hero },
+      {
+        name: "keywords",
+        content:
+          "casamento Lucas e Vanessa, Lucas & Vanessa, confirmação de presença, RSVP, lista de presentes",
+      },
     ],
     links: [
       { rel: "preconnect", href: "https://fonts.googleapis.com" },
@@ -83,12 +102,17 @@ function Home() {
         </motion.div>
 
         <div className="absolute bottom-8 left-1/2 -translate-x-1/2 text-white/60 text-xs uppercase tracking-[0.4em] animate-pulse">
-          ↓ Role
+          ↓ Role para ver
         </div>
       </section>
 
       {/* HISTÓRIA */}
-      <Section id="historia" eyebrow="Nossa história" title="A linha do tempo do nosso amor">
+      <Section
+        id="historia"
+        eyebrow="Nossa história"
+        title="A linha do tempo de Lucas & Vanessa"
+        className="overflow-x-hidden"
+      >
         <div className="relative max-w-3xl mx-auto">
           <div className="absolute left-4 sm:left-1/2 top-0 bottom-0 w-px bg-gradient-to-b from-transparent via-gold/60 to-transparent" />
           {WEDDING.timeline.map((t, i) => (

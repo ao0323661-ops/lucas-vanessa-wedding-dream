@@ -159,9 +159,9 @@ function NotAdmin() {
     <div className="min-h-screen flex flex-col items-center justify-center text-center px-6 gap-4">
       <h1 className="font-display text-3xl">Sem permissão</h1>
       <p className="text-muted-foreground max-w-md">
-        Sua conta foi criada mas ainda não tem acesso de administrador. Para liberar, abra o painel
-        da Lovable Cloud e adicione uma linha na tabela <code>user_roles</code> com seu{" "}
-        <code>user_id</code> e role <code>admin</code>.
+        Sua conta foi criada, mas ainda não tem acesso de administrador. Para liberar, adicione uma
+        linha na tabela <code>user_roles</code> com seu <code>user_id</code> e role{" "}
+        <code>admin</code>.
       </p>
       <button
         onClick={() => supabase.auth.signOut()}
