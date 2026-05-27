@@ -19,11 +19,13 @@ export function RsvpForm() {
   const [attending, setAttending] = useState<"yes" | "no">("yes");
   const [companions, setCompanions] = useState(0);
   const [alreadySent, setAlreadySent] = useState(false);
+  const [storedAttending, setStoredAttending] = useState<"yes" | "no" | null>(null);
 
   useEffect(() => {
-    // Check local storage to prevent double submission
-    if (localStorage.getItem("rsvp_sent")) {
+    const status = localStorage.getItem("rsvp_status");
+    if (status) {
       setAlreadySent(true);
+      setStoredAttending(status as "yes" | "no");
     }
   }, []);
 
@@ -53,15 +55,15 @@ export function RsvpForm() {
 
     setSubmitting(true);
 
-    // Additional check in DB to be extra safe
+    // Additional check in DB: search by full name OR phone to avoid duplicates
     const { data: existing } = await supabase
       .from("rsvps")
       .select("id")
-      .eq("full_name", parsed.data.full_name)
+      .or(`full_name.eq."${parsed.data.full_name}",phone.eq."${parsed.data.phone}"`)
       .maybeSingle();
 
     if (existing) {
-      setError("Já existe uma confirmação com este nome.");
+      setError("Já existe uma confirmação com este nome ou telefone.");
       setSubmitting(false);
       return;
     }
@@ -82,11 +84,13 @@ export function RsvpForm() {
       return;
     }
 
-    localStorage.setItem("rsvp_sent", "true");
+    localStorage.setItem("rsvp_status", parsed.data.attending);
+    setStoredAttending(parsed.data.attending);
     setDone(true);
   }
 
   if (done || alreadySent) {
+    const displayAttending = done ? attending : (storedAttending || "yes");
     return (
       <motion.div
         initial={{ opacity: 0, scale: 0.95 }}
@@ -95,15 +99,15 @@ export function RsvpForm() {
       >
         <div className="gold-divider text-xs uppercase tracking-[0.4em] mb-6">RSVP</div>
         <h3 className="font-display text-4xl mb-4">
-          {attending === "yes" || (alreadySent && !done) ? "Sua presença está confirmada" : "Obrigado por avisar"}
+          {displayAttending === "yes" ? "Sua presença está confirmada" : "Obrigado por avisar"}
         </h3>
         <p className="text-muted-foreground font-light tracking-wide">
-          {attending === "yes" || (alreadySent && !done)
+          {displayAttending === "yes"
             ? "Mal podemos esperar para celebrar com você este dia tão especial."
             : "Sentiremos sua falta, mas agradecemos o carinho."}
         </p>
         <button 
-          onClick={() => { localStorage.removeItem("rsvp_sent"); setAlreadySent(false); setDone(false); }}
+          onClick={() => { localStorage.removeItem("rsvp_status"); setAlreadySent(false); setDone(false); }}
           className="mt-8 text-[10px] uppercase tracking-[0.3em] text-muted-foreground hover:text-gold transition-colors"
         >
           Enviar outra resposta
