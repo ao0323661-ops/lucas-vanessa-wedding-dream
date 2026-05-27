@@ -70,8 +70,11 @@ function AdminPage() {
 
   if (loading)
     return (
-      <div className="min-h-screen flex items-center justify-center text-muted-foreground">
-        Carregando…
+      <div className="flex min-h-screen items-center justify-center bg-background px-6 text-muted-foreground">
+        <div className="paper-luxe rounded-md px-8 py-7 text-center">
+          <div className="mx-auto mb-4 h-10 w-10 animate-pulse rounded-full border border-olive/25 bg-olive/[0.08]" />
+          <p className="text-xs uppercase tracking-[0.28em]">Carregando...</p>
+        </div>
       </div>
     );
   if (!session) return <AuthCard />;
@@ -104,11 +107,11 @@ function AuthCard() {
   }
 
   return (
-    <div className="min-h-screen bg-foreground text-background flex items-center justify-center px-6">
-      <div className="w-full max-w-md p-10 bg-background text-foreground rounded-md shadow-luxe">
+    <div className="flex min-h-screen items-center justify-center bg-background px-6">
+      <div className="paper-luxe w-full max-w-md rounded-md p-8 sm:p-10">
         <Link
           to="/"
-          className="text-xs uppercase tracking-[0.3em] text-muted-foreground hover:text-gold"
+          className="text-xs uppercase tracking-[0.3em] text-muted-foreground transition-colors hover:text-gold"
         >
           ← Voltar ao site
         </Link>
@@ -124,7 +127,7 @@ function AuthCard() {
             placeholder="E-mail"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
-            className="w-full bg-transparent border-b border-border focus:border-gold outline-none py-3"
+            className="w-full border-0 border-b border-border bg-transparent py-3 outline-none transition-colors focus:border-olive"
           />
           <input
             type="password"
@@ -133,19 +136,19 @@ function AuthCard() {
             placeholder="Senha"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
-            className="w-full bg-transparent border-b border-border focus:border-gold outline-none py-3"
+            className="w-full border-0 border-b border-border bg-transparent py-3 outline-none transition-colors focus:border-olive"
           />
           {error && <p className="text-destructive text-sm">{error}</p>}
           <button
             disabled={loading}
-            className="w-full py-3 bg-foreground text-background uppercase tracking-[0.3em] text-xs hover:bg-gold hover:text-foreground transition"
+            className="w-full rounded-md bg-gold py-3 text-xs uppercase tracking-[0.3em] text-background shadow-gold transition hover:bg-olive-deep disabled:cursor-wait disabled:opacity-70"
           >
-            {loading ? "…" : mode === "login" ? "Entrar" : "Criar conta"}
+            {loading ? "..." : mode === "login" ? "Entrar" : "Criar conta"}
           </button>
         </form>
         <button
           onClick={() => setMode(mode === "login" ? "signup" : "login")}
-          className="mt-4 text-xs text-muted-foreground hover:text-gold uppercase tracking-[0.3em]"
+          className="mt-4 text-xs uppercase tracking-[0.3em] text-muted-foreground transition-colors hover:text-gold"
         >
           {mode === "login" ? "Primeiro acesso? Criar conta" : "Já tenho conta"}
         </button>
@@ -156,25 +159,33 @@ function AuthCard() {
 
 function NotAdmin() {
   return (
-    <div className="min-h-screen flex flex-col items-center justify-center text-center px-6 gap-4">
-      <h1 className="font-display text-3xl">Sem permissão</h1>
-      <p className="text-muted-foreground max-w-md">
-        Sua conta foi criada, mas ainda não tem acesso de administrador. Para liberar, adicione uma
-        linha na tabela <code>user_roles</code> com seu <code>user_id</code> e role{" "}
-        <code>admin</code>.
-      </p>
-      <button
-        onClick={() => supabase.auth.signOut()}
-        className="mt-4 px-6 py-2 border border-border text-xs uppercase tracking-[0.3em] hover:border-gold"
-      >
-        Sair
-      </button>
-      <Link
-        to="/"
-        className="text-xs uppercase tracking-[0.3em] text-muted-foreground hover:text-gold"
-      >
-        ← Voltar ao site
-      </Link>
+    <div className="flex min-h-screen items-center justify-center bg-background px-6 py-12 text-center">
+      <div className="paper-luxe relative w-full max-w-xl overflow-hidden rounded-md p-8 sm:p-10">
+        <div className="pointer-events-none absolute inset-x-10 top-0 h-px bg-gradient-to-r from-transparent via-olive/45 to-transparent" />
+        <div className="mx-auto mb-6 flex h-14 w-14 items-center justify-center rounded-full border border-olive/25 bg-olive/[0.08] font-display text-2xl text-gold">
+          LV
+        </div>
+        <p className="gold-kicker mb-4">Área reservada</p>
+        <h1 className="font-display text-4xl leading-tight text-balance">Sem permissão</h1>
+        <p className="mx-auto mt-4 max-w-md text-muted-foreground text-pretty">
+          Sua conta está autenticada, mas ainda não foi liberada para acessar o painel dos noivos.
+          Peça a Lucas & Vanessa para ativarem seu acesso de administrador.
+        </p>
+        <div className="mt-8 flex flex-col justify-center gap-3 sm:flex-row">
+          <button
+            onClick={() => supabase.auth.signOut()}
+            className="rounded-md bg-gold px-6 py-3 text-xs uppercase tracking-[0.3em] text-background shadow-gold transition hover:bg-olive-deep"
+          >
+            Sair
+          </button>
+          <Link
+            to="/"
+            className="rounded-md border border-border px-6 py-3 text-xs uppercase tracking-[0.3em] text-muted-foreground transition hover:border-olive hover:text-gold"
+          >
+            ← Voltar ao site
+          </Link>
+        </div>
+      </div>
     </div>
   );
 }
@@ -263,24 +274,24 @@ function Dashboard() {
 
   return (
     <div className="min-h-screen bg-background">
-      <header className="border-b border-border bg-foreground text-background">
+      <header className="border-b border-olive/20 bg-olive-deep text-background">
         <div className="max-w-6xl mx-auto px-6 py-5 flex items-center justify-between">
           <div>
             <p className="font-script text-gold text-2xl leading-none">{WEDDING.names.full}</p>
-            <p className="text-xs uppercase tracking-[0.3em] text-background/60">
+            <p className="text-xs uppercase tracking-[0.3em] text-background/70">
               Painel administrativo
             </p>
           </div>
           <div className="flex gap-2">
             <Link
               to="/"
-              className="px-4 py-2 text-xs uppercase tracking-[0.25em] border border-background/30 hover:border-gold transition-colors"
+              className="rounded-md border border-background/30 px-4 py-2 text-xs uppercase tracking-[0.25em] transition-colors hover:border-gold hover:text-gold"
             >
               Site
             </Link>
             <button
               onClick={() => supabase.auth.signOut()}
-              className="px-4 py-2 text-xs uppercase tracking-[0.25em] bg-gold text-foreground hover:bg-white transition-colors"
+              className="rounded-md bg-background px-4 py-2 text-xs uppercase tracking-[0.25em] text-olive-deep transition-colors hover:bg-gold hover:text-background"
             >
               Sair
             </button>
@@ -301,7 +312,7 @@ function Dashboard() {
             <button
               key={k}
               onClick={() => setTab(k)}
-              className={`px-5 py-3 text-[10px] sm:text-xs uppercase tracking-[0.3em] border-b-2 transition-all ${tab === k ? "border-gold text-foreground" : "border-transparent text-muted-foreground hover:text-foreground"}`}
+              className={`px-5 py-3 text-[10px] sm:text-xs uppercase tracking-[0.3em] border-b-2 transition-all ${tab === k ? "border-olive text-foreground" : "border-transparent text-muted-foreground hover:text-foreground"}`}
             >
               {k === "overview"
                 ? "RSVP"
@@ -321,9 +332,9 @@ function Dashboard() {
               .map((r) => (
                 <div
                   key={r.id}
-                  className="p-6 border border-border bg-card rounded-md shadow-sm relative overflow-hidden group"
+                  className="paper-luxe group relative overflow-hidden rounded-md p-6"
                 >
-                  <div className="absolute top-0 left-0 w-1 h-full bg-gold opacity-50 group-hover:opacity-100 transition-opacity" />
+                  <div className="absolute top-0 left-0 h-full w-1 bg-olive opacity-45 transition-opacity group-hover:opacity-100" />
                   <p className="text-foreground/90 italic font-light leading-relaxed">
                     "{r.message}"
                   </p>
@@ -354,7 +365,7 @@ function Dashboard() {
                   placeholder="Buscar por nome..."
                   value={search}
                   onChange={(e) => setSearch(e.target.value)}
-                  className="flex-1 bg-transparent border-b border-border focus:border-gold outline-none py-2 text-sm"
+                  className="flex-1 border-0 border-b border-border bg-transparent py-2 text-sm outline-none transition-colors focus:border-olive"
                 />
                 <select
                   value={filter}
@@ -364,7 +375,7 @@ function Dashboard() {
                       setFilter(value);
                     }
                   }}
-                  className="bg-transparent border-b border-border focus:border-gold outline-none py-2 text-xs uppercase tracking-widest"
+                  className="border-0 border-b border-border bg-transparent py-2 text-xs uppercase tracking-widest outline-none transition-colors focus:border-olive"
                 >
                   <option value="all">Todos</option>
                   <option value="confirmed">Confirmados</option>
@@ -373,15 +384,15 @@ function Dashboard() {
               </div>
               <button
                 onClick={() => exportCsv(filteredRsvps)}
-                className="px-6 py-3 bg-foreground text-background text-[10px] uppercase tracking-[0.3em] hover:bg-gold hover:text-foreground transition-all shadow-md"
+                className="rounded-md bg-gold px-6 py-3 text-[10px] uppercase tracking-[0.3em] text-background shadow-gold transition-all hover:bg-olive-deep"
               >
                 Exportar CSV
               </button>
             </div>
 
-            <div className="overflow-x-auto border border-border rounded-md bg-card">
+            <div className="overflow-x-auto rounded-md border border-border bg-card shadow-luxe">
               <table className="w-full text-sm">
-                <thead className="bg-secondary/50 text-[10px] uppercase tracking-[0.2em] border-b border-border">
+                <thead className="border-b border-border bg-secondary/55 text-[10px] uppercase tracking-[0.2em]">
                   <tr>
                     <Th>Nome</Th>
                     <Th>Status</Th>
@@ -393,11 +404,11 @@ function Dashboard() {
                 </thead>
                 <tbody className="divide-y divide-border/50">
                   {filteredRsvps.map((r) => (
-                    <tr key={r.id} className="hover:bg-secondary/20 transition-colors">
+                    <tr key={r.id} className="transition-colors hover:bg-secondary/25">
                       <Td className="font-medium">{r.full_name}</Td>
                       <Td>
                         <span
-                          className={`text-[10px] uppercase tracking-widest px-2 py-1 rounded-full ${r.attending ? "bg-gold/10 text-gold" : "bg-muted/10 text-muted-foreground"}`}
+                          className={`rounded-full px-2 py-1 text-[10px] uppercase tracking-widest ${r.attending ? "bg-olive/[0.08] text-gold" : "bg-muted/60 text-muted-foreground"}`}
                         >
                           {r.attending ? "Sim" : "Não"}
                         </span>
@@ -430,7 +441,7 @@ function Dashboard() {
 
         {tab === "gifts" && (
           <div className="space-y-6">
-            <div className="flex justify-between items-end p-6 bg-card border border-border rounded-md shadow-sm">
+            <div className="paper-luxe flex items-end justify-between rounded-md p-6">
               <div>
                 <p className="text-[10px] uppercase tracking-[0.4em] text-muted-foreground">
                   Total informado
@@ -447,9 +458,9 @@ function Dashboard() {
               </div>
             </div>
 
-            <div className="overflow-x-auto border border-border rounded-md bg-card">
+            <div className="overflow-x-auto rounded-md border border-border bg-card shadow-luxe">
               <table className="w-full text-sm">
-                <thead className="bg-secondary/50 text-[10px] uppercase tracking-[0.2em] border-b border-border">
+                <thead className="border-b border-border bg-secondary/55 text-[10px] uppercase tracking-[0.2em]">
                   <tr>
                     <Th>Convidado</Th>
                     <Th>Cota</Th>
@@ -459,7 +470,7 @@ function Dashboard() {
                 </thead>
                 <tbody className="divide-y divide-border/50">
                   {gifts.map((g) => (
-                    <tr key={g.id} className="hover:bg-secondary/20 transition-colors">
+                    <tr key={g.id} className="transition-colors hover:bg-secondary/25">
                       <Td className="font-medium">{g.guest_name}</Td>
                       <Td className="text-xs">{g.gift_name}</Td>
                       <Td className="text-gold font-medium">
@@ -486,10 +497,7 @@ function Dashboard() {
         {tab === "messages" && (
           <div className="space-y-4">
             {messages.map((message) => (
-              <div
-                key={message.id}
-                className="p-6 border border-border bg-card rounded-md shadow-sm"
-              >
+              <div key={message.id} className="paper-luxe rounded-md p-6">
                 <div className="flex flex-col gap-4 md:flex-row md:items-start md:justify-between">
                   <div>
                     <div className="flex flex-wrap items-center gap-3">
@@ -499,8 +507,8 @@ function Dashboard() {
                       <span
                         className={`text-[9px] uppercase tracking-[0.2em] px-2 py-1 rounded-full ${
                           message.approved
-                            ? "bg-gold/10 text-gold"
-                            : "bg-muted/20 text-muted-foreground"
+                            ? "bg-olive/[0.08] text-gold"
+                            : "bg-muted/60 text-muted-foreground"
                         }`}
                       >
                         {message.approved ? "Aprovada" : "Pendente"}
@@ -515,14 +523,14 @@ function Dashboard() {
                     <button
                       onClick={() => void setMessageApproval(message.id, true)}
                       disabled={message.approved}
-                      className="px-4 py-2 text-[10px] uppercase tracking-[0.25em] bg-foreground text-background hover:bg-gold hover:text-foreground transition disabled:opacity-40"
+                      className="rounded-md bg-gold px-4 py-2 text-[10px] uppercase tracking-[0.25em] text-background transition hover:bg-olive-deep disabled:opacity-40"
                     >
                       Aprovar
                     </button>
                     <button
                       onClick={() => void setMessageApproval(message.id, false)}
                       disabled={!message.approved}
-                      className="px-4 py-2 text-[10px] uppercase tracking-[0.25em] border border-border hover:border-gold transition disabled:opacity-40"
+                      className="rounded-md border border-border px-4 py-2 text-[10px] uppercase tracking-[0.25em] transition hover:border-olive hover:text-gold disabled:opacity-40"
                     >
                       Reprovar
                     </button>
@@ -545,10 +553,14 @@ function Dashboard() {
 function Stat({ label, value, accent }: { label: string; value: number; accent?: boolean }) {
   return (
     <div
-      className={`p-6 rounded-md border transition-all hover:shadow-md ${accent ? "bg-foreground text-background border-foreground" : "bg-card border-border"}`}
+      className={`rounded-md border p-6 transition-all hover:shadow-md ${
+        accent ? "border-olive bg-gold text-background shadow-gold" : "paper-luxe text-foreground"
+      }`}
     >
       <p
-        className={`text-[10px] uppercase tracking-[0.3em] ${accent ? "text-gold" : "text-muted-foreground"}`}
+        className={`text-[10px] uppercase tracking-[0.3em] ${
+          accent ? "text-background/75" : "text-muted-foreground"
+        }`}
       >
         {label}
       </p>

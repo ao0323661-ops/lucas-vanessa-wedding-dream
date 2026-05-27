@@ -64,7 +64,7 @@ function Home() {
     <div id="top" className="min-h-screen bg-background text-foreground">
       <Nav />
 
-      <section className="relative flex h-[calc(100svh-34px)] min-h-[620px] items-center justify-center overflow-hidden px-5 pb-12 pt-24 text-white sm:px-6">
+      <section className="relative flex h-[calc(100svh-34px)] min-h-[620px] items-center justify-center overflow-hidden px-5 pb-12 pt-24 text-background sm:px-6">
         <motion.img
           src={WEDDING.photos.hero}
           alt={WEDDING.names.full}
@@ -90,14 +90,14 @@ function Home() {
             initial={{ opacity: 0, y: 14 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.2 }}
-            className="glass-luxe rounded-full px-5 py-2 text-[10px] uppercase tracking-[0.34em] text-gold sm:text-xs"
+            className="glass-luxe rounded-full px-5 py-2 text-[10px] uppercase tracking-[0.34em] text-olive-deep sm:text-xs"
           >
             {WEDDING.dateLabel}
           </motion.span>
 
-          <h1 className="mt-5 font-display text-5xl leading-[0.84] text-white text-balance sm:text-7xl md:text-8xl 2xl:text-9xl">
+          <h1 className="mt-5 font-display text-5xl leading-[0.84] text-background text-balance drop-shadow-[0_14px_34px_rgb(48_63_40_/_0.26)] sm:text-7xl md:text-8xl 2xl:text-9xl">
             {WEDDING.names.groom}
-            <span className="my-1 block font-script text-4xl leading-none text-gold drop-shadow-[0_12px_36px_rgb(0_0_0_/_0.45)] sm:my-2 sm:text-6xl md:text-7xl 2xl:text-8xl">
+            <span className="my-1 block font-script text-4xl leading-none text-gold drop-shadow-[0_12px_30px_rgb(48_63_40_/_0.26)] sm:my-2 sm:text-6xl md:text-7xl 2xl:text-8xl">
               &
             </span>
             {WEDDING.names.bride}
@@ -107,7 +107,7 @@ function Home() {
             initial={{ opacity: 0, y: 16 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.9, delay: 0.35 }}
-            className="mx-auto mt-5 max-w-xl font-display text-lg italic leading-relaxed text-white/80 text-pretty sm:text-xl md:text-2xl"
+            className="mx-auto mt-5 max-w-xl font-display text-lg italic leading-relaxed text-background/86 text-pretty sm:text-xl md:text-2xl"
           >
             "{WEDDING.heroPhrase}"
           </motion.p>
@@ -129,14 +129,14 @@ function Home() {
           >
             <a
               href="#rsvp"
-              className="shine-line inline-flex min-h-[54px] items-center justify-center gap-3 rounded-md bg-gold px-8 py-4 text-[10px] font-semibold uppercase tracking-[0.28em] text-foreground shadow-gold transition-all duration-500 hover:bg-white sm:text-xs"
+              className="shine-line inline-flex min-h-[54px] items-center justify-center gap-3 rounded-md bg-gold px-8 py-4 text-[10px] font-semibold uppercase tracking-[0.28em] text-background shadow-gold transition-all duration-500 hover:bg-olive-deep sm:text-xs"
             >
               Confirmar presença
               <ArrowRight size={16} />
             </a>
             <a
               href="#local"
-              className="inline-flex min-h-[54px] items-center justify-center gap-3 rounded-md border border-white/20 bg-white/[0.06] px-8 py-4 text-[10px] uppercase tracking-[0.28em] text-white/80 backdrop-blur transition-all duration-500 hover:border-gold/60 hover:text-gold sm:text-xs"
+              className="inline-flex min-h-[54px] items-center justify-center gap-3 rounded-md border border-olive/25 bg-linen/45 px-8 py-4 text-[10px] uppercase tracking-[0.28em] text-olive-deep/78 backdrop-blur transition-all duration-500 hover:border-olive/55 hover:text-olive-deep sm:text-xs"
             >
               Ver detalhes
             </a>
@@ -151,7 +151,7 @@ function Home() {
             opacity: { delay: 1.2, duration: 0.7 },
             y: { repeat: Infinity, duration: 2.2 },
           }}
-          className="absolute bottom-5 left-1/2 z-10 flex -translate-x-1/2 flex-col items-center gap-2 text-[9px] uppercase tracking-[0.32em] text-white/55 [@media(max-height:760px)]:hidden"
+          className="absolute bottom-5 left-1/2 z-10 flex -translate-x-1/2 flex-col items-center gap-2 text-olive-deep/55 text-[9px] uppercase tracking-[0.32em] [@media(max-height:760px)]:hidden"
           aria-label="Role para ver a história"
         >
           Role
@@ -206,7 +206,7 @@ function Home() {
               whileHover={{ y: -6 }}
               viewport={{ once: true, margin: "-50px" }}
               transition={{ duration: 0.68, delay: i * 0.05, ease: [0.16, 1, 0.3, 1] }}
-              className={`group relative overflow-hidden rounded-md border border-white/10 bg-white/[0.04] shadow-[0_24px_70px_-44px_rgb(0_0_0_/_0.9)] ${
+              className={`group relative overflow-hidden rounded-md border border-olive/15 bg-linen/25 shadow-[0_24px_70px_-48px_rgb(77_92_60_/_0.55)] ${
                 i === 0 ? "col-span-2 row-span-2" : ""
               } ${i === 3 ? "md:row-span-2" : ""}`}
             >
@@ -216,9 +216,9 @@ function Home() {
                 loading={i === 0 ? "eager" : "lazy"}
                 className="h-full w-full object-cover transition-transform duration-[1200ms] ease-out group-hover:scale-105"
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-black/10 opacity-70 transition-opacity duration-500 group-hover:opacity-95" />
+              <div className="absolute inset-0 bg-gradient-to-t from-olive-deep/70 via-transparent to-foreground/10 opacity-70 transition-opacity duration-500 group-hover:opacity-90" />
               <div className="absolute inset-x-4 bottom-4 flex items-center justify-between">
-                <span className="text-[10px] uppercase tracking-[0.26em] text-white/75">
+                <span className="text-[10px] uppercase tracking-[0.26em] text-background/82">
                   Capítulo {String(i + 1).padStart(2, "0")}
                 </span>
                 <span className="h-px w-10 bg-gold/70 transition-all duration-500 group-hover:w-16" />
@@ -239,10 +239,10 @@ function Home() {
               transition={{ duration: 0.76, delay: i * 0.08, ease: [0.16, 1, 0.3, 1] }}
               className="paper-luxe group relative overflow-hidden rounded-md p-7 transition-transform duration-500 hover:-translate-y-1 sm:p-10"
             >
-              <div className="pointer-events-none absolute inset-x-8 top-0 h-px bg-gradient-to-r from-transparent via-gold/70 to-transparent" />
+              <div className="pointer-events-none absolute inset-x-8 top-0 h-px bg-gradient-to-r from-transparent via-olive/45 to-transparent" />
               <div className="mb-8 flex items-center justify-between gap-4">
                 <div className="gold-kicker">{i === 0 ? "Cerimônia" : "Festa"}</div>
-                <span className="flex h-11 w-11 items-center justify-center rounded-full border border-gold/30 bg-gold/10 text-gold">
+                <span className="flex h-11 w-11 items-center justify-center rounded-full border border-olive/25 bg-olive/[0.08] text-gold">
                   {i === 0 ? <CalendarDays size={18} /> : <Clock size={18} />}
                 </span>
               </div>
@@ -258,7 +258,7 @@ function Home() {
                 href={place.mapsUrl}
                 target="_blank"
                 rel="noreferrer"
-                className="shine-line mt-8 inline-flex min-h-[48px] items-center justify-center gap-3 rounded-md bg-foreground px-6 py-3 text-[10px] uppercase tracking-[0.28em] text-background transition-all duration-500 hover:bg-gold hover:text-foreground"
+                className="shine-line mt-8 inline-flex min-h-[48px] items-center justify-center gap-3 rounded-md bg-gold px-6 py-3 text-[10px] uppercase tracking-[0.28em] text-background transition-all duration-500 hover:bg-olive-deep"
               >
                 Abrir no Google Maps
                 <ArrowRight size={15} />
@@ -282,20 +282,20 @@ function Home() {
 
       <Section id="rsvp" eyebrow="Confirme sua presença" title="RSVP">
         <div className="paper-luxe relative mx-auto max-w-3xl overflow-hidden rounded-md p-6 sm:p-10 md:p-12">
-          <div className="pointer-events-none absolute inset-x-10 top-0 h-px bg-gradient-to-r from-transparent via-gold/80 to-transparent" />
+          <div className="pointer-events-none absolute inset-x-10 top-0 h-px bg-gradient-to-r from-transparent via-olive/45 to-transparent" />
           <RsvpForm />
         </div>
       </Section>
 
-      <footer className="relative overflow-hidden bg-foreground px-6 py-14 text-center text-background">
-        <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-gold/70 to-transparent" />
+      <footer className="relative overflow-hidden bg-olive-deep px-6 py-14 text-center text-background">
+        <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-champagne to-transparent" />
         <p className="font-script text-5xl leading-none text-gold">{WEDDING.names.full}</p>
-        <p className="mt-4 text-xs uppercase tracking-[0.32em] text-background/60">
+        <p className="mt-4 text-xs uppercase tracking-[0.32em] text-background/70">
           {WEDDING.dateLabel}
         </p>
         <Link
           to="/admin"
-          className="mt-7 inline-block text-[10px] uppercase tracking-[0.3em] text-background/40 transition-colors hover:text-gold"
+          className="mt-7 inline-block text-[10px] uppercase tracking-[0.3em] text-background/55 transition-colors hover:text-gold"
         >
           Área dos noivos
         </Link>

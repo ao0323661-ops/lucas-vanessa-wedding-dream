@@ -98,8 +98,8 @@ export function RsvpForm() {
         transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
         className="relative overflow-hidden px-2 py-8 text-center sm:px-6 sm:py-10"
       >
-        <div className="pointer-events-none absolute inset-x-8 top-0 h-px bg-gradient-to-r from-transparent via-gold/80 to-transparent" />
-        <div className="mx-auto mb-6 flex h-14 w-14 items-center justify-center rounded-full border border-gold/40 bg-gold/10 text-gold shadow-gold">
+        <div className="pointer-events-none absolute inset-x-8 top-0 h-px bg-gradient-to-r from-transparent via-olive/45 to-transparent" />
+        <div className="mx-auto mb-6 flex h-14 w-14 items-center justify-center rounded-full border border-olive/30 bg-olive/[0.08] text-gold shadow-gold">
           {displayAttending === "yes" ? <Heart size={22} /> : <Check size={22} />}
         </div>
         <div className="gold-divider gold-kicker mb-6 justify-center">RSVP</div>
@@ -149,12 +149,12 @@ export function RsvpForm() {
               onClick={() => setAttending(o.v as "yes" | "no")}
               className={`group relative min-h-[56px] flex-1 overflow-hidden rounded-md border px-4 py-4 text-xs uppercase tracking-[0.18em] transition-all duration-500 ${
                 attending === o.v
-                  ? "border-foreground bg-foreground text-background shadow-luxe"
-                  : "border-border bg-background/40 text-foreground hover:border-gold/60 hover:bg-gold/5"
+                  ? "border-olive bg-gold text-background shadow-gold"
+                  : "border-border bg-background/40 text-foreground hover:border-olive/55 hover:bg-olive/[0.05]"
               }`}
             >
               {attending === o.v && (
-                <span className="absolute inset-x-4 top-0 h-px bg-gradient-to-r from-transparent via-gold/80 to-transparent" />
+                <span className="absolute inset-x-4 top-0 h-px bg-gradient-to-r from-transparent via-linen/75 to-transparent" />
               )}
               {o.l}
             </button>
@@ -176,19 +176,19 @@ export function RsvpForm() {
                 <button
                   type="button"
                   onClick={() => setCompanions(Math.max(0, companions - 1))}
-                  className="flex h-12 w-12 items-center justify-center rounded-full border border-border bg-background/50 text-foreground transition-all hover:border-gold hover:text-gold disabled:opacity-40"
+                  className="flex h-12 w-12 items-center justify-center rounded-full border border-border bg-background/50 text-foreground transition-all hover:border-olive hover:text-gold disabled:opacity-40"
                   aria-label="Diminuir acompanhantes"
                   disabled={companions === 0}
                 >
                   <Minus size={18} />
                 </button>
-                <span className="flex h-14 min-w-14 items-center justify-center rounded-md border border-gold/25 bg-gold/[0.08] px-4 font-display text-4xl text-foreground">
+                <span className="flex h-14 min-w-14 items-center justify-center rounded-md border border-olive/25 bg-olive/[0.08] px-4 font-display text-4xl text-foreground">
                   {companions}
                 </span>
                 <button
                   type="button"
                   onClick={() => setCompanions(Math.min(10, companions + 1))}
-                  className="flex h-12 w-12 items-center justify-center rounded-full border border-border bg-background/50 text-foreground transition-all hover:border-gold hover:text-gold disabled:opacity-40"
+                  className="flex h-12 w-12 items-center justify-center rounded-full border border-border bg-background/50 text-foreground transition-all hover:border-olive hover:text-gold disabled:opacity-40"
                   aria-label="Aumentar acompanhantes"
                   disabled={companions === 10}
                 >
@@ -238,7 +238,7 @@ export function RsvpForm() {
       <button
         type="submit"
         disabled={submitting}
-        className="shine-line flex min-h-[58px] w-full items-center justify-center gap-3 rounded-md bg-foreground px-6 py-5 text-[10px] uppercase tracking-[0.34em] text-background shadow-luxe transition-all duration-500 hover:bg-gold hover:text-foreground disabled:cursor-wait disabled:opacity-70 sm:text-xs"
+        className="shine-line flex min-h-[58px] w-full items-center justify-center gap-3 rounded-md bg-gold px-6 py-5 text-[10px] uppercase tracking-[0.34em] text-background shadow-gold transition-all duration-500 hover:bg-olive-deep disabled:cursor-wait disabled:opacity-70 sm:text-xs"
       >
         {submitting && <Loader2 size={16} className="animate-spin" />}
         {submitting ? "Processando..." : "Confirmar presença"}
@@ -248,7 +248,7 @@ export function RsvpForm() {
 }
 
 const inputCls =
-  "w-full rounded-none border-0 border-b border-border bg-transparent px-1 py-4 font-light text-foreground outline-none transition-all duration-300 placeholder:text-muted-foreground/45 focus:border-gold focus:bg-gold/5";
+  "w-full rounded-none border-0 border-b border-border bg-transparent px-1 py-4 font-light text-foreground outline-none transition-all duration-300 placeholder:text-muted-foreground/45 focus:border-olive focus:bg-olive/[0.04]";
 
 function Field({ label, children }: { label: string; children: React.ReactNode }) {
   return (

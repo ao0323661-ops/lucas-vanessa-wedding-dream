@@ -18,8 +18,9 @@ const SITE_DESCRIPTION =
 function NotFoundComponent() {
   return (
     <div className="flex min-h-screen items-center justify-center bg-background px-4">
-      <div className="max-w-md text-center">
-        <h1 className="text-7xl font-bold text-foreground">404</h1>
+      <div className="paper-luxe max-w-md rounded-md p-8 text-center">
+        <p className="gold-kicker mb-4">Lucas & Vanessa</p>
+        <h1 className="font-display text-7xl text-gold">404</h1>
         <h2 className="mt-4 text-xl font-semibold text-foreground">Página não encontrada</h2>
         <p className="mt-2 text-sm text-muted-foreground">
           Este endereço não existe ou foi movido. Volte para o site do casamento de Lucas & Vanessa.
@@ -27,7 +28,7 @@ function NotFoundComponent() {
         <div className="mt-6">
           <Link
             to="/"
-            className="inline-flex items-center justify-center rounded-md bg-primary px-4 py-2 text-sm font-medium text-primary-foreground transition-colors hover:bg-primary/90"
+            className="inline-flex items-center justify-center rounded-md bg-gold px-5 py-3 text-xs font-medium uppercase tracking-[0.24em] text-background shadow-gold transition-colors hover:bg-olive-deep"
           >
             Voltar ao início
           </Link>
@@ -43,8 +44,9 @@ function ErrorComponent({ error, reset }: { error: Error; reset: () => void }) {
 
   return (
     <div className="flex min-h-screen items-center justify-center bg-background px-4">
-      <div className="max-w-md text-center">
-        <h1 className="text-xl font-semibold tracking-tight text-foreground">
+      <div className="paper-luxe max-w-md rounded-md p-8 text-center">
+        <p className="gold-kicker mb-4">Instabilidade</p>
+        <h1 className="font-display text-3xl leading-tight tracking-tight text-foreground">
           Não conseguimos carregar esta página
         </h1>
         <p className="mt-2 text-sm text-muted-foreground">
@@ -56,13 +58,13 @@ function ErrorComponent({ error, reset }: { error: Error; reset: () => void }) {
               router.invalidate();
               reset();
             }}
-            className="inline-flex items-center justify-center rounded-md bg-primary px-4 py-2 text-sm font-medium text-primary-foreground transition-colors hover:bg-primary/90"
+            className="inline-flex items-center justify-center rounded-md bg-gold px-5 py-3 text-xs font-medium uppercase tracking-[0.22em] text-background shadow-gold transition-colors hover:bg-olive-deep"
           >
             Tentar novamente
           </button>
           <a
             href="/"
-            className="inline-flex items-center justify-center rounded-md border border-input bg-background px-4 py-2 text-sm font-medium text-foreground transition-colors hover:bg-accent"
+            className="inline-flex items-center justify-center rounded-md border border-border bg-background px-5 py-3 text-xs font-medium uppercase tracking-[0.22em] text-foreground transition-colors hover:border-olive hover:text-gold"
           >
             Voltar ao início
           </a>
@@ -88,7 +90,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
         content:
           "casamento Lucas e Vanessa, Lucas & Vanessa, RSVP casamento, lista de presentes, mural de mensagens",
       },
-      { name: "theme-color", content: "#c79b36" },
+      { name: "theme-color", content: "#66724c" },
       { property: "og:title", content: SITE_TITLE },
       { property: "og:description", content: SITE_DESCRIPTION },
       { property: "og:type", content: "website" },

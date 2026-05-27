@@ -59,9 +59,9 @@ export function GiftList() {
             transition={{ delay: i * 0.05, duration: 0.65, ease: [0.16, 1, 0.3, 1] }}
             whileHover={{ y: -6 }}
             whileTap={{ scale: 0.99 }}
-            className="paper-luxe group relative overflow-hidden rounded-md p-7 text-left transition-all duration-500 hover:border-gold/45"
+            className="paper-luxe group relative overflow-hidden rounded-md p-7 text-left transition-all duration-500 hover:border-olive/45"
           >
-            <div className="pointer-events-none absolute inset-x-6 top-0 h-px bg-gradient-to-r from-transparent via-gold/65 to-transparent opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
+            <div className="pointer-events-none absolute inset-x-6 top-0 h-px bg-gradient-to-r from-transparent via-olive/45 to-transparent opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
             <div className="gold-kicker mb-5">Cota</div>
             <h3 className="font-display text-2xl leading-tight text-balance">{g.name}</h3>
             <p className="mt-3 min-h-[52px] text-sm text-muted-foreground text-pretty">
@@ -71,7 +71,7 @@ export function GiftList() {
               <span className="font-display text-3xl leading-none text-foreground">
                 {g.amount > 0 ? `R$ ${g.amount}` : "Livre"}
               </span>
-              <span className="flex h-10 w-10 items-center justify-center rounded-full border border-gold/25 text-gold transition-all duration-500 group-hover:border-gold group-hover:bg-gold group-hover:text-foreground">
+              <span className="flex h-10 w-10 items-center justify-center rounded-full border border-olive/25 text-gold transition-all duration-500 group-hover:border-olive group-hover:bg-gold group-hover:text-background">
                 <ArrowRight size={16} />
               </span>
             </div>
@@ -81,7 +81,7 @@ export function GiftList() {
 
       {selected && (
         <div
-          className="fixed inset-0 z-50 flex items-center justify-center bg-black/75 p-4 backdrop-blur-md"
+          className="fixed inset-0 z-50 flex items-center justify-center bg-olive-deep/55 p-4 backdrop-blur-md"
           onClick={() => setSelected(null)}
         >
           <motion.div
@@ -93,12 +93,12 @@ export function GiftList() {
           >
             <button
               onClick={() => setSelected(null)}
-              className="absolute right-4 top-4 flex h-10 w-10 items-center justify-center rounded-full border border-border bg-background/70 text-muted-foreground transition-colors hover:border-gold hover:text-gold"
+              className="absolute right-4 top-4 flex h-10 w-10 items-center justify-center rounded-full border border-border bg-background/70 text-muted-foreground transition-colors hover:border-olive hover:text-gold"
               aria-label="Fechar presente"
             >
               <X size={17} />
             </button>
-            <div className="pointer-events-none absolute inset-x-8 top-0 h-px bg-gradient-to-r from-transparent via-gold/75 to-transparent" />
+            <div className="pointer-events-none absolute inset-x-8 top-0 h-px bg-gradient-to-r from-transparent via-olive/45 to-transparent" />
             <div className="gold-divider gold-kicker">Presente</div>
             <h3 className="mt-5 pr-12 font-display text-3xl leading-tight text-balance">
               {selected.name}
@@ -113,7 +113,7 @@ export function GiftList() {
                   <input
                     value={guestName}
                     onChange={(e) => setGuestName(e.target.value)}
-                    className="w-full border-0 border-b border-border bg-transparent py-3 outline-none transition-colors focus:border-gold"
+                    className="w-full border-0 border-b border-border bg-transparent py-3 outline-none transition-colors focus:border-olive"
                   />
                 </label>
                 <label className="block">
@@ -125,11 +125,11 @@ export function GiftList() {
                     min={1}
                     value={amount || ""}
                     onChange={(e) => setAmount(Number(e.target.value))}
-                    className="w-full border-0 border-b border-border bg-transparent py-3 outline-none transition-colors focus:border-gold"
+                    className="w-full border-0 border-b border-border bg-transparent py-3 outline-none transition-colors focus:border-olive"
                   />
                 </label>
 
-                <div className="rounded-md border border-gold/20 bg-gold/[0.07] p-4 text-sm">
+                <div className="rounded-md border border-olive/20 bg-olive/[0.06] p-4 text-sm">
                   <p className="mb-3 text-[10px] uppercase tracking-[0.28em] text-muted-foreground">
                     Chave Pix
                   </p>
@@ -137,7 +137,7 @@ export function GiftList() {
                     <code className="break-all text-foreground">{WEDDING.pix.key}</code>
                     <button
                       onClick={copyPix}
-                      className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-foreground text-background transition hover:bg-gold hover:text-foreground"
+                      className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-gold text-background transition hover:bg-olive-deep"
                       aria-label={copied ? "Chave Pix copiada" : "Copiar chave Pix"}
                     >
                       {copied ? <Check size={16} /> : <Copy size={16} />}
@@ -158,14 +158,14 @@ export function GiftList() {
                 <div className="flex flex-col gap-3 pt-2 sm:flex-row">
                   <button
                     onClick={() => setSelected(null)}
-                    className="min-h-[48px] flex-1 rounded-md border border-border text-xs uppercase tracking-[0.28em] transition-colors hover:border-gold hover:text-gold"
+                    className="min-h-[48px] flex-1 rounded-md border border-border text-xs uppercase tracking-[0.28em] transition-colors hover:border-olive hover:text-gold"
                   >
                     Cancelar
                   </button>
                   <button
                     onClick={confirm}
                     disabled={!guestName.trim() || amount <= 0 || confirming}
-                    className="shine-line flex min-h-[48px] flex-1 items-center justify-center gap-3 rounded-md bg-foreground px-4 text-xs uppercase tracking-[0.28em] text-background transition hover:bg-gold hover:text-foreground disabled:cursor-wait disabled:opacity-55"
+                    className="shine-line flex min-h-[48px] flex-1 items-center justify-center gap-3 rounded-md bg-gold px-4 text-xs uppercase tracking-[0.28em] text-background transition hover:bg-olive-deep disabled:cursor-wait disabled:opacity-55"
                   >
                     {confirming && <Loader2 size={15} className="animate-spin" />}
                     {confirming ? "Registrando..." : "Informar envio"}
@@ -174,7 +174,7 @@ export function GiftList() {
               </div>
             ) : (
               <div className="mt-7 py-8 text-center">
-                <div className="mx-auto mb-5 flex h-14 w-14 items-center justify-center rounded-full border border-gold/35 bg-gold/10 text-gold">
+                <div className="mx-auto mb-5 flex h-14 w-14 items-center justify-center rounded-full border border-olive/30 bg-olive/[0.08] text-gold">
                   <Check size={22} />
                 </div>
                 <p className="font-display text-3xl">Obrigado, {guestName}!</p>
@@ -183,7 +183,7 @@ export function GiftList() {
                 </p>
                 <button
                   onClick={() => setSelected(null)}
-                  className="shine-line mt-7 inline-flex min-h-[48px] items-center justify-center rounded-md bg-foreground px-8 text-xs uppercase tracking-[0.28em] text-background transition hover:bg-gold hover:text-foreground"
+                  className="shine-line mt-7 inline-flex min-h-[48px] items-center justify-center rounded-md bg-gold px-8 text-xs uppercase tracking-[0.28em] text-background transition hover:bg-olive-deep"
                 >
                   Fechar
                 </button>
