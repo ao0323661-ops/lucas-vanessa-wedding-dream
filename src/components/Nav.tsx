@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import { Menu, X } from "lucide-react";
 
 const links = [
   { href: "#historia", label: "Nossa História" },
@@ -23,24 +24,34 @@ export function Nav() {
 
   return (
     <header
-      className={`fixed top-0 inset-x-0 z-50 transition-all duration-500 ${
-        scrolled ? "bg-background/85 backdrop-blur border-b border-border" : "bg-transparent"
+      className={`fixed inset-x-0 top-0 z-50 transition-all duration-700 ${
+        scrolled
+          ? "border-b border-border/70 bg-background/80 shadow-[0_18px_55px_-42px_rgb(0_0_0_/_0.7)] backdrop-blur-xl"
+          : "bg-transparent"
       }`}
     >
-      <div className="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
+      <div className="mx-auto flex max-w-7xl items-center justify-between px-5 py-4 sm:px-6">
         <a
           href="#top"
-          className={`font-display text-xl tracking-wide ${scrolled ? "text-foreground" : "text-white"}`}
+          className={`group flex items-center gap-3 font-display text-xl tracking-wide transition-colors ${
+            scrolled ? "text-foreground" : "text-white"
+          }`}
+          aria-label="Voltar ao início"
         >
-          L <span className="text-gold">&</span> V
+          <span className="flex h-9 w-9 items-center justify-center rounded-full border border-gold/45 bg-black/15 text-sm text-gold backdrop-blur">
+            LV
+          </span>
+          <span className="hidden sm:inline">
+            Lucas <span className="text-gold">&</span> Vanessa
+          </span>
         </a>
-        <nav className="hidden md:flex items-center gap-8">
+        <nav className="hidden items-center gap-7 md:flex">
           {links.map((l) => (
             <a
               key={l.href}
               href={l.href}
-              className={`text-xs uppercase tracking-[0.25em] hover:text-gold transition-colors ${
-                scrolled ? "text-foreground/80" : "text-white/90"
+              className={`relative text-xs uppercase tracking-[0.24em] transition-colors after:absolute after:-bottom-2 after:left-0 after:h-px after:w-0 after:bg-gold after:transition-all after:duration-300 hover:text-gold hover:after:w-full ${
+                scrolled ? "text-foreground/75" : "text-white/85"
               }`}
             >
               {l.label}
@@ -49,30 +60,43 @@ export function Nav() {
         </nav>
         <button
           onClick={() => setOpen(!open)}
-          className={`md:hidden text-xs uppercase tracking-[0.25em] ${scrolled ? "text-foreground" : "text-white"}`}
-          aria-label="Menu"
+          className={`flex h-11 w-11 items-center justify-center rounded-full border transition-all md:hidden ${
+            scrolled
+              ? "border-border bg-background/60 text-foreground"
+              : "border-white/20 bg-white/[0.08] text-white backdrop-blur"
+          }`}
+          aria-label={open ? "Fechar menu" : "Abrir menu"}
+          aria-expanded={open}
         >
-          {open ? "Fechar" : "Menu"}
+          {open ? <X size={18} /> : <Menu size={18} />}
         </button>
       </div>
       <AnimatePresence>
         {open && (
           <motion.div
-            initial={{ opacity: 0, y: -20 }}
+            initial={{ opacity: 0, y: -18 }}
             animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -20 }}
-            className="md:hidden bg-background border-t border-border px-6 py-8 flex flex-col gap-6 shadow-xl"
+            exit={{ opacity: 0, y: -18 }}
+            transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
+            className="md:hidden"
           >
-            {links.map((l) => (
-              <a
-                key={l.href}
-                href={l.href}
-                onClick={() => setOpen(false)}
-                className="text-sm uppercase tracking-[0.3em] text-foreground/80 hover:text-gold transition-colors"
-              >
-                {l.label}
-              </a>
-            ))}
+            <div className="mx-4 mb-4 rounded-md border border-gold/20 bg-background/95 px-6 py-7 shadow-luxe backdrop-blur-xl">
+              <nav className="flex flex-col gap-5">
+                {links.map((l, index) => (
+                  <motion.a
+                    key={l.href}
+                    href={l.href}
+                    onClick={() => setOpen(false)}
+                    initial={{ opacity: 0, y: -6 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.28, delay: index * 0.035 }}
+                    className="border-b border-border/60 pb-4 text-sm uppercase tracking-[0.28em] text-foreground/80 transition-colors last:border-0 last:pb-0 hover:text-gold"
+                  >
+                    {l.label}
+                  </motion.a>
+                ))}
+              </nav>
+            </div>
           </motion.div>
         )}
       </AnimatePresence>

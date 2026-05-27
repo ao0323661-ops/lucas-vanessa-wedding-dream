@@ -1,6 +1,6 @@
 /**
  * ============================================================================
- * CONFIGURAÇÃO DO CASAMENTO — LUCAS & VANESSA
+ * CONFIGURAÇÃO DO CASAMENTO - LUCAS & VANESSA
  * ============================================================================
  *
  * Este é o único arquivo que você precisa editar para personalizar o site.
@@ -14,23 +14,23 @@ import gallery3 from "@/assets/gallery3.jpg";
 import gallery4 from "@/assets/gallery4.jpg";
 
 export const WEDDING = {
-  // 1. Nomes do Casal
+  // 1. Nomes do casal
   names: {
     bride: "Vanessa",
     groom: "Lucas",
     full: "Lucas & Vanessa",
   },
 
-  // 2. Data e Hora
+  // 2. Data e hora
   // Formato: YYYY-MM-DDTHH:mm:ss-03:00 (Brasília)
   date: new Date("2026-08-02T16:00:00-03:00"),
   dateLabel: "2 de Agosto de 2026",
   timeLabel: "16:00h",
 
-  // 3. Frase de Destaque (Hero)
+  // 3. Frase de destaque (hero)
   heroPhrase: "E entre todos os olhares do mundo, encontrei o seu.",
 
-  // 4. Locais (Cerimônia e Festa)
+  // 4. Locais (cerimônia e festa)
   ceremony: {
     name: "Cerimônia de Lucas & Vanessa",
     address: "Endereço da cerimônia será compartilhado pelos noivos",
@@ -45,14 +45,14 @@ export const WEDDING = {
     mapsUrl: "https://www.google.com/maps",
   },
 
-  // 5. Financeiro / Presentes
+  // 5. Financeiro / presentes
   pix: {
-    key: "sua-chave-pix-aqui@exemplo.com", // CHAVE PIX REAL
+    key: "sua-chave-pix-aqui@exemplo.com",
     name: "Lucas & Vanessa",
     bank: "Nome do Banco",
   },
 
-  // 6. Nossa História (Linha do Tempo)
+  // 6. Nossa história (linha do tempo)
   timeline: [
     {
       year: "2018",
@@ -81,7 +81,7 @@ export const WEDDING = {
     },
   ],
 
-  // 7. Lista de Cotas de Presentes (Lua de Mel)
+  // 7. Lista de cotas de presentes (lua de mel)
   gifts: [
     {
       id: "jantar-paris",
@@ -121,7 +121,7 @@ export const WEDDING = {
     },
   ],
 
-  // 8. Fotos do Site
+  // 8. Fotos do site
   photos: {
     hero: heroImg,
     gallery: [gallery1, gallery2, gallery3, gallery4, gallery1, gallery3],

@@ -1,7 +1,8 @@
-import { useState, useEffect } from "react";
+import { useEffect, useState } from "react";
 import { z } from "zod";
 import { supabase } from "@/integrations/supabase/client";
 import { motion, AnimatePresence } from "framer-motion";
+import { Check, Heart, Loader2, Minus, Plus } from "lucide-react";
 
 const schema = z.object({
   full_name: z.string().trim().min(2, "Nome muito curto").max(120),
@@ -92,15 +93,20 @@ export function RsvpForm() {
     const displayAttending = done ? attending : storedAttending || "yes";
     return (
       <motion.div
-        initial={{ opacity: 0, scale: 0.95 }}
-        animate={{ opacity: 1, scale: 1 }}
-        className="text-center py-12 px-6 border border-gold/40 rounded-md bg-secondary/40"
+        initial={{ opacity: 0, y: 18, scale: 0.98 }}
+        animate={{ opacity: 1, y: 0, scale: 1 }}
+        transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
+        className="relative overflow-hidden px-2 py-8 text-center sm:px-6 sm:py-10"
       >
-        <div className="gold-divider text-xs uppercase tracking-[0.4em] mb-6">RSVP</div>
-        <h3 className="font-display text-4xl mb-4">
+        <div className="pointer-events-none absolute inset-x-8 top-0 h-px bg-gradient-to-r from-transparent via-gold/80 to-transparent" />
+        <div className="mx-auto mb-6 flex h-14 w-14 items-center justify-center rounded-full border border-gold/40 bg-gold/10 text-gold shadow-gold">
+          {displayAttending === "yes" ? <Heart size={22} /> : <Check size={22} />}
+        </div>
+        <div className="gold-divider gold-kicker mb-6 justify-center">RSVP</div>
+        <h3 className="mb-4 font-display text-4xl leading-tight text-balance sm:text-5xl">
           {displayAttending === "yes" ? "Sua presença está confirmada" : "Obrigado por avisar"}
         </h3>
-        <p className="text-muted-foreground font-light tracking-wide">
+        <p className="mx-auto max-w-md font-light tracking-wide text-muted-foreground text-pretty">
           {displayAttending === "yes"
             ? "Mal podemos esperar para celebrar com você este dia tão especial."
             : "Sentiremos sua falta, mas agradecemos o carinho."}
@@ -111,7 +117,7 @@ export function RsvpForm() {
             setAlreadySent(false);
             setDone(false);
           }}
-          className="mt-8 text-[10px] uppercase tracking-[0.3em] text-muted-foreground hover:text-gold transition-colors"
+          className="mt-8 text-[10px] uppercase tracking-[0.3em] text-muted-foreground transition-colors hover:text-gold"
         >
           Enviar outra resposta
         </button>
@@ -132,7 +138,7 @@ export function RsvpForm() {
       </Field>
 
       <Field label="Você vai comparecer?">
-        <div className="flex flex-col sm:flex-row gap-3">
+        <div className="flex flex-col gap-3 sm:flex-row">
           {[
             { v: "yes", l: "Sim, eu vou" },
             { v: "no", l: "Não poderei ir" },
@@ -141,12 +147,15 @@ export function RsvpForm() {
               type="button"
               key={o.v}
               onClick={() => setAttending(o.v as "yes" | "no")}
-              className={`flex-1 px-4 py-4 rounded-md text-xs uppercase tracking-[0.2em] border transition-all duration-300 ${
+              className={`group relative min-h-[56px] flex-1 overflow-hidden rounded-md border px-4 py-4 text-xs uppercase tracking-[0.18em] transition-all duration-500 ${
                 attending === o.v
-                  ? "bg-foreground text-background border-foreground shadow-lg"
-                  : "bg-transparent border-border hover:border-gold/50"
+                  ? "border-foreground bg-foreground text-background shadow-luxe"
+                  : "border-border bg-background/40 text-foreground hover:border-gold/60 hover:bg-gold/5"
               }`}
             >
+              {attending === o.v && (
+                <span className="absolute inset-x-4 top-0 h-px bg-gradient-to-r from-transparent via-gold/80 to-transparent" />
+              )}
               {o.l}
             </button>
           ))}
@@ -159,24 +168,31 @@ export function RsvpForm() {
             initial={{ height: 0, opacity: 0 }}
             animate={{ height: "auto", opacity: 1 }}
             exit={{ height: 0, opacity: 0 }}
+            transition={{ duration: 0.45, ease: [0.16, 1, 0.3, 1] }}
             className="overflow-hidden"
           >
             <Field label="Acompanhantes (além de você)">
-              <div className="flex items-center gap-6 mt-2">
+              <div className="mt-2 flex items-center gap-5">
                 <button
                   type="button"
                   onClick={() => setCompanions(Math.max(0, companions - 1))}
-                  className="w-12 h-12 rounded-full border border-border hover:border-gold hover:text-gold transition-all flex items-center justify-center text-xl"
+                  className="flex h-12 w-12 items-center justify-center rounded-full border border-border bg-background/50 text-foreground transition-all hover:border-gold hover:text-gold disabled:opacity-40"
+                  aria-label="Diminuir acompanhantes"
+                  disabled={companions === 0}
                 >
-                  −
+                  <Minus size={18} />
                 </button>
-                <span className="font-display text-4xl w-8 text-center">{companions}</span>
+                <span className="flex h-14 min-w-14 items-center justify-center rounded-md border border-gold/25 bg-gold/[0.08] px-4 font-display text-4xl text-foreground">
+                  {companions}
+                </span>
                 <button
                   type="button"
                   onClick={() => setCompanions(Math.min(10, companions + 1))}
-                  className="w-12 h-12 rounded-full border border-border hover:border-gold hover:text-gold transition-all flex items-center justify-center text-xl"
+                  className="flex h-12 w-12 items-center justify-center rounded-full border border-border bg-background/50 text-foreground transition-all hover:border-gold hover:text-gold disabled:opacity-40"
+                  aria-label="Aumentar acompanhantes"
+                  disabled={companions === 10}
                 >
-                  +
+                  <Plus size={18} />
                 </button>
               </div>
             </Field>
@@ -184,7 +200,7 @@ export function RsvpForm() {
         )}
       </AnimatePresence>
 
-      <div className="grid sm:grid-cols-2 gap-6">
+      <div className="grid gap-6 sm:grid-cols-2">
         <Field label="Telefone / WhatsApp">
           <input name="phone" maxLength={40} placeholder="(00) 00000-0000" className={inputCls} />
         </Field>
@@ -211,9 +227,9 @@ export function RsvpForm() {
 
       {error && (
         <motion.p
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          className="text-destructive text-xs uppercase tracking-widest text-center"
+          initial={{ opacity: 0, y: -6 }}
+          animate={{ opacity: 1, y: 0 }}
+          className="rounded-md border border-destructive/20 bg-destructive/5 px-4 py-3 text-center text-xs uppercase tracking-widest text-destructive"
         >
           {error}
         </motion.p>
@@ -222,21 +238,22 @@ export function RsvpForm() {
       <button
         type="submit"
         disabled={submitting}
-        className="w-full py-5 bg-foreground text-background uppercase tracking-[0.4em] text-[10px] sm:text-xs hover:bg-gold hover:text-foreground transition-all duration-500 disabled:opacity-50 shadow-luxe"
+        className="shine-line flex min-h-[58px] w-full items-center justify-center gap-3 rounded-md bg-foreground px-6 py-5 text-[10px] uppercase tracking-[0.34em] text-background shadow-luxe transition-all duration-500 hover:bg-gold hover:text-foreground disabled:cursor-wait disabled:opacity-70 sm:text-xs"
       >
-        {submitting ? "Processando…" : "Confirmar presença"}
+        {submitting && <Loader2 size={16} className="animate-spin" />}
+        {submitting ? "Processando..." : "Confirmar presença"}
       </button>
     </form>
   );
 }
 
 const inputCls =
-  "w-full bg-transparent border-b border-border focus:border-gold outline-none px-1 py-4 text-foreground placeholder:text-muted-foreground/40 transition-all duration-300 font-light";
+  "w-full rounded-none border-0 border-b border-border bg-transparent px-1 py-4 font-light text-foreground outline-none transition-all duration-300 placeholder:text-muted-foreground/45 focus:border-gold focus:bg-gold/5";
 
 function Field({ label, children }: { label: string; children: React.ReactNode }) {
   return (
     <div className="block">
-      <span className="block text-[10px] uppercase tracking-[0.3em] text-muted-foreground/80 mb-3">
+      <span className="mb-3 block text-[10px] uppercase tracking-[0.28em] text-muted-foreground/80">
         {label}
       </span>
       {children}
