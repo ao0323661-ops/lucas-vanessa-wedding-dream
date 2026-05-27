@@ -54,8 +54,8 @@ export function MessageWall() {
 
   return (
     <div className="grid gap-8 lg:grid-cols-[0.9fr_1.1fr] lg:gap-12">
-      <form onSubmit={submit} className="glass-luxe relative overflow-hidden rounded-md p-7 sm:p-8">
-        <div className="pointer-events-none absolute inset-x-8 top-0 h-px bg-gradient-to-r from-transparent via-gold/70 to-transparent" />
+      <form onSubmit={submit} className="paper-luxe relative overflow-hidden rounded-md p-7 sm:p-8">
+        <div className="pointer-events-none absolute inset-x-8 top-0 h-px bg-gradient-to-r from-transparent via-olive/45 to-transparent" />
         <h3 className="font-display text-3xl leading-tight">Deixe sua mensagem</h3>
         <div className="mt-7 space-y-5">
           <input
@@ -64,7 +64,7 @@ export function MessageWall() {
             placeholder="Seu nome"
             maxLength={80}
             required
-            className="w-full border-0 border-b border-white/20 bg-transparent py-3 text-background outline-none transition-colors placeholder:text-background/40 focus:border-gold"
+            className="w-full border-0 border-b border-border bg-transparent py-3 text-foreground outline-none transition-colors placeholder:text-muted-foreground/45 focus:border-olive"
           />
           <textarea
             value={message}
@@ -73,18 +73,18 @@ export function MessageWall() {
             maxLength={500}
             rows={4}
             required
-            className="w-full resize-none border-0 border-b border-white/20 bg-transparent py-3 text-background outline-none transition-colors placeholder:text-background/40 focus:border-gold"
+            className="w-full resize-none border-0 border-b border-border bg-transparent py-3 text-foreground outline-none transition-colors placeholder:text-muted-foreground/45 focus:border-olive"
           />
           <button
             disabled={sending}
-            className="shine-line flex min-h-[48px] items-center justify-center gap-3 rounded-md bg-gold px-7 text-xs uppercase tracking-[0.28em] text-foreground shadow-gold transition-colors hover:bg-white disabled:cursor-wait disabled:opacity-70"
+            className="shine-line flex min-h-[48px] items-center justify-center gap-3 rounded-md bg-gold px-7 text-xs uppercase tracking-[0.28em] text-background shadow-gold transition-colors hover:bg-olive-deep disabled:cursor-wait disabled:opacity-70"
           >
             {sending ? <Loader2 size={15} className="animate-spin" /> : <Send size={15} />}
             {sending ? "Enviando..." : "Enviar"}
           </button>
         </div>
         {sent && (
-          <p className="mt-5 rounded-md border border-gold/20 bg-gold/[0.08] px-4 py-3 text-xs text-background/70">
+          <p className="mt-5 rounded-md border border-olive/20 bg-olive/[0.06] px-4 py-3 text-xs text-muted-foreground">
             Mensagem enviada para aprovação.
           </p>
         )}
@@ -101,11 +101,11 @@ export function MessageWall() {
             [0, 1, 2].map((item) => (
               <div
                 key={item}
-                className="h-28 animate-pulse rounded-md border border-white/10 bg-white/[0.05]"
+                className="h-28 animate-pulse rounded-md border border-olive/10 bg-linen/60"
               />
             ))}
           {!loading && items.length === 0 && (
-            <p className="glass-luxe rounded-md p-6 font-display text-2xl italic text-background/70">
+            <p className="paper-luxe rounded-md p-6 font-display text-2xl italic text-muted-foreground">
               Seja o primeiro a deixar uma mensagem.
             </p>
           )}
@@ -116,9 +116,9 @@ export function MessageWall() {
                 initial={{ opacity: 0, y: 12 }}
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0 }}
-                className="glass-luxe rounded-md border-l-2 border-l-gold p-5"
+                className="paper-luxe rounded-md border-l-2 border-l-olive p-5"
               >
-                <p className="leading-relaxed text-background/90 text-pretty">"{m.message}"</p>
+                <p className="leading-relaxed text-foreground/90 text-pretty">"{m.message}"</p>
                 <p className="mt-4 text-[10px] uppercase tracking-[0.25em] text-gold">- {m.name}</p>
               </motion.div>
             ))}

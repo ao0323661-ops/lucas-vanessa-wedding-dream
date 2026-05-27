@@ -34,11 +34,11 @@ export function Nav() {
         <a
           href="#top"
           className={`group flex items-center gap-3 font-display text-xl tracking-wide transition-colors ${
-            scrolled ? "text-foreground" : "text-white"
+            scrolled ? "text-foreground" : "text-background"
           }`}
           aria-label="Voltar ao início"
         >
-          <span className="flex h-9 w-9 items-center justify-center rounded-full border border-gold/45 bg-black/15 text-sm text-gold backdrop-blur">
+          <span className="flex h-9 w-9 items-center justify-center rounded-full border border-olive/35 bg-linen/45 text-sm text-gold backdrop-blur">
             LV
           </span>
           <span className="hidden sm:inline">
@@ -51,7 +51,7 @@ export function Nav() {
               key={l.href}
               href={l.href}
               className={`relative text-xs uppercase tracking-[0.24em] transition-colors after:absolute after:-bottom-2 after:left-0 after:h-px after:w-0 after:bg-gold after:transition-all after:duration-300 hover:text-gold hover:after:w-full ${
-                scrolled ? "text-foreground/75" : "text-white/85"
+                scrolled ? "text-foreground/75" : "text-background/88"
               }`}
             >
               {l.label}
@@ -63,7 +63,7 @@ export function Nav() {
           className={`flex h-11 w-11 items-center justify-center rounded-full border transition-all md:hidden ${
             scrolled
               ? "border-border bg-background/60 text-foreground"
-              : "border-white/20 bg-white/[0.08] text-white backdrop-blur"
+              : "border-background/25 bg-linen/[0.14] text-background backdrop-blur"
           }`}
           aria-label={open ? "Fechar menu" : "Abrir menu"}
           aria-expanded={open}
@@ -80,7 +80,7 @@ export function Nav() {
             transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
             className="md:hidden"
           >
-            <div className="mx-4 mb-4 rounded-md border border-gold/20 bg-background/95 px-6 py-7 shadow-luxe backdrop-blur-xl">
+            <div className="mx-4 mb-4 rounded-md border border-olive/20 bg-background/95 px-6 py-7 shadow-luxe backdrop-blur-xl">
               <nav className="flex flex-col gap-5">
                 {links.map((l, index) => (
                   <motion.a
