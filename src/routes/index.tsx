@@ -314,9 +314,15 @@ function Home() {
                 Uma prévia visual do convite, com retratos dos noivos e atmosfera clara, natural e
                 íntima.
               </p>
-              <p className="border-l border-gold/70 pl-5 text-sm leading-7 text-muted-foreground text-pretty">
-                Após a celebração, as fotos oficiais ficarão disponíveis aqui para os convidados.
-              </p>
+              <div className="relative overflow-hidden rounded-md border border-olive/20 bg-background/45 px-5 py-4 backdrop-blur-[1px] sm:px-6 sm:py-5">
+                <div className="pointer-events-none absolute inset-y-4 left-0 w-px bg-olive/55" />
+                <p className="text-[10px] font-medium uppercase tracking-[0.26em] text-olive/75">
+                  Fotos oficiais
+                </p>
+                <p className="mt-3 text-[0.95rem] leading-7 text-foreground/85 text-pretty sm:text-base sm:leading-8">
+                  Após a celebração, as fotos oficiais ficarão disponíveis aqui para os convidados.
+                </p>
+              </div>
             </div>
           </motion.div>
 
