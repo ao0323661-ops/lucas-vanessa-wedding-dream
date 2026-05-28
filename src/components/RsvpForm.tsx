@@ -1,11 +1,11 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, type FormEvent, type ReactNode } from "react";
 import { z } from "zod";
-import { supabase } from "@/integrations/supabase/client";
 import { motion, AnimatePresence } from "framer-motion";
 import { Check, Heart, Loader2, Minus, Plus } from "lucide-react";
+import { supabase } from "@/integrations/supabase/client";
 
 const schema = z.object({
-  full_name: z.string().trim().min(2, "Nome muito curto").max(120),
+  full_name: z.string().trim().min(1, "Nome do convite inválido").max(120),
   attending: z.enum(["yes", "no"]),
   companions: z.number().min(0).max(10),
   phone: z.string().trim().max(40).optional().or(z.literal("")),
@@ -13,15 +13,26 @@ const schema = z.object({
   message: z.string().trim().max(600).optional().or(z.literal("")),
 });
 
+type RsvpInvitedGuest = {
+  id: string;
+  displayName: string;
+  allowedCompanions: number;
+};
+
+type RsvpFormProps = {
+  invitedGuest?: RsvpInvitedGuest;
+};
+
 function isDuplicateRsvpError(error: { code?: string; message?: string } | null) {
   return (
     error?.code === "23505" ||
+    error?.message?.includes("rsvps_unique_invited_guest_id_idx") ||
     error?.message?.includes("rsvps_unique_normalized_phone_idx") ||
     error?.message?.includes("rsvps_unique_no_phone_normalized_name_idx")
   );
 }
 
-export function RsvpForm() {
+export function RsvpForm({ invitedGuest }: RsvpFormProps) {
   const [submitting, setSubmitting] = useState(false);
   const [done, setDone] = useState(false);
   const [error, setError] = useState<string | null>(null);
@@ -29,27 +40,51 @@ export function RsvpForm() {
   const [companions, setCompanions] = useState(0);
   const [alreadySent, setAlreadySent] = useState(false);
   const [storedAttending, setStoredAttending] = useState<"yes" | "no" | null>(null);
+  const maxCompanions = invitedGuest
+    ? Math.max(0, Math.min(10, Math.trunc(invitedGuest.allowedCompanions)))
+    : 0;
+  const storageKey = invitedGuest ? `rsvp_status_${invitedGuest.id}` : null;
 
   useEffect(() => {
-    const status = localStorage.getItem("rsvp_status");
-    if (status) {
-      setAlreadySent(true);
-      setStoredAttending(status as "yes" | "no");
-    }
-  }, []);
+    setAlreadySent(false);
+    setStoredAttending(null);
+    setDone(false);
 
-  async function onSubmit(e: React.FormEvent<HTMLFormElement>) {
+    if (!storageKey) return;
+
+    const status = localStorage.getItem(storageKey);
+    if (status === "yes" || status === "no") {
+      setAlreadySent(true);
+      setStoredAttending(status);
+    }
+  }, [storageKey]);
+
+  useEffect(() => {
+    setCompanions((current) => Math.min(current, maxCompanions));
+  }, [maxCompanions]);
+
+  async function onSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
     setError(null);
+
+    if (!invitedGuest || !storageKey) {
+      setError("Valide seu convite antes de confirmar presença.");
+      return;
+    }
 
     if (alreadySent) {
       setError("Você já enviou sua confirmação.");
       return;
     }
 
+    if (attending === "yes" && companions > maxCompanions) {
+      setError(`Este convite permite no máximo ${maxCompanions} acompanhante(s).`);
+      return;
+    }
+
     const fd = new FormData(e.currentTarget);
     const parsed = schema.safeParse({
-      full_name: String(fd.get("full_name") || ""),
+      full_name: invitedGuest.displayName,
       attending,
       companions,
       phone: String(fd.get("phone") || ""),
@@ -67,7 +102,9 @@ export function RsvpForm() {
     const { error: insertError } = await supabase.from("rsvps").insert({
       full_name: parsed.data.full_name,
       attending: parsed.data.attending === "yes",
-      companions: parsed.data.attending === "yes" ? parsed.data.companions : 0,
+      companions:
+        parsed.data.attending === "yes" ? Math.min(parsed.data.companions, maxCompanions) : 0,
+      invited_guest_id: invitedGuest.id,
       phone: parsed.data.phone || null,
       dietary_restrictions: parsed.data.dietary_restrictions || null,
       message: parsed.data.message || null,
@@ -78,15 +115,35 @@ export function RsvpForm() {
     if (insertError) {
       setError(
         isDuplicateRsvpError(insertError)
-          ? "Já existe uma confirmação com este telefone ou nome."
+          ? "Já existe uma confirmação para este convite."
           : "Não conseguimos registrar agora. Verifique os campos e tente novamente.",
       );
       return;
     }
 
-    localStorage.setItem("rsvp_status", parsed.data.attending);
+    localStorage.setItem(storageKey, parsed.data.attending);
     setStoredAttending(parsed.data.attending);
     setDone(true);
+  }
+
+  if (!invitedGuest) {
+    return (
+      <motion.div
+        initial={{ opacity: 0, y: 18 }}
+        animate={{ opacity: 1, y: 0 }}
+        className="px-2 py-8 text-center sm:px-6 sm:py-10"
+      >
+        <div className="mx-auto mb-6 flex h-14 w-14 items-center justify-center rounded-full border border-olive/30 bg-olive/[0.08] text-gold shadow-gold">
+          <Check size={22} />
+        </div>
+        <h3 className="mb-4 font-display text-4xl leading-tight text-balance sm:text-5xl">
+          Valide seu convite primeiro
+        </h3>
+        <p className="mx-auto max-w-md font-light tracking-wide text-muted-foreground text-pretty">
+          O RSVP aparece assim que o nome do convite é confirmado.
+        </p>
+      </motion.div>
+    );
   }
 
   if (done || alreadySent) {
@@ -111,30 +168,24 @@ export function RsvpForm() {
             ? "Mal podemos esperar para celebrar com você este dia tão especial."
             : "Sentiremos sua falta, mas agradecemos o carinho."}
         </p>
-        <button
-          onClick={() => {
-            localStorage.removeItem("rsvp_status");
-            setAlreadySent(false);
-            setDone(false);
-          }}
-          className="mt-8 text-[10px] uppercase tracking-[0.3em] text-muted-foreground transition-colors hover:text-gold"
-        >
-          Enviar outra resposta
-        </button>
+        <p className="mx-auto mt-8 max-w-md text-xs uppercase tracking-[0.22em] text-muted-foreground/75">
+          Para alterar a resposta, fale com Lucas ou Vanessa.
+        </p>
       </motion.div>
     );
   }
 
   return (
     <form onSubmit={onSubmit} className="space-y-8">
-      <Field label="Nome completo">
-        <input
-          name="full_name"
-          required
-          maxLength={120}
-          className={inputCls}
-          placeholder="Como está no convite"
-        />
+      <Field label="Convidado principal">
+        <div className="rounded-md border border-olive/20 bg-olive/[0.06] px-5 py-4">
+          <p className="font-display text-3xl leading-tight text-foreground">
+            {invitedGuest.displayName}
+          </p>
+          <p className="mt-1 text-xs uppercase tracking-[0.2em] text-muted-foreground">
+            Nome confirmado na lista de convidados
+          </p>
+        </div>
       </Field>
 
       <Field label="Você vai comparecer?">
@@ -187,14 +238,17 @@ export function RsvpForm() {
                 </span>
                 <button
                   type="button"
-                  onClick={() => setCompanions(Math.min(10, companions + 1))}
+                  onClick={() => setCompanions(Math.min(maxCompanions, companions + 1))}
                   className="flex h-12 w-12 items-center justify-center rounded-full border border-border bg-background/50 text-foreground transition-all hover:border-olive hover:text-gold disabled:opacity-40"
                   aria-label="Aumentar acompanhantes"
-                  disabled={companions === 10}
+                  disabled={companions === maxCompanions}
                 >
                   <Plus size={18} />
                 </button>
               </div>
+              <p className="mt-3 text-xs text-muted-foreground">
+                Este convite permite até {maxCompanions} acompanhante(s).
+              </p>
             </Field>
           </motion.div>
         )}
@@ -250,7 +304,7 @@ export function RsvpForm() {
 const inputCls =
   "w-full rounded-none border-0 border-b border-border bg-transparent px-1 py-4 font-light text-foreground outline-none transition-all duration-300 placeholder:text-muted-foreground/45 focus:border-olive focus:bg-olive/[0.04]";
 
-function Field({ label, children }: { label: string; children: React.ReactNode }) {
+function Field({ label, children }: { label: string; children: ReactNode }) {
   return (
     <div className="block">
       <span className="mb-3 block text-[10px] uppercase tracking-[0.28em] text-muted-foreground/80">

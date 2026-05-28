@@ -1,13 +1,16 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
+import { lazy, Suspense, useState } from "react";
 import { motion } from "framer-motion";
-import { ArrowRight, CalendarDays, ChevronDown, Clock, MapPin } from "lucide-react";
+import { ArrowRight, ChevronDown, Loader2 } from "lucide-react";
 import { Nav } from "@/components/Nav";
 import { Countdown } from "@/components/Countdown";
 import { Section } from "@/components/Section";
 import { RsvpForm } from "@/components/RsvpForm";
+import { GuestAccessGate } from "@/components/GuestAccessGate";
 import { MessageWall } from "@/components/MessageWall";
 import { GiftList } from "@/components/GiftList";
 import { WEDDING } from "@/lib/wedding";
+import type { InvitedGuestMatch } from "@/lib/invited-guests";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -53,6 +56,7 @@ export const Route = createFileRoute("/")({
 });
 
 const gallery = WEDDING.photos.gallery;
+const ProtectedWeddingDetails = lazy(() => import("@/components/ProtectedWeddingDetails"));
 
 const reveal = {
   hidden: { opacity: 0, y: 28 },
@@ -60,6 +64,8 @@ const reveal = {
 };
 
 function Home() {
+  const [validatedGuest, setValidatedGuest] = useState<InvitedGuestMatch | null>(null);
+
   return (
     <div id="top" className="min-h-screen bg-background text-foreground">
       <Nav />
@@ -128,10 +134,10 @@ function Home() {
             className="mt-5 flex flex-col items-center gap-3 sm:flex-row"
           >
             <a
-              href="#rsvp"
+              href="#local"
               className="shine-line inline-flex min-h-[54px] items-center justify-center gap-3 rounded-md bg-gold px-8 py-4 text-[10px] font-semibold uppercase tracking-[0.28em] text-background shadow-gold transition-all duration-500 hover:bg-olive-deep sm:text-xs"
             >
-              Confirmar presença
+              Confirmar convite
               <ArrowRight size={16} />
             </a>
             <a
@@ -228,44 +234,27 @@ function Home() {
         </div>
       </Section>
 
-      <Section id="local" eyebrow="O grande dia" title="Cerimônia e celebração">
-        <div className="grid gap-6 md:grid-cols-2">
-          {[WEDDING.ceremony, WEDDING.reception].map((place, i) => (
-            <motion.article
-              key={place.name}
-              initial={{ opacity: 0, y: 24 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.76, delay: i * 0.08, ease: [0.16, 1, 0.3, 1] }}
-              className="paper-luxe group relative overflow-hidden rounded-md p-7 transition-transform duration-500 hover:-translate-y-1 sm:p-10"
-            >
-              <div className="pointer-events-none absolute inset-x-8 top-0 h-px bg-gradient-to-r from-transparent via-olive/45 to-transparent" />
-              <div className="mb-8 flex items-center justify-between gap-4">
-                <div className="gold-kicker">{i === 0 ? "Cerimônia" : "Festa"}</div>
-                <span className="flex h-11 w-11 items-center justify-center rounded-full border border-olive/25 bg-olive/[0.08] text-gold">
-                  {i === 0 ? <CalendarDays size={18} /> : <Clock size={18} />}
+      <Section
+        id="local"
+        eyebrow={validatedGuest ? "O grande dia" : "Convite"}
+        title={validatedGuest ? "Cerimônia e celebração" : "Acesso aos detalhes do casamento"}
+      >
+        {validatedGuest ? (
+          <Suspense
+            fallback={
+              <div className="paper-luxe mx-auto flex max-w-3xl items-center justify-center gap-3 rounded-md px-6 py-12 text-muted-foreground">
+                <Loader2 size={18} className="animate-spin text-gold" />
+                <span className="text-xs uppercase tracking-[0.28em]">
+                  Preparando os detalhes...
                 </span>
               </div>
-              <h3 className="font-display text-3xl leading-tight text-balance sm:text-4xl">
-                {place.name}
-              </h3>
-              <p className="mt-5 flex gap-3 text-muted-foreground text-pretty">
-                <MapPin className="mt-1 h-4 w-4 shrink-0 text-gold" />
-                <span>{place.address}</span>
-              </p>
-              <p className="mt-5 font-display text-3xl text-foreground">{place.time}</p>
-              <a
-                href={place.mapsUrl}
-                target="_blank"
-                rel="noreferrer"
-                className="shine-line mt-8 inline-flex min-h-[48px] items-center justify-center gap-3 rounded-md bg-gold px-6 py-3 text-[10px] uppercase tracking-[0.28em] text-background transition-all duration-500 hover:bg-olive-deep"
-              >
-                Abrir no Google Maps
-                <ArrowRight size={15} />
-              </a>
-            </motion.article>
-          ))}
-        </div>
+            }
+          >
+            <ProtectedWeddingDetails guest={validatedGuest} />
+          </Suspense>
+        ) : (
+          <GuestAccessGate onValidated={setValidatedGuest} />
+        )}
       </Section>
 
       <Section id="presentes" eyebrow="Lista de presentes" title="Cotas de lua de mel">
@@ -280,12 +269,20 @@ function Home() {
         <MessageWall />
       </Section>
 
-      <Section id="rsvp" eyebrow="Confirme sua presença" title="RSVP">
-        <div className="paper-luxe relative mx-auto max-w-3xl overflow-hidden rounded-md p-6 sm:p-10 md:p-12">
-          <div className="pointer-events-none absolute inset-x-10 top-0 h-px bg-gradient-to-r from-transparent via-olive/45 to-transparent" />
-          <RsvpForm />
-        </div>
-      </Section>
+      {validatedGuest && (
+        <Section id="rsvp" eyebrow="Confirme sua presença" title="RSVP">
+          <div className="paper-luxe relative mx-auto max-w-3xl overflow-hidden rounded-md p-6 sm:p-10 md:p-12">
+            <div className="pointer-events-none absolute inset-x-10 top-0 h-px bg-gradient-to-r from-transparent via-olive/45 to-transparent" />
+            <RsvpForm
+              invitedGuest={{
+                id: validatedGuest.id,
+                displayName: validatedGuest.display_name,
+                allowedCompanions: validatedGuest.allowed_companions,
+              }}
+            />
+          </div>
+        </Section>
+      )}
 
       <footer className="relative overflow-hidden bg-olive-deep px-6 py-14 text-center text-background">
         <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-champagne to-transparent" />

@@ -62,6 +62,36 @@ export type Database = {
         };
         Relationships: [];
       };
+      invited_guests: {
+        Row: {
+          allowed_companions: number;
+          created_at: string;
+          display_name: string;
+          group_name: string | null;
+          id: string;
+          is_active: boolean;
+          normalized_name: string;
+        };
+        Insert: {
+          allowed_companions?: number;
+          created_at?: string;
+          display_name: string;
+          group_name?: string | null;
+          id?: string;
+          is_active?: boolean;
+          normalized_name?: string;
+        };
+        Update: {
+          allowed_companions?: number;
+          created_at?: string;
+          display_name?: string;
+          group_name?: string | null;
+          id?: string;
+          is_active?: boolean;
+          normalized_name?: string;
+        };
+        Relationships: [];
+      };
       rsvps: {
         Row: {
           attending: boolean;
@@ -70,6 +100,7 @@ export type Database = {
           dietary_restrictions: string | null;
           full_name: string;
           id: string;
+          invited_guest_id: string | null;
           message: string | null;
           phone: string | null;
         };
@@ -80,6 +111,7 @@ export type Database = {
           dietary_restrictions?: string | null;
           full_name: string;
           id?: string;
+          invited_guest_id?: string | null;
           message?: string | null;
           phone?: string | null;
         };
@@ -90,6 +122,7 @@ export type Database = {
           dietary_restrictions?: string | null;
           full_name?: string;
           id?: string;
+          invited_guest_id?: string | null;
           message?: string | null;
           phone?: string | null;
         };
@@ -116,6 +149,39 @@ export type Database = {
         };
         Relationships: [];
       };
+      wedding_private_locations: {
+        Row: {
+          address: string;
+          created_at: string;
+          id: string;
+          label: string;
+          maps_url: string;
+          name: string;
+          sort_order: number;
+          time_label: string;
+        };
+        Insert: {
+          address: string;
+          created_at?: string;
+          id: string;
+          label: string;
+          maps_url: string;
+          name: string;
+          sort_order?: number;
+          time_label: string;
+        };
+        Update: {
+          address?: string;
+          created_at?: string;
+          id?: string;
+          label?: string;
+          maps_url?: string;
+          name?: string;
+          sort_order?: number;
+          time_label?: string;
+        };
+        Relationships: [];
+      };
     };
     Views: {
       [_ in never]: never;
@@ -128,6 +194,34 @@ export type Database = {
         };
         Returns: boolean;
       };
+      get_wedding_private_details: {
+        Args: {
+          guest_id: string;
+          guest_name: string;
+        };
+        Returns: {
+          address: string;
+          id: string;
+          label: string;
+          maps_url: string;
+          name: string;
+          time_label: string;
+        }[];
+      };
+      is_valid_invited_guest_rsvp: {
+        Args: {
+          guest_companions: number;
+          guest_id: string;
+          guest_name: string;
+        };
+        Returns: boolean;
+      };
+      normalize_invited_guest_name: {
+        Args: {
+          value: string;
+        };
+        Returns: string | null;
+      };
       normalize_name: {
         Args: {
           value: string;
@@ -139,6 +233,17 @@ export type Database = {
           value: string;
         };
         Returns: string;
+      };
+      search_invited_guest: {
+        Args: {
+          name_input: string;
+        };
+        Returns: {
+          allowed_companions: number;
+          display_name: string;
+          group_name: string | null;
+          id: string;
+        }[];
       };
     };
     Enums: {

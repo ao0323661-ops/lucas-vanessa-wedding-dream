@@ -30,29 +30,14 @@ export const WEDDING = {
   // 3. Frase de destaque (hero)
   heroPhrase: "E entre todos os olhares do mundo, encontrei o seu.",
 
-  // 4. Locais (cerimônia e festa)
-  ceremony: {
-    name: "Cerimônia de Lucas & Vanessa",
-    address: "Endereço da cerimônia será compartilhado pelos noivos",
-    time: "16h00",
-    mapsUrl: "https://www.google.com/maps",
-  },
-
-  reception: {
-    name: "Celebração de Lucas & Vanessa",
-    address: "Endereço da festa será compartilhado pelos noivos",
-    time: "19h00",
-    mapsUrl: "https://www.google.com/maps",
-  },
-
-  // 5. Financeiro / presentes
+  // 4. Financeiro / presentes
   pix: {
     key: "sua-chave-pix-aqui@exemplo.com",
     name: "Lucas & Vanessa",
     bank: "Nome do Banco",
   },
 
-  // 6. Nossa história (linha do tempo)
+  // 5. Nossa história (linha do tempo)
   timeline: [
     {
       year: "2018",
@@ -81,7 +66,7 @@ export const WEDDING = {
     },
   ],
 
-  // 7. Lista de cotas de presentes (lua de mel)
+  // 6. Lista de cotas de presentes (lua de mel)
   gifts: [
     {
       id: "jantar-paris",
@@ -121,7 +106,7 @@ export const WEDDING = {
     },
   ],
 
-  // 8. Fotos do site
+  // 7. Fotos do site
   photos: {
     hero: heroImg,
     gallery: [gallery1, gallery2, gallery3, gallery4, gallery1, gallery3],

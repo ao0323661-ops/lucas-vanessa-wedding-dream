@@ -8,7 +8,7 @@ const links = [
   { href: "#local", label: "Local" },
   { href: "#presentes", label: "Presentes" },
   { href: "#mural", label: "Mural" },
-  { href: "#rsvp", label: "Confirmar" },
+  { href: "#local", label: "Convite" },
 ];
 
 export function Nav() {
