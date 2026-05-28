@@ -6,8 +6,6 @@
  * Dados públicos do convite de Lucas & Vanessa.
  */
 
-import gallery2 from "@/assets/gallery2.jpg";
-
 export const WEDDING = {
   // 1. Nomes do casal
   names: {
@@ -78,6 +76,6 @@ export const WEDDING = {
   // 6. Fotos do site
   photos: {
     hero: "/images/capa-casal.jpg",
-    gallery: [gallery2],
+    gallery: [] as string[],
   },
 };

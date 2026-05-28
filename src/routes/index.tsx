@@ -79,38 +79,38 @@ const editorialNotes = [
 const visualGallery = [
   {
     src: WEDDING.photos.hero,
-    alt: "Retrato de Lucas e Vanessa",
-    label: "Retrato",
+    alt: "Lucas e Vanessa em uma prévia editorial",
+    label: "Prévia 01",
     className: "col-span-2 row-span-2 md:col-span-2 md:row-span-2",
     imageClassName: "object-[50%_42%]",
   },
   {
-    src: WEDDING.photos.gallery[0],
-    alt: "Alianças em composição neutra",
-    label: "Detalhe",
+    src: WEDDING.photos.hero,
+    alt: "Retrato dos noivos com luz natural",
+    label: "Prévia 02",
     className: "col-span-2 md:col-span-2",
-    imageClassName: "object-center",
-  },
-  {
-    src: WEDDING.photos.gallery[0],
-    alt: "Detalhe off-white das alianças",
-    label: "Off-white",
-    className: "",
-    imageClassName: "object-center",
+    imageClassName: "object-[42%_24%]",
   },
   {
     src: WEDDING.photos.hero,
-    alt: "Lucas e Vanessa em luz natural",
-    label: "Luz natural",
+    alt: "Recorte editorial de Lucas e Vanessa",
+    label: "Recorte",
     className: "",
-    imageClassName: "object-[45%_32%]",
+    imageClassName: "object-[34%_50%]",
   },
   {
     src: WEDDING.photos.hero,
-    alt: "Retrato editorial de Lucas e Vanessa",
-    label: "Fazenda",
+    alt: "Lucas e Vanessa em atmosfera diurna",
+    label: "Manhã",
+    className: "",
+    imageClassName: "object-[58%_44%]",
+  },
+  {
+    src: WEDDING.photos.hero,
+    alt: "Prévia dos noivos para o convite",
+    label: "Noivos",
     className: "col-span-2 md:col-span-2",
-    imageClassName: "object-[52%_58%]",
+    imageClassName: "object-[52%_62%]",
   },
 ];
 
@@ -332,12 +332,18 @@ function Home() {
             <div>
               <p className="gold-kicker">Galeria</p>
               <h2 className="mt-5 font-display text-5xl leading-[0.9] text-foreground text-balance sm:text-7xl">
-                Luz, verde e presença.
+                Registros dos noivos.
               </h2>
             </div>
-            <p className="max-w-xl text-sm leading-8 text-muted-foreground text-pretty md:justify-self-end">
-              A composição aproxima o site da fazenda: natural, claro, íntimo.
-            </p>
+            <div className="max-w-xl space-y-5 md:justify-self-end">
+              <p className="text-sm leading-8 text-muted-foreground text-pretty">
+                Uma prévia visual do convite, com retratos dos noivos e atmosfera clara, natural e
+                íntima.
+              </p>
+              <p className="border-l border-gold/70 pl-5 text-sm leading-7 text-muted-foreground text-pretty">
+                Após a celebração, as fotos oficiais ficarão disponíveis aqui para os convidados.
+              </p>
+            </div>
           </motion.div>
 
           <div className="grid auto-rows-[190px] grid-cols-2 gap-3 sm:auto-rows-[260px] sm:gap-5 md:grid-cols-4 md:auto-rows-[250px] md:gap-6">
