@@ -28,7 +28,7 @@ export const WEDDING = {
 
   // 4. Financeiro / presentes
   pix: {
-    key: "sua-chave-pix-aqui@exemplo.com",
+    key: "contaff15as@gmail.com",
     name: "Lucas & Vanessa",
     bank: "Nome do Banco",
   },
