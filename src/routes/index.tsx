@@ -436,10 +436,10 @@ function Home() {
         )}
       </Section>
 
-      <Section id="presentes" eyebrow="Presentes" title="Cotas para a viagem">
+      <Section id="presentes" eyebrow="Presentes" title="Cotas para Aracaju">
         <p className="mx-auto mb-14 max-w-2xl text-center text-muted-foreground text-pretty">
-          Para quem quiser participar também por esse gesto, as cotas ficam aqui de forma simples e
-          direta.
+          Para quem quiser participar também por esse gesto, as cotas acompanham a viagem real dos
+          noivos e o começo da vida a dois.
         </p>
         <GiftList />
       </Section>
