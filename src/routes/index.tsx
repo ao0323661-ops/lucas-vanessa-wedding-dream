@@ -56,26 +56,6 @@ export const Route = createFileRoute("/")({
 
 const ProtectedWeddingDetails = lazy(() => import("@/components/ProtectedWeddingDetails"));
 
-const reveal = {
-  hidden: { opacity: 0, y: 28 },
-  visible: { opacity: 1, y: 0 },
-};
-
-const editorialNotes = [
-  {
-    label: "Local",
-    text: "A paisagem real da fazenda guia o tom visual do convite.",
-  },
-  {
-    label: "Manhã",
-    text: "O encontro começa às 9h, com luz natural, verde ao redor e tempo para estar presente.",
-  },
-  {
-    label: "Atmosfera",
-    text: "Oliva, off-white, natureza e poucos elementos. A elegância fica no respiro.",
-  },
-];
-
 const visualGallery = {
   hero: {
     src: WEDDING.photos.gallery[0],
@@ -197,7 +177,7 @@ function Home() {
         </motion.div>
 
         <motion.a
-          href="#editorial"
+          href="#contagem"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1, y: [0, 8, 0] }}
           transition={{
@@ -213,85 +193,28 @@ function Home() {
       </section>
 
       <section
-        id="editorial"
-        className="relative overflow-hidden bg-background px-5 py-20 sm:px-6 sm:py-32"
+        id="contagem"
+        aria-label="Contagem regressiva"
+        className="relative overflow-hidden bg-background px-5 pb-8 pt-14 sm:px-6 sm:pb-12 sm:pt-20"
       >
-        <div className="warm-light pointer-events-none absolute inset-0 opacity-45" />
+        <div className="warm-light pointer-events-none absolute inset-0 opacity-35" />
         <div className="editorial-rule absolute inset-x-8 top-0" />
-        <div className="relative z-10 mx-auto grid max-w-7xl gap-12 lg:grid-cols-[0.9fr_1.1fr] lg:items-end">
+        <div className="relative z-10 mx-auto max-w-4xl">
           <motion.div
             initial={{ opacity: 0, y: 28 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: "-80px" }}
             transition={{ duration: 0.95, ease: [0.16, 1, 0.3, 1] }}
-            className="max-w-2xl self-start"
+            className="editorial-panel rounded-md p-5 sm:p-8 md:p-10"
           >
-            <p className="editorial-kicker">Edição nupcial</p>
-            <h2 className="mt-5 font-display text-5xl leading-[0.92] text-balance sm:text-7xl">
-              A manhã pede leveza.
-            </h2>
-            <p className="mt-7 max-w-xl text-sm leading-8 text-muted-foreground text-pretty sm:text-base">
-              O convite acompanha a paisagem da fazenda: luz natural, verde ao redor, silêncio bom e
-              uma composição sem excesso.
-            </p>
-            <div className="mt-10 grid gap-5 sm:grid-cols-3 lg:grid-cols-1">
-              {editorialNotes.map((item, i) => (
-                <motion.div
-                  key={item.label}
-                  variants={reveal}
-                  initial="hidden"
-                  whileInView="visible"
-                  viewport={{ once: true, margin: "-70px" }}
-                  transition={{ duration: 0.72, delay: i * 0.06, ease: [0.16, 1, 0.3, 1] }}
-                  className="border-t border-olive/20 pt-5"
-                >
-                  <p className="text-[10px] uppercase tracking-[0.3em] text-olive">{item.label}</p>
-                  <p className="mt-3 text-sm leading-7 text-muted-foreground text-pretty">
-                    {item.text}
-                  </p>
-                </motion.div>
-              ))}
-            </div>
-          </motion.div>
-          <motion.div
-            initial={{ opacity: 0, y: 28 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: "-80px" }}
-            transition={{ duration: 0.95, delay: 0.08, ease: [0.16, 1, 0.3, 1] }}
-            className="grid gap-5"
-          >
-            <figure className="relative min-h-[360px] overflow-hidden rounded-md border border-olive/15 bg-olive/[0.06] shadow-[0_42px_120px_-72px_rgb(47_42_36_/_0.75)] sm:min-h-[520px]">
-              <img
-                src={WEDDING.photos.venue}
-                alt="Fazenda do Limoeiro em luz natural"
-                loading="lazy"
-                className="absolute inset-0 h-full w-full object-cover object-[50%_54%] sm:object-[50%_52%] lg:object-[50%_55%]"
-              />
-              <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(246,241,231,0.02)_0%,rgba(246,241,231,0.08)_44%,rgba(57,68,47,0.58)_100%)]" />
-              <figcaption className="absolute bottom-6 left-6 right-6 grid gap-5 text-background sm:grid-cols-[1fr_auto] sm:items-end">
-                <div>
-                  <span className="text-[10px] uppercase tracking-[0.32em] text-background/72">
-                    {WEDDING.venue.name}
-                  </span>
-                  <span className="mt-3 block max-w-[16rem] font-display text-3xl leading-none sm:text-4xl">
-                    Paisagem aberta para uma celebração diurna
-                  </span>
-                </div>
-                <span className="text-[10px] uppercase tracking-[0.3em] text-background/70 sm:text-right">
-                  {WEDDING.timeLabel} · luz natural
-                </span>
-              </figcaption>
-            </figure>
-            <div className="editorial-panel rounded-md p-5 sm:p-8">
-              <Countdown target={WEDDING.date} />
-            </div>
+            <Countdown target={WEDDING.date} />
           </motion.div>
         </div>
       </section>
 
       <section
         id="galeria"
-        className="gallery-band relative overflow-hidden px-5 py-24 text-foreground sm:px-6 sm:py-36"
+        className="gallery-band relative overflow-hidden px-5 pb-24 pt-16 text-foreground sm:px-6 sm:pb-36 sm:pt-24"
       >
         <div className="warm-light pointer-events-none absolute inset-0 opacity-40" />
         <div className="editorial-rule absolute inset-x-8 top-0" />
@@ -442,10 +365,10 @@ function Home() {
         )}
       </Section>
 
-      <Section id="presentes" eyebrow="Presentes" title="Cotas para Aracaju">
+      <Section id="presentes" eyebrow="Presentes" title="Cotas para a nossa viagem">
         <p className="mx-auto mb-14 max-w-2xl text-center text-muted-foreground text-pretty">
-          Para quem quiser participar também por esse gesto, as cotas acompanham a viagem real dos
-          noivos e o começo da vida a dois.
+          Para quem quiser participar também por esse gesto, reunimos cotas simples para a viagem, a
+          lua de mel e o começo da vida a dois.
         </p>
         <GiftList />
       </Section>

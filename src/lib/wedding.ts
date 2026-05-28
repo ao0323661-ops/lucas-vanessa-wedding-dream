@@ -36,16 +36,16 @@ export const WEDDING = {
   // 5. Lista de cotas de presentes
   gifts: [
     {
-      id: "cota-passagem-aracaju",
-      name: "Cota de passagem",
+      id: "passagem",
+      name: "Passagem",
       amount: 350,
-      description: "Um trecho para aproximar os noivos de Aracaju",
+      description: "Uma ajuda para o caminho dos noivos na viagem",
     },
     {
-      id: "cota-hospedagem-aracaju",
-      name: "Cota de hospedagem",
+      id: "hospedagem",
+      name: "Hospedagem",
       amount: 500,
-      description: "Uma diária tranquila para descansar depois da festa",
+      description: "Uma diária tranquila para descansar e aproveitar com calma",
     },
     {
       id: "cafe-manha-noivos",
@@ -54,26 +54,26 @@ export const WEDDING = {
       description: "Um começo de dia leve durante a viagem",
     },
     {
-      id: "jantar-especial-aracaju",
-      name: "Jantar especial em Aracaju",
+      id: "jantar-especial",
+      name: "Jantar especial",
       amount: 220,
-      description: "Uma noite à mesa para celebrar com calma",
+      description: "Uma noite à mesa para celebrar o começo dessa nova fase",
     },
     {
-      id: "passeio-noivos-aracaju",
+      id: "passeio-noivos",
       name: "Passeio dos noivos",
       amount: 180,
-      description: "Um dia para conhecer Aracaju no ritmo deles",
+      description: "Um momento para caminhar, respirar e guardar memórias",
     },
     {
-      id: "ajuda-viagem-aracaju",
-      name: "Ajuda para nossa viagem",
+      id: "nossa-viagem",
+      name: "Nossa viagem",
       amount: 150,
       description: "Uma contribuição para pequenos momentos do roteiro",
     },
     {
-      id: "lua-de-mel-aracaju",
-      name: "Contribuição para lua de mel",
+      id: "lua-de-mel",
+      name: "Lua de mel",
       amount: 700,
       description: "Um carinho para compor os primeiros dias de casados",
     },

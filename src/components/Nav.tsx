@@ -3,7 +3,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X } from "lucide-react";
 
 const links = [
-  { href: "#editorial", label: "Editorial" },
+  { href: "#contagem", label: "Data" },
   { href: "#galeria", label: "Galeria" },
   { href: "#local", label: "Convite" },
   { href: "#presentes", label: "Presentes" },
