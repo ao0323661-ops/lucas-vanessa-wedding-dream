@@ -7,7 +7,6 @@
  */
 
 import gallery2 from "@/assets/gallery2.jpg";
-import gallery4 from "@/assets/gallery4.jpg";
 
 export const WEDDING = {
   // 1. Nomes do casal
@@ -19,18 +18,24 @@ export const WEDDING = {
 
   // 2. Data e hora
   // Formato: YYYY-MM-DDTHH:mm:ss-03:00 (Brasília)
-  date: new Date("2026-08-02T16:00:00-03:00"),
+  date: new Date("2026-08-02T09:00:00-03:00"),
   dateLabel: "2 de agosto de 2026",
-  timeLabel: "16:00h",
+  timeLabel: "9h00",
 
-  // 3. Financeiro / presentes
+  // 3. Local
+  venue: {
+    name: "Fazenda do Limoeiro",
+    note: "Cerimônia e festa no mesmo lugar",
+  },
+
+  // 4. Financeiro / presentes
   pix: {
     key: "sua-chave-pix-aqui@exemplo.com",
     name: "Lucas & Vanessa",
     bank: "Nome do Banco",
   },
 
-  // 4. Lista de cotas de presentes
+  // 5. Lista de cotas de presentes
   gifts: [
     {
       id: "jantar-paris",
@@ -48,7 +53,7 @@ export const WEDDING = {
       id: "hotel-boutique",
       name: "Diária em Hotel Boutique",
       amount: 800,
-      description: "Uma noite bem escolhida no roteiro",
+      description: "Uma diária bem escolhida no roteiro",
     },
     {
       id: "cafe-da-manha",
@@ -60,7 +65,7 @@ export const WEDDING = {
       id: "brinde-espumante",
       name: "Espumante",
       amount: 50,
-      description: "Uma garrafa para uma noite da viagem",
+      description: "Uma garrafa para um momento da viagem",
     },
     {
       id: "contribuicao-livre",
@@ -70,9 +75,9 @@ export const WEDDING = {
     },
   ],
 
-  // 5. Fotos do site
+  // 6. Fotos do site
   photos: {
     hero: "/images/capa-casal.jpg",
-    gallery: [gallery2, gallery4],
+    gallery: [gallery2],
   },
 };

@@ -19,12 +19,12 @@ export const Route = createFileRoute("/")({
       {
         name: "description",
         content:
-          "Convite reservado para o casamento de Lucas & Vanessa, com galeria, detalhes e confirmação de presença.",
+          "Convite reservado para o casamento de Lucas & Vanessa na Fazenda do Limoeiro, com galeria, detalhes e confirmação de presença.",
       },
       { property: "og:title", content: "Lucas & Vanessa - Convite" },
       {
         property: "og:description",
-        content: "Uma experiência visual reservada para os convidados de Lucas & Vanessa.",
+        content: "Uma manhã na Fazenda do Limoeiro, em uma experiência visual reservada.",
       },
       { property: "og:type", content: "website" },
       { property: "og:locale", content: "pt_BR" },
@@ -34,7 +34,7 @@ export const Route = createFileRoute("/")({
       { name: "twitter:title", content: "Lucas & Vanessa - Convite" },
       {
         name: "twitter:description",
-        content: "Uma experiência visual reservada para os convidados de Lucas & Vanessa.",
+        content: "Uma manhã na Fazenda do Limoeiro, em uma experiência visual reservada.",
       },
       { name: "twitter:image", content: WEDDING.photos.hero },
       {
@@ -63,54 +63,54 @@ const reveal = {
 
 const editorialNotes = [
   {
-    label: "Presença",
-    text: "Uma celebração reservada, desenhada para ser vivida de perto.",
+    label: "Local",
+    text: "Cerimônia e festa acontecem na mesma paisagem: a Fazenda do Limoeiro.",
   },
   {
-    label: "Ritmo",
-    text: "Poucas palavras, pausas generosas e informação apenas quando precisa aparecer.",
+    label: "Manhã",
+    text: "O encontro começa às 9h, com luz natural, verde ao redor e tempo para estar presente.",
   },
   {
     label: "Atmosfera",
-    text: "Oliva, off-white, luz quente e fotografia como linguagem principal.",
+    text: "Oliva, off-white, natureza e poucos elementos. A elegância fica no respiro.",
   },
 ];
 
 const visualGallery = [
   {
     src: WEDDING.photos.hero,
-    alt: "Lucas e Vanessa em um retrato de fim de tarde",
+    alt: "Retrato de Lucas e Vanessa",
     label: "Retrato",
     className: "col-span-2 row-span-2 md:col-span-2 md:row-span-2",
     imageClassName: "object-[50%_42%]",
   },
   {
-    src: WEDDING.photos.gallery[1],
-    alt: "Ambiente de celebração iluminado por lustres",
-    label: "Ambiente",
+    src: WEDDING.photos.gallery[0],
+    alt: "Alianças em composição neutra",
+    label: "Detalhe",
     className: "col-span-2 md:col-span-2",
     imageClassName: "object-center",
   },
   {
     src: WEDDING.photos.gallery[0],
-    alt: "Alianças em luz baixa",
-    label: "Detalhe",
+    alt: "Detalhe off-white das alianças",
+    label: "Off-white",
     className: "",
     imageClassName: "object-center",
   },
   {
     src: WEDDING.photos.hero,
-    alt: "Arquitetura e luz no retrato de Lucas e Vanessa",
-    label: "Luz",
+    alt: "Lucas e Vanessa em luz natural",
+    label: "Luz natural",
     className: "",
-    imageClassName: "object-[42%_20%]",
+    imageClassName: "object-[45%_32%]",
   },
   {
-    src: WEDDING.photos.gallery[1],
-    alt: "Recepção com mesas e iluminação cênica",
-    label: "Recepção",
+    src: WEDDING.photos.hero,
+    alt: "Retrato editorial de Lucas e Vanessa",
+    label: "Fazenda",
     className: "col-span-2 md:col-span-2",
-    imageClassName: "object-[50%_58%]",
+    imageClassName: "object-[52%_58%]",
   },
 ];
 
@@ -192,7 +192,7 @@ function Home() {
               transition={{ duration: 0.9, delay: 0.43, ease: [0.16, 1, 0.3, 1] }}
               className="mx-auto mt-5 max-w-lg text-sm font-light leading-7 text-white/78 text-pretty md:mr-0"
             >
-              Um encontro íntimo, desenhado em silêncio, luz quente e presença.
+              Manhã na {WEDDING.venue.name}. Cerimônia e festa no mesmo lugar.
             </motion.p>
 
             <motion.div
@@ -254,11 +254,11 @@ function Home() {
           >
             <p className="gold-kicker">Edição nupcial</p>
             <h2 className="mt-5 font-display text-5xl leading-[0.92] text-balance sm:text-7xl">
-              Um convite para olhar devagar.
+              A manhã pede leveza.
             </h2>
             <p className="mt-7 max-w-xl text-sm leading-8 text-muted-foreground text-pretty sm:text-base">
-              A emoção fica na imagem, na pausa e no cuidado com cada detalhe. O restante permanece
-              simples, reservado e essencial.
+              O convite acompanha a paisagem da fazenda: luz natural, verde ao redor, silêncio bom e
+              uma composição sem excesso.
             </p>
             <div className="mt-10 grid gap-5 sm:grid-cols-3 lg:grid-cols-1">
               {editorialNotes.map((item, i) => (
@@ -286,20 +286,25 @@ function Home() {
             transition={{ duration: 0.95, delay: 0.08, ease: [0.16, 1, 0.3, 1] }}
             className="grid gap-5"
           >
-            <figure className="relative min-h-[360px] overflow-hidden rounded-md border border-olive/15 shadow-[0_42px_120px_-72px_rgb(47_42_36_/_0.75)] sm:min-h-[520px]">
+            <figure className="relative min-h-[360px] overflow-hidden rounded-md border border-olive/15 bg-olive/[0.06] shadow-[0_42px_120px_-72px_rgb(47_42_36_/_0.75)] sm:min-h-[520px]">
               <img
-                src={WEDDING.photos.gallery[1]}
-                alt="Ambiente elegante da celebração"
+                src={WEDDING.photos.hero}
+                alt="Lucas e Vanessa em retrato editorial"
                 loading="lazy"
-                className="absolute inset-0 h-full w-full object-cover"
+                className="absolute inset-0 h-full w-full object-cover object-[50%_42%]"
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-[#2f2a24]/70 via-transparent to-transparent" />
-              <figcaption className="absolute bottom-6 left-6 right-6 flex items-end justify-between gap-6 text-background">
-                <span className="max-w-[15rem] font-display text-3xl leading-none sm:text-4xl">
-                  {WEDDING.names.full}
-                </span>
-                <span className="text-right text-[10px] uppercase tracking-[0.3em] text-background/70">
-                  {WEDDING.dateLabel}
+              <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(246,241,231,0.06),rgba(246,241,231,0.16)_44%,rgba(57,68,47,0.62))]" />
+              <figcaption className="absolute bottom-6 left-6 right-6 grid gap-5 text-background sm:grid-cols-[1fr_auto] sm:items-end">
+                <div>
+                  <span className="text-[10px] uppercase tracking-[0.32em] text-background/72">
+                    {WEDDING.venue.name}
+                  </span>
+                  <span className="mt-3 block max-w-[16rem] font-display text-3xl leading-none sm:text-4xl">
+                    {WEDDING.venue.note}
+                  </span>
+                </div>
+                <span className="text-[10px] uppercase tracking-[0.3em] text-background/70 sm:text-right">
+                  {WEDDING.timeLabel} · luz natural
                 </span>
               </figcaption>
             </figure>
@@ -312,9 +317,9 @@ function Home() {
 
       <section
         id="galeria"
-        className="relative overflow-hidden bg-gradient-dark px-5 py-24 text-background sm:px-6 sm:py-36"
+        className="relative overflow-hidden bg-[linear-gradient(180deg,#f6f1e7_0%,#e9eddf_100%)] px-5 py-24 text-foreground sm:px-6 sm:py-36"
       >
-        <div className="cinematic-grain absolute inset-0 opacity-20" />
+        <div className="warm-light pointer-events-none absolute inset-0 opacity-40" />
         <div className="editorial-rule absolute inset-x-8 top-0" />
         <div className="relative z-10 mx-auto max-w-7xl">
           <motion.div
@@ -325,13 +330,13 @@ function Home() {
             className="mb-12 grid gap-8 md:grid-cols-[0.85fr_1.15fr] md:items-end sm:mb-16"
           >
             <div>
-              <p className="gold-kicker text-gold">Galeria</p>
-              <h2 className="mt-5 font-display text-5xl leading-[0.9] text-background text-balance sm:text-7xl">
-                Imagens antes das palavras.
+              <p className="gold-kicker">Galeria</p>
+              <h2 className="mt-5 font-display text-5xl leading-[0.9] text-foreground text-balance sm:text-7xl">
+                Luz, verde e presença.
               </h2>
             </div>
-            <p className="max-w-xl text-sm leading-8 text-background/70 text-pretty md:justify-self-end">
-              Retratos, textura, luz e escala. A fotografia conduz o tom do encontro.
+            <p className="max-w-xl text-sm leading-8 text-muted-foreground text-pretty md:justify-self-end">
+              A composição aproxima o site da fazenda: natural, claro, íntimo.
             </p>
           </motion.div>
 
@@ -352,9 +357,9 @@ function Home() {
                   loading={i === 0 ? "eager" : "lazy"}
                   className={`h-full w-full object-cover transition-transform duration-[1400ms] ease-out group-hover:scale-105 ${item.imageClassName}`}
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-[#2F2A24]/82 via-transparent to-[#39442F]/10 opacity-75 transition-opacity duration-500 group-hover:opacity-95" />
+                <div className="absolute inset-0 bg-gradient-to-t from-[#39442F]/72 via-transparent to-[#f6f1e7]/8 opacity-70 transition-opacity duration-500 group-hover:opacity-88" />
                 <div className="absolute inset-x-5 bottom-5 flex items-center justify-between">
-                  <span className="text-[10px] uppercase tracking-[0.26em] text-background/82">
+                  <span className="text-[10px] uppercase tracking-[0.26em] text-background/86">
                     {item.label}
                   </span>
                   <span className="h-px w-10 bg-gold/70 transition-all duration-500 group-hover:w-16" />
