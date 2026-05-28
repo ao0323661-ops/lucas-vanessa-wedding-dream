@@ -79,7 +79,6 @@ export const WEDDING = {
     venue: "/images/fazenda-limoeiro.jpeg",
     gallery: [
       "/images/noivos-escadaria.jpeg",
-      "/images/noivos-beijo-varanda.jpeg",
       "/images/noivos-colunas.jpeg",
       "/images/noivos-detalhe-alianca.jpeg",
     ],
