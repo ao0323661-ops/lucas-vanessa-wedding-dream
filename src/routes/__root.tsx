@@ -8,12 +8,12 @@ import {
   Scripts,
 } from "@tanstack/react-router";
 
-import heroImg from "@/assets/hero.jpg";
 import appCss from "../styles.css?url";
 
 const SITE_TITLE = "Lucas & Vanessa — Nosso Casamento";
 const SITE_DESCRIPTION =
   "Site oficial do casamento de Lucas & Vanessa. Veja os detalhes da celebração, confirme presença, envie uma mensagem e participe da lista de presentes.";
+const HERO_IMAGE = "/images/capa-casal.jpg";
 
 function NotFoundComponent() {
   return (
@@ -101,11 +101,11 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { name: "twitter:description", content: SITE_DESCRIPTION },
       {
         property: "og:image",
-        content: heroImg,
+        content: HERO_IMAGE,
       },
       {
         name: "twitter:image",
-        content: heroImg,
+        content: HERO_IMAGE,
       },
     ],
     links: [

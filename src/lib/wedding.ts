@@ -7,7 +7,6 @@
  * Altere os valores abaixo com as informações reais do seu grande dia.
  */
 
-import heroImg from "@/assets/hero.jpg";
 import gallery1 from "@/assets/gallery1.jpg";
 import gallery2 from "@/assets/gallery2.jpg";
 import gallery3 from "@/assets/gallery3.jpg";
@@ -108,7 +107,7 @@ export const WEDDING = {
 
   // 7. Fotos do site
   photos: {
-    hero: heroImg,
+    hero: "/images/capa-casal.jpg",
     gallery: [gallery1, gallery2, gallery3, gallery4, gallery1, gallery3],
   },
 };

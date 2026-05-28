@@ -3,7 +3,6 @@ import { lazy, Suspense, useState } from "react";
 import { motion } from "framer-motion";
 import { ArrowRight, ChevronDown, Loader2 } from "lucide-react";
 import { Nav } from "@/components/Nav";
-import { Countdown } from "@/components/Countdown";
 import { Section } from "@/components/Section";
 import { RsvpForm } from "@/components/RsvpForm";
 import { GuestAccessGate } from "@/components/GuestAccessGate";
@@ -70,83 +69,81 @@ function Home() {
     <div id="top" className="min-h-screen bg-background text-foreground">
       <Nav />
 
-      <section className="relative flex h-[calc(100svh-34px)] min-h-[620px] items-center justify-center overflow-hidden px-5 pb-12 pt-24 text-background sm:px-6">
+      <section className="relative flex h-[100svh] min-h-[620px] items-stretch justify-center overflow-hidden px-5 text-white sm:px-6">
         <motion.img
           src={WEDDING.photos.hero}
           alt={WEDDING.names.full}
-          width={1920}
-          height={1080}
+          width={720}
+          height={1280}
           fetchPriority="high"
-          initial={{ scale: 1.08 }}
-          animate={{ scale: 1.16 }}
-          transition={{ duration: 18, ease: "easeOut" }}
-          className="absolute inset-0 h-full w-full object-cover object-[52%_center]"
+          initial={{ scale: 1.02, y: 0 }}
+          animate={{ scale: 1.055, y: -8 }}
+          transition={{ duration: 20, ease: "easeOut" }}
+          className="absolute inset-0 h-full w-full object-cover object-[50%_42%] will-change-transform sm:object-[50%_44%] md:object-[50%_45%]"
         />
-        <div className="hero-vignette absolute inset-0" />
+        <div
+          className="absolute inset-0"
+          style={{
+            background: "linear-gradient(to bottom, rgba(0,0,0,0.35), rgba(0,0,0,0.55))",
+          }}
+        />
         <div className="cinematic-grain absolute inset-0" />
-        <div className="absolute inset-x-0 bottom-0 h-36 bg-gradient-to-t from-background via-background/45 to-transparent" />
+        <div className="absolute inset-x-0 bottom-0 h-48 bg-gradient-to-t from-background via-background/45 to-transparent" />
 
         <motion.div
-          initial={{ opacity: 0, y: 38 }}
+          initial={{ opacity: 0, y: 34 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 1.35, ease: [0.16, 1, 0.3, 1] }}
-          className="relative z-10 mx-auto flex w-full max-w-5xl flex-col items-center text-center"
+          transition={{ duration: 1.2, ease: [0.16, 1, 0.3, 1] }}
+          className="relative z-10 mx-auto flex h-full w-full max-w-7xl flex-col items-center justify-end pb-20 pt-28 text-center sm:pb-24 md:items-end md:pb-28 md:text-right"
         >
-          <motion.span
-            initial={{ opacity: 0, y: 14 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.2 }}
-            className="glass-luxe rounded-full px-5 py-2 text-[10px] uppercase tracking-[0.34em] text-olive-deep sm:text-xs"
-          >
-            {WEDDING.dateLabel}
-          </motion.span>
-
-          <h1 className="mt-5 font-display text-5xl leading-[0.84] text-background text-balance drop-shadow-[0_14px_34px_rgb(48_63_40_/_0.26)] sm:text-7xl md:text-8xl 2xl:text-9xl">
-            {WEDDING.names.groom}
-            <span className="my-1 block font-script text-4xl leading-none text-gold drop-shadow-[0_12px_30px_rgb(48_63_40_/_0.26)] sm:my-2 sm:text-6xl md:text-7xl 2xl:text-8xl">
-              &
-            </span>
-            {WEDDING.names.bride}
-          </h1>
-
-          <motion.p
-            initial={{ opacity: 0, y: 16 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.9, delay: 0.35 }}
-            className="mx-auto mt-5 max-w-xl font-display text-lg italic leading-relaxed text-background/86 text-pretty sm:text-xl md:text-2xl"
-          >
-            "{WEDDING.heroPhrase}"
-          </motion.p>
-
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.9, delay: 0.52 }}
-            className="mt-6 w-full sm:mt-8"
-          >
-            <Countdown target={WEDDING.date} />
-          </motion.div>
-
-          <motion.div
-            initial={{ opacity: 0, y: 18 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.68 }}
-            className="mt-5 flex flex-col items-center gap-3 sm:flex-row"
-          >
-            <a
-              href="#local"
-              className="shine-line inline-flex min-h-[54px] items-center justify-center gap-3 rounded-md bg-gold px-8 py-4 text-[10px] font-semibold uppercase tracking-[0.28em] text-background shadow-gold transition-all duration-500 hover:bg-olive-deep sm:text-xs"
+          <div className="max-w-[min(100%,720px)]">
+            <motion.h1
+              initial={{ opacity: 0, y: 22 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 1.05, delay: 0.15, ease: [0.16, 1, 0.3, 1] }}
+              className="font-display text-5xl leading-[0.9] text-white text-balance drop-shadow-[0_18px_42px_rgb(0_0_0_/_0.46)] sm:text-7xl md:text-8xl 2xl:text-9xl"
             >
-              Confirmar convite
-              <ArrowRight size={16} />
-            </a>
-            <a
-              href="#local"
-              className="inline-flex min-h-[54px] items-center justify-center gap-3 rounded-md border border-olive/25 bg-linen/45 px-8 py-4 text-[10px] uppercase tracking-[0.28em] text-olive-deep/78 backdrop-blur transition-all duration-500 hover:border-olive/55 hover:text-olive-deep sm:text-xs"
+              {WEDDING.names.groom}
+              <span className="mx-2 font-script text-4xl leading-none text-gold drop-shadow-[0_12px_30px_rgb(0_0_0_/_0.38)] sm:mx-4 sm:text-6xl md:text-7xl 2xl:text-8xl">
+                &
+              </span>
+              {WEDDING.names.bride}
+            </motion.h1>
+
+            <motion.p
+              initial={{ opacity: 0, y: 18 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.95, delay: 0.34, ease: [0.16, 1, 0.3, 1] }}
+              className="mx-auto mt-5 max-w-md font-display text-2xl italic leading-relaxed text-white/88 drop-shadow-[0_10px_24px_rgb(0_0_0_/_0.34)] sm:text-3xl md:mr-0 md:text-4xl"
             >
-              Ver detalhes
-            </a>
-          </motion.div>
+              Nosso grande dia
+            </motion.p>
+
+            <motion.div
+              initial={{ opacity: 0, y: 18 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.85, delay: 0.5, ease: [0.16, 1, 0.3, 1] }}
+              className="mt-7 flex flex-col items-center gap-3 sm:flex-row md:justify-end"
+            >
+              <motion.a
+                href="#local"
+                whileHover={{ y: -2 }}
+                whileTap={{ scale: 0.98 }}
+                className="shine-line inline-flex min-h-[54px] items-center justify-center gap-3 rounded-md bg-gold px-8 py-4 text-[10px] font-semibold uppercase tracking-[0.28em] text-background shadow-[0_22px_55px_-28px_rgb(0_0_0_/_0.9)] transition-all duration-500 hover:bg-champagne sm:text-xs"
+              >
+                Confirmar presença
+                <ArrowRight size={16} />
+              </motion.a>
+              <motion.a
+                href="#local"
+                whileHover={{ y: -2 }}
+                whileTap={{ scale: 0.98 }}
+                className="inline-flex min-h-[54px] items-center justify-center rounded-md border border-white/35 bg-black/18 px-8 py-4 text-[10px] uppercase tracking-[0.28em] text-white/88 shadow-[0_18px_45px_-32px_rgb(0_0_0_/_0.9)] backdrop-blur-md transition-all duration-500 hover:border-gold/70 hover:bg-white/12 hover:text-white sm:text-xs"
+              >
+                Ver detalhes
+              </motion.a>
+            </motion.div>
+          </div>
         </motion.div>
 
         <motion.a
@@ -157,7 +154,7 @@ function Home() {
             opacity: { delay: 1.2, duration: 0.7 },
             y: { repeat: Infinity, duration: 2.2 },
           }}
-          className="absolute bottom-5 left-1/2 z-10 flex -translate-x-1/2 flex-col items-center gap-2 text-olive-deep/55 text-[9px] uppercase tracking-[0.32em] [@media(max-height:760px)]:hidden"
+          className="absolute bottom-5 left-1/2 z-10 flex -translate-x-1/2 flex-col items-center gap-2 text-white/62 text-[9px] uppercase tracking-[0.32em] [@media(max-height:760px)]:hidden"
           aria-label="Role para ver a história"
         >
           Role
