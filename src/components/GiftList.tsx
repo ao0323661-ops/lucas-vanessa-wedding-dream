@@ -56,22 +56,22 @@ export function GiftList() {
             initial={{ opacity: 0, y: 24 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            transition={{ delay: i * 0.05, duration: 0.65, ease: [0.16, 1, 0.3, 1] }}
-            whileHover={{ y: -6 }}
+            transition={{ delay: i * 0.05, duration: 0.75, ease: [0.16, 1, 0.3, 1] }}
+            whileHover={{ y: -8 }}
             whileTap={{ scale: 0.99 }}
-            className="paper-luxe group relative overflow-hidden rounded-md p-7 text-left transition-all duration-500 hover:border-olive/45"
+            className="editorial-panel group relative overflow-hidden rounded-md p-7 text-left transition-all duration-500 hover:border-gold/45 sm:p-8"
           >
-            <div className="pointer-events-none absolute inset-x-6 top-0 h-px bg-gradient-to-r from-transparent via-olive/45 to-transparent opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
-            <div className="gold-kicker mb-5">Cota</div>
-            <h3 className="font-display text-2xl leading-tight text-balance">{g.name}</h3>
+            <div className="pointer-events-none absolute inset-x-6 top-0 h-px bg-gradient-to-r from-transparent via-gold/60 to-transparent opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
+            <div className="gold-kicker mb-6">Cota {String(i + 1).padStart(2, "0")}</div>
+            <h3 className="font-display text-3xl leading-tight text-balance">{g.name}</h3>
             <p className="mt-3 min-h-[52px] text-sm text-muted-foreground text-pretty">
               {g.description}
             </p>
-            <div className="mt-7 flex items-center justify-between gap-4">
-              <span className="font-display text-3xl leading-none text-foreground">
+            <div className="mt-8 flex items-end justify-between gap-4">
+              <span className="font-display text-4xl leading-none text-foreground">
                 {g.amount > 0 ? `R$ ${g.amount}` : "Livre"}
               </span>
-              <span className="flex h-10 w-10 items-center justify-center rounded-full border border-olive/25 text-gold transition-all duration-500 group-hover:border-olive group-hover:bg-gold group-hover:text-background">
+              <span className="flex h-11 w-11 items-center justify-center rounded-full border border-olive/25 text-gold transition-all duration-500 group-hover:border-gold group-hover:bg-gold group-hover:text-background">
                 <ArrowRight size={16} />
               </span>
             </div>

@@ -55,7 +55,7 @@ export default function ProtectedWeddingDetails({ guest }: ProtectedWeddingDetai
 
   if (loading) {
     return (
-      <div className="paper-luxe mx-auto flex max-w-3xl items-center justify-center gap-3 rounded-md px-6 py-12 text-muted-foreground">
+      <div className="editorial-panel mx-auto flex max-w-3xl items-center justify-center gap-3 rounded-md px-6 py-12 text-muted-foreground">
         <Loader2 size={18} className="animate-spin text-gold" />
         <span className="text-xs uppercase tracking-[0.28em]">Carregando detalhes...</span>
       </div>
@@ -64,7 +64,7 @@ export default function ProtectedWeddingDetails({ guest }: ProtectedWeddingDetai
 
   if (error || locations.length === 0) {
     return (
-      <div className="paper-luxe mx-auto max-w-3xl rounded-md px-6 py-10 text-center">
+      <div className="editorial-panel mx-auto max-w-3xl rounded-md px-6 py-10 text-center">
         <p className="gold-kicker mb-4 justify-center">Convite confirmado</p>
         <p className="text-muted-foreground">
           {error || "Os detalhes do local ainda não estão disponíveis para este convite."}
@@ -80,7 +80,7 @@ export default function ProtectedWeddingDetails({ guest }: ProtectedWeddingDetai
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
         transition={{ duration: 0.65, ease: [0.16, 1, 0.3, 1] }}
-        className="paper-luxe mx-auto max-w-3xl rounded-md px-6 py-5 text-center sm:px-8"
+        className="editorial-panel mx-auto max-w-3xl rounded-md px-6 py-5 text-center sm:px-8"
       >
         <p className="text-[10px] uppercase tracking-[0.28em] text-muted-foreground">
           Convite liberado para
@@ -98,9 +98,9 @@ export default function ProtectedWeddingDetails({ guest }: ProtectedWeddingDetai
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.76, delay: index * 0.08, ease: [0.16, 1, 0.3, 1] }}
-            className="paper-luxe group relative overflow-hidden rounded-md p-7 transition-transform duration-500 hover:-translate-y-1 sm:p-10"
+            className="editorial-panel group relative overflow-hidden rounded-md p-7 transition-transform duration-500 hover:-translate-y-1 sm:p-10"
           >
-            <div className="pointer-events-none absolute inset-x-8 top-0 h-px bg-gradient-to-r from-transparent via-olive/45 to-transparent" />
+            <div className="pointer-events-none absolute inset-x-8 top-0 h-px bg-gradient-to-r from-transparent via-gold/60 to-transparent" />
             <div className="mb-8 flex items-center justify-between gap-4">
               <div className="gold-kicker">{place.label}</div>
               <span className="flex h-11 w-11 items-center justify-center rounded-full border border-olive/25 bg-olive/[0.08] text-gold">

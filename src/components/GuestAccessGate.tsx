@@ -71,24 +71,26 @@ export function GuestAccessGate({ onValidated }: GuestAccessGateProps) {
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: "-40px" }}
       transition={{ duration: 0.72, ease: [0.16, 1, 0.3, 1] }}
-      className="paper-luxe relative mx-auto max-w-3xl overflow-hidden rounded-md p-6 sm:p-10"
+      className="editorial-panel relative mx-auto w-full overflow-hidden rounded-md p-5 sm:p-7"
     >
-      <div className="pointer-events-none absolute inset-x-10 top-0 h-px bg-gradient-to-r from-transparent via-olive/45 to-transparent" />
-      <div className="mx-auto mb-7 flex h-14 w-14 items-center justify-center rounded-full border border-olive/25 bg-olive/[0.08] text-gold shadow-gold">
-        <UserRoundCheck size={22} />
+      <div className="pointer-events-none absolute inset-x-8 top-0 h-px bg-gradient-to-r from-transparent via-gold/60 to-transparent" />
+
+      <div className="flex items-start gap-4">
+        <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full border border-olive/20 bg-olive/[0.08] text-gold shadow-gold">
+          <UserRoundCheck size={18} />
+        </span>
+        <div>
+          <p className="gold-kicker mb-3">Convite reservado</p>
+          <h3 className="font-display text-3xl leading-tight text-balance sm:text-4xl">
+            Digite seu nome como está no convite
+          </h3>
+          <p className="mt-3 text-sm leading-relaxed text-muted-foreground text-pretty">
+            O endereço e o RSVP aparecem depois da validação.
+          </p>
+        </div>
       </div>
 
-      <div className="mx-auto max-w-xl text-center">
-        <p className="gold-kicker mb-4 justify-center">Convite reservado</p>
-        <h3 className="font-display text-4xl leading-tight text-balance sm:text-5xl">
-          Digite seu nome como está no convite
-        </h3>
-        <p className="mt-4 text-sm leading-relaxed text-muted-foreground text-pretty sm:text-base">
-          Vamos liberar os detalhes do endereço e a confirmação assim que encontrarmos seu convite.
-        </p>
-      </div>
-
-      <form onSubmit={onSubmit} className="mx-auto mt-8 max-w-xl">
+      <form onSubmit={onSubmit} className="mt-7">
         <label className="block">
           <span className="mb-3 block text-[10px] uppercase tracking-[0.28em] text-muted-foreground/80">
             Nome ou apelido
@@ -112,7 +114,7 @@ export function GuestAccessGate({ onValidated }: GuestAccessGateProps) {
         <button
           type="submit"
           disabled={searching}
-          className="shine-line mt-6 flex min-h-[56px] w-full items-center justify-center gap-3 rounded-md bg-gold px-6 py-4 text-[10px] uppercase tracking-[0.3em] text-background shadow-gold transition-all duration-500 hover:bg-olive-deep disabled:cursor-wait disabled:opacity-70 sm:text-xs"
+          className="shine-line mt-6 flex min-h-[54px] w-full items-center justify-center gap-3 rounded-md bg-gold px-6 py-4 text-[10px] uppercase tracking-[0.3em] text-background shadow-gold transition-all duration-500 hover:bg-olive-deep disabled:cursor-wait disabled:opacity-70 sm:text-xs"
         >
           {searching ? <Loader2 size={16} className="animate-spin" /> : <CheckCircle2 size={16} />}
           {searching ? "Verificando..." : "Verificar convite"}

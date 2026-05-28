@@ -31,31 +31,31 @@ export function Countdown({ target }: { target: Date }) {
 
   return (
     <div
-      className="mx-auto w-full max-w-2xl"
+      className="mx-auto w-full"
       role="timer"
       aria-label="Contagem regressiva para o casamento"
       aria-busy={!mounted}
     >
-      <div className="mb-3 text-center">
-        <span className="glass-luxe inline-flex rounded-full px-4 py-2 text-[10px] uppercase tracking-[0.32em] text-olive-deep/80">
+      <div className="mb-5 text-center">
+        <span className="inline-flex rounded-full border border-gold/30 bg-background/45 px-4 py-2 text-[10px] uppercase tracking-[0.32em] text-olive-deep/80 backdrop-blur">
           Faltam
         </span>
       </div>
-      <div className="grid grid-cols-4 gap-2.5 sm:gap-4">
+      <div className="grid grid-cols-2 gap-3 sm:grid-cols-4 sm:gap-4">
         {items.map((it) => (
           <motion.div
             key={it.label}
-            whileHover={{ y: -4 }}
+            whileHover={{ y: -5 }}
             transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
             className="text-center"
           >
-            <div className="shine-line glass-luxe relative flex min-h-[68px] items-center justify-center rounded-md px-2 py-3 sm:min-h-[82px] sm:px-4">
-              <div className="absolute inset-x-3 top-0 h-px bg-gradient-to-r from-transparent via-olive/55 to-transparent" />
-              <div className="font-display text-2xl leading-none text-gold tabular-nums sm:text-3xl">
+            <div className="shine-line relative flex min-h-[92px] items-center justify-center rounded-md border border-gold/25 bg-background/35 px-3 py-4 shadow-[0_24px_70px_-48px_rgb(47_42_36_/_0.8)] backdrop-blur sm:min-h-[108px] sm:px-4">
+              <div className="absolute inset-x-4 top-0 h-px bg-gradient-to-r from-transparent via-gold/70 to-transparent" />
+              <div className="font-display text-4xl leading-none text-gold tabular-nums sm:text-5xl">
                 {mounted ? String(it.value).padStart(2, "0") : "--"}
               </div>
             </div>
-            <div className="mt-2 text-[9px] uppercase tracking-[0.26em] text-olive-deep/65 sm:text-xs sm:tracking-[0.3em]">
+            <div className="mt-3 text-[9px] uppercase tracking-[0.26em] text-olive-deep/65 sm:text-xs sm:tracking-[0.3em]">
               {it.label}
             </div>
           </motion.div>
