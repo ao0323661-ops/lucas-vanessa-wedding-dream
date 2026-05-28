@@ -24,7 +24,7 @@ export const Route = createFileRoute("/")({
       { property: "og:title", content: "Lucas & Vanessa - Convite" },
       {
         property: "og:description",
-        content: "Uma manhã na Fazenda do Limoeiro, em uma experiência visual reservada.",
+        content: "Luz natural e verde em uma experiência visual reservada.",
       },
       { property: "og:type", content: "website" },
       { property: "og:locale", content: "pt_BR" },
@@ -34,7 +34,7 @@ export const Route = createFileRoute("/")({
       { name: "twitter:title", content: "Lucas & Vanessa - Convite" },
       {
         name: "twitter:description",
-        content: "Uma manhã na Fazenda do Limoeiro, em uma experiência visual reservada.",
+        content: "Luz natural e verde em uma experiência visual reservada.",
       },
       { name: "twitter:image", content: WEDDING.photos.hero },
       {
@@ -64,7 +64,7 @@ const reveal = {
 const editorialNotes = [
   {
     label: "Local",
-    text: "Cerimônia e festa acontecem na mesma paisagem: a Fazenda do Limoeiro.",
+    text: "A paisagem real da fazenda guia o tom visual do convite.",
   },
   {
     label: "Manhã",
@@ -183,7 +183,7 @@ function Home() {
               transition={{ duration: 0.9, delay: 0.43, ease: [0.16, 1, 0.3, 1] }}
               className="mx-auto mt-5 max-w-lg text-sm font-light leading-7 text-white/78 text-pretty md:mr-0"
             >
-              Manhã na {WEDDING.venue.name}. Cerimônia e festa no mesmo lugar.
+              Luz natural, verde ao redor e uma celebração diurna.
             </motion.p>
 
             <motion.div
@@ -279,19 +279,19 @@ function Home() {
           >
             <figure className="relative min-h-[360px] overflow-hidden rounded-md border border-olive/15 bg-olive/[0.06] shadow-[0_42px_120px_-72px_rgb(47_42_36_/_0.75)] sm:min-h-[520px]">
               <img
-                src={WEDDING.photos.hero}
-                alt="Lucas e Vanessa em retrato editorial"
+                src={WEDDING.photos.venue}
+                alt="Fazenda do Limoeiro em luz natural"
                 loading="lazy"
-                className="absolute inset-0 h-full w-full object-cover object-[50%_42%]"
+                className="absolute inset-0 h-full w-full object-cover object-[50%_54%] sm:object-[50%_52%] lg:object-[50%_55%]"
               />
-              <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(246,241,231,0.06),rgba(246,241,231,0.16)_44%,rgba(57,68,47,0.62))]" />
+              <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(246,241,231,0.02)_0%,rgba(246,241,231,0.08)_44%,rgba(57,68,47,0.58)_100%)]" />
               <figcaption className="absolute bottom-6 left-6 right-6 grid gap-5 text-background sm:grid-cols-[1fr_auto] sm:items-end">
                 <div>
                   <span className="text-[10px] uppercase tracking-[0.32em] text-background/72">
                     {WEDDING.venue.name}
                   </span>
                   <span className="mt-3 block max-w-[16rem] font-display text-3xl leading-none sm:text-4xl">
-                    {WEDDING.venue.note}
+                    Paisagem aberta para uma celebração diurna
                   </span>
                 </div>
                 <span className="text-[10px] uppercase tracking-[0.3em] text-background/70 sm:text-right">

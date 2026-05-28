@@ -23,7 +23,7 @@ export const WEDDING = {
   // 3. Local
   venue: {
     name: "Fazenda do Limoeiro",
-    note: "Cerimônia e festa no mesmo lugar",
+    note: "Luz natural e verde ao redor",
   },
 
   // 4. Financeiro / presentes
@@ -76,6 +76,7 @@ export const WEDDING = {
   // 6. Fotos do site
   photos: {
     hero: "/images/capa-casal.jpg",
+    venue: "/images/fazenda-limoeiro.jpeg",
     gallery: [
       "/images/noivos-escadaria.jpeg",
       "/images/noivos-beijo-varanda.jpeg",
