@@ -76,6 +76,11 @@ export const WEDDING = {
   // 6. Fotos do site
   photos: {
     hero: "/images/capa-casal.jpg",
-    gallery: [] as string[],
+    gallery: [
+      "/images/noivos-escadaria.jpeg",
+      "/images/noivos-beijo-varanda.jpeg",
+      "/images/noivos-colunas.jpeg",
+      "/images/noivos-detalhe-alianca.jpeg",
+    ],
   },
 };

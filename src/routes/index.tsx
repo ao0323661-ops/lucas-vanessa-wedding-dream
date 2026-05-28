@@ -76,43 +76,34 @@ const editorialNotes = [
   },
 ];
 
-const visualGallery = [
-  {
-    src: WEDDING.photos.hero,
-    alt: "Lucas e Vanessa em uma prévia editorial",
-    label: "Prévia 01",
-    className: "col-span-2 row-span-2 md:col-span-2 md:row-span-2",
-    imageClassName: "object-[50%_42%]",
+const visualGallery = {
+  hero: {
+    src: WEDDING.photos.gallery[0],
+    alt: "Lucas e Vanessa sentados em uma escadaria histórica",
+    label: "Retrato principal",
+    imageClassName: "object-[50%_48%] sm:object-[50%_46%] lg:object-[50%_50%]",
   },
-  {
-    src: WEDDING.photos.hero,
-    alt: "Retrato dos noivos com luz natural",
-    label: "Prévia 02",
-    className: "col-span-2 md:col-span-2",
-    imageClassName: "object-[42%_24%]",
+  secondary: [
+    {
+      src: WEDDING.photos.gallery[1],
+      alt: "Lucas e Vanessa em um beijo na varanda",
+      label: "Luz natural",
+      imageClassName: "object-[48%_38%] sm:object-[50%_40%] lg:object-[50%_42%]",
+    },
+    {
+      src: WEDDING.photos.gallery[2],
+      alt: "Lucas e Vanessa entre colunas de pedra",
+      label: "Arquitetura",
+      imageClassName: "object-[50%_42%] sm:object-[50%_45%] lg:object-[50%_44%]",
+    },
+  ],
+  detail: {
+    src: WEDDING.photos.gallery[3],
+    alt: "Detalhe da aliança em luz natural",
+    label: "Detalhe",
+    imageClassName: "object-[50%_30%] sm:object-[50%_32%] lg:object-[50%_30%]",
   },
-  {
-    src: WEDDING.photos.hero,
-    alt: "Recorte editorial de Lucas e Vanessa",
-    label: "Recorte",
-    className: "",
-    imageClassName: "object-[34%_50%]",
-  },
-  {
-    src: WEDDING.photos.hero,
-    alt: "Lucas e Vanessa em atmosfera diurna",
-    label: "Manhã",
-    className: "",
-    imageClassName: "object-[58%_44%]",
-  },
-  {
-    src: WEDDING.photos.hero,
-    alt: "Prévia dos noivos para o convite",
-    label: "Noivos",
-    className: "col-span-2 md:col-span-2",
-    imageClassName: "object-[52%_62%]",
-  },
-];
+};
 
 function Home() {
   const [validatedGuest, setValidatedGuest] = useState<InvitedGuestMatch | null>(null);
@@ -346,32 +337,90 @@ function Home() {
             </div>
           </motion.div>
 
-          <div className="grid auto-rows-[190px] grid-cols-2 gap-3 sm:auto-rows-[260px] sm:gap-5 md:grid-cols-4 md:auto-rows-[250px] md:gap-6">
-            {visualGallery.map((item, i) => (
+          <div className="grid gap-4 sm:gap-5 lg:grid-cols-[1.12fr_0.88fr] lg:gap-6">
+            <motion.figure
+              initial={{ opacity: 0, y: 30, scale: 0.985 }}
+              whileInView={{ opacity: 1, y: 0, scale: 1 }}
+              whileHover={{ y: -5 }}
+              viewport={{ once: true, margin: "-50px" }}
+              transition={{ duration: 0.82, ease: [0.16, 1, 0.3, 1] }}
+              className="group relative min-h-[540px] overflow-hidden rounded-md border border-olive/15 bg-linen shadow-[0_46px_130px_-76px_rgb(47_42_36_/_0.86)] sm:min-h-[680px] lg:min-h-[760px]"
+            >
+              <img
+                src={visualGallery.hero.src}
+                alt={visualGallery.hero.alt}
+                loading="lazy"
+                className={`absolute inset-0 h-full w-full object-cover transition-transform duration-[1500ms] ease-out group-hover:scale-[1.035] ${visualGallery.hero.imageClassName}`}
+              />
+              <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(246,241,231,0.04)_0%,transparent_34%,rgba(57,68,47,0.66)_100%)]" />
+              <div className="absolute inset-0 opacity-0 transition-opacity duration-700 group-hover:opacity-100 bg-[radial-gradient(circle_at_50%_34%,transparent_0%,rgba(246,241,231,0.12)_46%,rgba(47,42,36,0.24)_100%)]" />
+              <figcaption className="absolute inset-x-5 bottom-5 flex items-end justify-between gap-5 text-background sm:inset-x-7 sm:bottom-7">
+                <div>
+                  <span className="text-[10px] uppercase tracking-[0.32em] text-background/74">
+                    {visualGallery.hero.label}
+                  </span>
+                  <span className="mt-3 block max-w-sm font-display text-3xl leading-none sm:text-5xl">
+                    Registros em luz natural
+                  </span>
+                </div>
+                <span className="hidden h-px w-16 bg-gold/70 sm:block" />
+              </figcaption>
+            </motion.figure>
+
+            <div className="grid gap-4 sm:grid-cols-2 sm:gap-5 lg:grid-cols-2 lg:grid-rows-[1fr_0.62fr] lg:gap-6">
+              {visualGallery.secondary.map((item, i) => (
+                <motion.figure
+                  key={item.src}
+                  initial={{ opacity: 0, y: 26, scale: 0.985 }}
+                  whileInView={{ opacity: 1, y: 0, scale: 1 }}
+                  whileHover={{ y: -5 }}
+                  viewport={{ once: true, margin: "-50px" }}
+                  transition={{
+                    duration: 0.78,
+                    delay: (i + 1) * 0.06,
+                    ease: [0.16, 1, 0.3, 1],
+                  }}
+                  className="group relative min-h-[360px] overflow-hidden rounded-md border border-olive/15 bg-linen shadow-[0_34px_100px_-70px_rgb(47_42_36_/_0.74)] sm:min-h-[430px] lg:min-h-0"
+                >
+                  <img
+                    src={item.src}
+                    alt={item.alt}
+                    loading="lazy"
+                    className={`absolute inset-0 h-full w-full object-cover transition-transform duration-[1400ms] ease-out group-hover:scale-[1.04] ${item.imageClassName}`}
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-[#39442F]/70 via-transparent to-[#f6f1e7]/10 opacity-78 transition-opacity duration-500 group-hover:opacity-90" />
+                  <figcaption className="absolute inset-x-5 bottom-5 flex items-center justify-between gap-4">
+                    <span className="text-[10px] uppercase tracking-[0.28em] text-background/84">
+                      {item.label}
+                    </span>
+                    <span className="h-px w-10 bg-gold/70 transition-all duration-500 group-hover:w-16" />
+                  </figcaption>
+                </motion.figure>
+              ))}
+
               <motion.figure
-                key={`${item.src}-${item.label}-${i}`}
-                initial={{ opacity: 0, y: 28, scale: 0.985 }}
+                initial={{ opacity: 0, y: 26, scale: 0.985 }}
                 whileInView={{ opacity: 1, y: 0, scale: 1 }}
-                whileHover={{ y: -6 }}
+                whileHover={{ y: -5 }}
                 viewport={{ once: true, margin: "-50px" }}
-                transition={{ duration: 0.78, delay: i * 0.05, ease: [0.16, 1, 0.3, 1] }}
-                className={`group relative overflow-hidden rounded-md border border-background/10 bg-linen/10 shadow-[0_34px_100px_-58px_rgb(0_0_0_/_0.8)] ${item.className}`}
+                transition={{ duration: 0.78, delay: 0.18, ease: [0.16, 1, 0.3, 1] }}
+                className="group relative min-h-[280px] overflow-hidden rounded-md border border-olive/15 bg-olive-deep shadow-[0_34px_100px_-70px_rgb(47_42_36_/_0.78)] sm:col-span-2 sm:min-h-[330px] lg:col-span-2 lg:min-h-0"
               >
                 <img
-                  src={item.src}
-                  alt={item.alt}
-                  loading={i === 0 ? "eager" : "lazy"}
-                  className={`h-full w-full object-cover transition-transform duration-[1400ms] ease-out group-hover:scale-105 ${item.imageClassName}`}
+                  src={visualGallery.detail.src}
+                  alt={visualGallery.detail.alt}
+                  loading="lazy"
+                  className={`absolute inset-0 h-full w-full object-cover transition-transform duration-[1400ms] ease-out group-hover:scale-[1.045] ${visualGallery.detail.imageClassName}`}
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-[#39442F]/72 via-transparent to-[#f6f1e7]/8 opacity-70 transition-opacity duration-500 group-hover:opacity-88" />
-                <div className="absolute inset-x-5 bottom-5 flex items-center justify-between">
-                  <span className="text-[10px] uppercase tracking-[0.26em] text-background/86">
-                    {item.label}
+                <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(47,42,36,0.68),rgba(57,68,47,0.2)_54%,rgba(47,42,36,0.34))]" />
+                <figcaption className="absolute inset-x-5 bottom-5 flex items-center justify-between gap-4">
+                  <span className="text-[10px] uppercase tracking-[0.28em] text-background/84">
+                    {visualGallery.detail.label}
                   </span>
                   <span className="h-px w-10 bg-gold/70 transition-all duration-500 group-hover:w-16" />
-                </div>
+                </figcaption>
               </motion.figure>
-            ))}
+            </div>
           </div>
         </div>
       </section>
