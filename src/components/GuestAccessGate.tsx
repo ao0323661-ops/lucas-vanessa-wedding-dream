@@ -82,10 +82,10 @@ export function GuestAccessGate({ onValidated }: GuestAccessGateProps) {
         <div>
           <p className="gold-kicker mb-3">Convite reservado</p>
           <h3 className="font-display text-3xl leading-tight text-balance sm:text-4xl">
-            Digite seu nome como está no convite
+            Acesse com o nome do convite
           </h3>
           <p className="mt-3 text-sm leading-relaxed text-muted-foreground text-pretty">
-            O endereço e o RSVP aparecem depois da validação.
+            Endereço, horários e RSVP ficam reunidos na área reservada.
           </p>
         </div>
       </div>
@@ -155,7 +155,7 @@ export function GuestAccessGate({ onValidated }: GuestAccessGateProps) {
             className="mx-auto mt-7 max-w-xl space-y-3"
           >
             <p className="text-center text-[10px] uppercase tracking-[0.28em] text-muted-foreground">
-              Encontramos mais de um convite
+              Convites encontrados
             </p>
             {matches.map((guest) => (
               <button

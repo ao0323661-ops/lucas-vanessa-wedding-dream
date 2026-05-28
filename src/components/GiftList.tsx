@@ -144,8 +144,8 @@ export function GiftList() {
                     </button>
                   </div>
                   <p className="mt-3 text-xs text-muted-foreground">
-                    O botão abaixo apenas informa aos noivos que você enviou um Pix. A conferência
-                    do pagamento é manual.
+                    O botão abaixo apenas registra que o Pix foi enviado. A conferência do pagamento
+                    é manual.
                   </p>
                 </div>
 
@@ -179,7 +179,7 @@ export function GiftList() {
                 </div>
                 <p className="font-display text-3xl">Obrigado, {guestName}!</p>
                 <p className="mx-auto mt-3 max-w-sm text-muted-foreground text-pretty">
-                  Registramos sua informação de envio. Os noivos farão a conferência manual do Pix.
+                  Registramos a informação de envio. A conferência do Pix será feita manualmente.
                 </p>
                 <button
                   onClick={() => setSelected(null)}

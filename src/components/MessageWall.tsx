@@ -59,8 +59,8 @@ export function MessageWall() {
         className="editorial-panel relative overflow-hidden rounded-md p-7 sm:p-8"
       >
         <div className="pointer-events-none absolute inset-x-8 top-0 h-px bg-gradient-to-r from-transparent via-gold/60 to-transparent" />
-        <p className="gold-kicker mb-4">Mural afetivo</p>
-        <h3 className="font-display text-4xl leading-tight">Deixe sua mensagem</h3>
+        <p className="gold-kicker mb-4">Mural reservado</p>
+        <h3 className="font-display text-4xl leading-tight">Escreva uma nota</h3>
         <div className="mt-7 space-y-5">
           <input
             value={name}
@@ -73,7 +73,7 @@ export function MessageWall() {
           <textarea
             value={message}
             onChange={(e) => setMessage(e.target.value)}
-            placeholder="Sua mensagem para os noivos..."
+            placeholder="Sua nota para Lucas e Vanessa..."
             maxLength={500}
             rows={4}
             required
@@ -110,7 +110,7 @@ export function MessageWall() {
             ))}
           {!loading && items.length === 0 && (
             <p className="editorial-panel rounded-md p-6 font-display text-2xl italic text-muted-foreground">
-              Seja o primeiro a deixar uma mensagem.
+              Seja o primeiro a deixar uma nota.
             </p>
           )}
           {!loading &&

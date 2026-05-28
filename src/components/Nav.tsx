@@ -3,12 +3,11 @@ import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X } from "lucide-react";
 
 const links = [
-  { href: "#historia", label: "Nossa História" },
+  { href: "#editorial", label: "Editorial" },
   { href: "#galeria", label: "Galeria" },
-  { href: "#local", label: "Local" },
+  { href: "#local", label: "Convite" },
   { href: "#presentes", label: "Presentes" },
   { href: "#mural", label: "Mural" },
-  { href: "#local", label: "Convite" },
 ];
 
 export function Nav() {
