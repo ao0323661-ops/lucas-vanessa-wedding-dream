@@ -133,7 +133,7 @@ export function RsvpForm({ invitedGuest }: RsvpFormProps) {
         animate={{ opacity: 1, y: 0 }}
         className="px-2 py-8 text-center sm:px-6 sm:py-10"
       >
-        <div className="mx-auto mb-6 flex h-14 w-14 items-center justify-center rounded-full border border-olive/30 bg-olive/[0.08] text-gold shadow-gold">
+        <div className="mx-auto mb-6 flex h-14 w-14 items-center justify-center rounded-full border border-olive/30 bg-olive/[0.08] text-olive shadow-natural">
           <Check size={22} />
         </div>
         <h3 className="mb-4 font-display text-4xl leading-tight text-balance sm:text-5xl">
@@ -156,10 +156,10 @@ export function RsvpForm({ invitedGuest }: RsvpFormProps) {
         className="relative overflow-hidden px-2 py-8 text-center sm:px-6 sm:py-10"
       >
         <div className="pointer-events-none absolute inset-x-8 top-0 h-px bg-gradient-to-r from-transparent via-olive/45 to-transparent" />
-        <div className="mx-auto mb-6 flex h-14 w-14 items-center justify-center rounded-full border border-olive/30 bg-olive/[0.08] text-gold shadow-gold">
+        <div className="mx-auto mb-6 flex h-14 w-14 items-center justify-center rounded-full border border-olive/30 bg-olive/[0.08] text-olive shadow-natural">
           {displayAttending === "yes" ? <Heart size={22} /> : <Check size={22} />}
         </div>
-        <div className="gold-divider gold-kicker mb-6 justify-center">RSVP</div>
+        <div className="editorial-divider editorial-kicker mb-6 justify-center">RSVP</div>
         <h3 className="mb-4 font-display text-4xl leading-tight text-balance sm:text-5xl">
           {displayAttending === "yes" ? "Sua presença está confirmada" : "Obrigado por avisar"}
         </h3>
@@ -200,7 +200,7 @@ export function RsvpForm({ invitedGuest }: RsvpFormProps) {
               onClick={() => setAttending(o.v as "yes" | "no")}
               className={`group relative min-h-[56px] flex-1 overflow-hidden rounded-md border px-4 py-4 text-xs uppercase tracking-[0.18em] transition-all duration-500 ${
                 attending === o.v
-                  ? "border-olive bg-gold text-background shadow-gold"
+                  ? "border-olive bg-olive text-background shadow-natural"
                   : "border-border bg-background/40 text-foreground hover:border-olive/55 hover:bg-olive/[0.05]"
               }`}
             >
@@ -227,7 +227,7 @@ export function RsvpForm({ invitedGuest }: RsvpFormProps) {
                 <button
                   type="button"
                   onClick={() => setCompanions(Math.max(0, companions - 1))}
-                  className="flex h-12 w-12 items-center justify-center rounded-full border border-border bg-background/50 text-foreground transition-all hover:border-olive hover:text-gold disabled:opacity-40"
+                  className="flex h-12 w-12 items-center justify-center rounded-full border border-border bg-background/50 text-foreground transition-all hover:border-olive hover:text-olive disabled:opacity-40"
                   aria-label="Diminuir acompanhantes"
                   disabled={companions === 0}
                 >
@@ -239,7 +239,7 @@ export function RsvpForm({ invitedGuest }: RsvpFormProps) {
                 <button
                   type="button"
                   onClick={() => setCompanions(Math.min(maxCompanions, companions + 1))}
-                  className="flex h-12 w-12 items-center justify-center rounded-full border border-border bg-background/50 text-foreground transition-all hover:border-olive hover:text-gold disabled:opacity-40"
+                  className="flex h-12 w-12 items-center justify-center rounded-full border border-border bg-background/50 text-foreground transition-all hover:border-olive hover:text-olive disabled:opacity-40"
                   aria-label="Aumentar acompanhantes"
                   disabled={companions === maxCompanions}
                 >
@@ -292,7 +292,7 @@ export function RsvpForm({ invitedGuest }: RsvpFormProps) {
       <button
         type="submit"
         disabled={submitting}
-        className="shine-line flex min-h-[58px] w-full items-center justify-center gap-3 rounded-md bg-gold px-6 py-5 text-[10px] uppercase tracking-[0.34em] text-background shadow-gold transition-all duration-500 hover:bg-olive-deep disabled:cursor-wait disabled:opacity-70 sm:text-xs"
+        className="shine-line flex min-h-[58px] w-full items-center justify-center gap-3 rounded-md bg-olive px-6 py-5 text-[10px] uppercase tracking-[0.34em] text-background shadow-natural transition-all duration-500 hover:bg-olive-deep disabled:cursor-wait disabled:opacity-70 sm:text-xs"
       >
         {submitting && <Loader2 size={16} className="animate-spin" />}
         {submitting ? "Processando..." : "Confirmar presença"}

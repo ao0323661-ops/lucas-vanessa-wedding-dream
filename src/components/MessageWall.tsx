@@ -58,8 +58,8 @@ export function MessageWall() {
         onSubmit={submit}
         className="editorial-panel relative overflow-hidden rounded-md p-7 sm:p-8"
       >
-        <div className="pointer-events-none absolute inset-x-8 top-0 h-px bg-gradient-to-r from-transparent via-gold/60 to-transparent" />
-        <p className="gold-kicker mb-4">Mural reservado</p>
+        <div className="pointer-events-none absolute inset-x-8 top-0 h-px bg-gradient-to-r from-transparent via-sage/65 to-transparent" />
+        <p className="editorial-kicker mb-4">Mural reservado</p>
         <h3 className="font-display text-4xl leading-tight">Escreva uma nota</h3>
         <div className="mt-7 space-y-5">
           <input
@@ -81,7 +81,7 @@ export function MessageWall() {
           />
           <button
             disabled={sending}
-            className="shine-line flex min-h-[50px] items-center justify-center gap-3 rounded-md bg-gold px-7 text-xs uppercase tracking-[0.28em] text-background shadow-gold transition-colors hover:bg-olive-deep disabled:cursor-wait disabled:opacity-70"
+            className="shine-line flex min-h-[50px] items-center justify-center gap-3 rounded-md bg-olive px-7 text-xs uppercase tracking-[0.28em] text-background shadow-natural transition-colors hover:bg-olive-deep disabled:cursor-wait disabled:opacity-70"
           >
             {sending ? <Loader2 size={15} className="animate-spin" /> : <Send size={15} />}
             {sending ? "Enviando..." : "Enviar"}
@@ -120,12 +120,12 @@ export function MessageWall() {
                 initial={{ opacity: 0, y: 12 }}
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0 }}
-                className="editorial-panel rounded-md border-l-2 border-l-gold p-6"
+                className="editorial-panel rounded-md border-l-2 border-l-sage p-6"
               >
                 <p className="font-display text-2xl italic leading-relaxed text-foreground/90 text-pretty">
                   "{m.message}"
                 </p>
-                <p className="mt-5 text-[10px] uppercase tracking-[0.25em] text-gold">- {m.name}</p>
+                <p className="mt-5 text-[10px] uppercase tracking-[0.25em] text-sage">- {m.name}</p>
               </motion.div>
             ))}
         </AnimatePresence>

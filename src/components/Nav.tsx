@@ -37,11 +37,11 @@ export function Nav() {
           }`}
           aria-label="Voltar ao início"
         >
-          <span className="flex h-9 w-9 items-center justify-center rounded-full border border-olive/35 bg-linen/45 text-sm text-gold backdrop-blur">
+          <span className="flex h-9 w-9 items-center justify-center rounded-full border border-sage/45 bg-linen/45 text-sm text-olive-deep backdrop-blur">
             LV
           </span>
           <span className="hidden sm:inline">
-            Lucas <span className="text-gold">&</span> Vanessa
+            Lucas <span className="text-sage">&</span> Vanessa
           </span>
         </a>
         <nav className="hidden items-center gap-7 md:flex">
@@ -49,7 +49,7 @@ export function Nav() {
             <a
               key={l.href}
               href={l.href}
-              className={`relative text-xs uppercase tracking-[0.24em] transition-colors after:absolute after:-bottom-2 after:left-0 after:h-px after:w-0 after:bg-gold after:transition-all after:duration-300 hover:text-gold hover:after:w-full ${
+              className={`relative text-xs uppercase tracking-[0.24em] transition-colors after:absolute after:-bottom-2 after:left-0 after:h-px after:w-0 after:bg-sage after:transition-all after:duration-300 hover:text-sage hover:after:w-full ${
                 scrolled ? "text-foreground/75" : "text-background/88"
               }`}
             >
@@ -89,7 +89,7 @@ export function Nav() {
                     initial={{ opacity: 0, y: -6 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.28, delay: index * 0.035 }}
-                    className="border-b border-border/60 pb-4 text-sm uppercase tracking-[0.28em] text-foreground/80 transition-colors last:border-0 last:pb-0 hover:text-gold"
+                    className="border-b border-border/60 pb-4 text-sm uppercase tracking-[0.28em] text-foreground/80 transition-colors last:border-0 last:pb-0 hover:text-olive"
                   >
                     {l.label}
                   </motion.a>

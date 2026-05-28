@@ -37,7 +37,7 @@ export function Countdown({ target }: { target: Date }) {
       aria-busy={!mounted}
     >
       <div className="mb-5 text-center">
-        <span className="inline-flex rounded-full border border-gold/30 bg-background/45 px-4 py-2 text-[10px] uppercase tracking-[0.32em] text-olive-deep/80 backdrop-blur">
+        <span className="inline-flex rounded-full border border-sage/35 bg-background/50 px-4 py-2 text-[10px] uppercase tracking-[0.32em] text-olive-deep/85 backdrop-blur">
           Faltam
         </span>
       </div>
@@ -49,9 +49,9 @@ export function Countdown({ target }: { target: Date }) {
             transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
             className="text-center"
           >
-            <div className="shine-line relative flex min-h-[92px] items-center justify-center rounded-md border border-gold/25 bg-background/35 px-3 py-4 shadow-[0_24px_70px_-48px_rgb(47_42_36_/_0.8)] backdrop-blur sm:min-h-[108px] sm:px-4">
-              <div className="absolute inset-x-4 top-0 h-px bg-gradient-to-r from-transparent via-gold/70 to-transparent" />
-              <div className="font-display text-4xl leading-none text-gold tabular-nums sm:text-5xl">
+            <div className="shine-line relative flex min-h-[92px] items-center justify-center rounded-md border border-sage/30 bg-background/40 px-3 py-4 shadow-[0_24px_70px_-50px_rgb(47_42_36_/_0.78)] backdrop-blur sm:min-h-[108px] sm:px-4">
+              <div className="absolute inset-x-4 top-0 h-px bg-gradient-to-r from-transparent via-sage/70 to-transparent" />
+              <div className="font-display text-4xl leading-none text-olive-deep tabular-nums sm:text-5xl">
                 {mounted ? String(it.value).padStart(2, "0") : "--"}
               </div>
             </div>

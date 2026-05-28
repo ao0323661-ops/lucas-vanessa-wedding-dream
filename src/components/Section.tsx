@@ -57,8 +57,8 @@ export function Section({
           >
             {eyebrow && (
               <span
-                className="gold-divider gold-kicker"
-                style={dark ? { color: "var(--gold)" } : undefined}
+                className="editorial-divider editorial-kicker"
+                style={dark ? { color: "var(--sage)" } : undefined}
               >
                 {eyebrow}
               </span>

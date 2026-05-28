@@ -73,14 +73,14 @@ export function GuestAccessGate({ onValidated }: GuestAccessGateProps) {
       transition={{ duration: 0.72, ease: [0.16, 1, 0.3, 1] }}
       className="editorial-panel relative mx-auto w-full overflow-hidden rounded-md p-5 sm:p-7"
     >
-      <div className="pointer-events-none absolute inset-x-8 top-0 h-px bg-gradient-to-r from-transparent via-gold/60 to-transparent" />
+      <div className="pointer-events-none absolute inset-x-8 top-0 h-px bg-gradient-to-r from-transparent via-sage/65 to-transparent" />
 
       <div className="flex items-start gap-4">
-        <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full border border-olive/20 bg-olive/[0.08] text-gold shadow-gold">
+        <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full border border-olive/20 bg-olive/[0.08] text-olive shadow-natural">
           <UserRoundCheck size={18} />
         </span>
         <div>
-          <p className="gold-kicker mb-3">Convite reservado</p>
+          <p className="editorial-kicker mb-3">Convite reservado</p>
           <h3 className="font-display text-3xl leading-tight text-balance sm:text-4xl">
             Acesse com o nome do convite
           </h3>
@@ -114,7 +114,7 @@ export function GuestAccessGate({ onValidated }: GuestAccessGateProps) {
         <button
           type="submit"
           disabled={searching}
-          className="shine-line mt-6 flex min-h-[54px] w-full items-center justify-center gap-3 rounded-md bg-gold px-6 py-4 text-[10px] uppercase tracking-[0.3em] text-background shadow-gold transition-all duration-500 hover:bg-olive-deep disabled:cursor-wait disabled:opacity-70 sm:text-xs"
+          className="shine-line mt-6 flex min-h-[54px] w-full items-center justify-center gap-3 rounded-md bg-olive px-6 py-4 text-[10px] uppercase tracking-[0.3em] text-background shadow-natural transition-all duration-500 hover:bg-olive-deep disabled:cursor-wait disabled:opacity-70 sm:text-xs"
         >
           {searching ? <Loader2 size={16} className="animate-spin" /> : <CheckCircle2 size={16} />}
           {searching ? "Verificando..." : "Verificar convite"}
@@ -172,7 +172,7 @@ export function GuestAccessGate({ onValidated }: GuestAccessGateProps) {
                     {guest.group_name || "Convite sem grupo informado"}
                   </span>
                 </span>
-                <span className="text-[10px] uppercase tracking-[0.26em] text-gold transition-colors group-hover:text-olive-deep">
+                <span className="text-[10px] uppercase tracking-[0.26em] text-sage transition-colors group-hover:text-olive-deep">
                   Escolher
                 </span>
               </button>
