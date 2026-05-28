@@ -1,9 +1,19 @@
 import { useCallback, useEffect, useState } from "react";
 import { supabase } from "@/integrations/supabase/client";
+import { MESSAGE_WALL_REFRESH_EVENT, MESSAGE_WALL_REFRESH_STORAGE_KEY } from "@/lib/message-wall";
 import { motion, AnimatePresence } from "framer-motion";
 import { Loader2, Send } from "lucide-react";
 
-type Msg = { id: string; name: string; message: string; created_at: string };
+type Msg = {
+  id: string;
+  name: string;
+  message: string;
+  approved: boolean;
+  created_at: string;
+};
+
+const MESSAGE_LIMIT = 30;
+const REFRESH_INTERVAL_MS = 10000;
 
 export function MessageWall() {
   const [items, setItems] = useState<Msg[]>([]);
@@ -14,20 +24,60 @@ export function MessageWall() {
   const [sent, setSent] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
-  const load = useCallback(async () => {
-    setLoading(true);
-    const { data } = await supabase
+  const load = useCallback(async (options: { silent?: boolean } = {}) => {
+    if (!options.silent) setLoading(true);
+
+    const { data, error } = await supabase
       .from("messages")
-      .select("id, name, message, created_at")
+      .select("id, name, message, approved, created_at")
       .eq("approved", true)
       .order("created_at", { ascending: false })
-      .limit(30);
-    if (data) setItems(data);
-    setLoading(false);
+      .limit(MESSAGE_LIMIT);
+
+    if (!error) {
+      setItems((data ?? []).filter((item) => item.approved));
+    }
+
+    if (!options.silent) setLoading(false);
   }, []);
 
   useEffect(() => {
     void load();
+  }, [load]);
+
+  useEffect(() => {
+    const refresh = () => {
+      void load({ silent: true });
+    };
+
+    const handleVisibilityChange = () => {
+      if (document.visibilityState === "visible") refresh();
+    };
+
+    const handleStorageChange = (event: StorageEvent) => {
+      if (event.key === MESSAGE_WALL_REFRESH_STORAGE_KEY) refresh();
+    };
+
+    const channel = supabase
+      .channel("public-message-wall")
+      .on("postgres_changes", { event: "*", schema: "public", table: "messages" }, refresh)
+      .subscribe();
+
+    const refreshInterval = window.setInterval(refresh, REFRESH_INTERVAL_MS);
+
+    window.addEventListener("focus", refresh);
+    window.addEventListener(MESSAGE_WALL_REFRESH_EVENT, refresh);
+    window.addEventListener("storage", handleStorageChange);
+    document.addEventListener("visibilitychange", handleVisibilityChange);
+
+    return () => {
+      window.clearInterval(refreshInterval);
+      window.removeEventListener("focus", refresh);
+      window.removeEventListener(MESSAGE_WALL_REFRESH_EVENT, refresh);
+      window.removeEventListener("storage", handleStorageChange);
+      document.removeEventListener("visibilitychange", handleVisibilityChange);
+      void supabase.removeChannel(channel);
+    };
   }, [load]);
 
   async function submit(e: React.FormEvent) {

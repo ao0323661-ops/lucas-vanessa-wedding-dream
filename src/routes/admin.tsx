@@ -2,6 +2,7 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { useEffect, useMemo, useState, type FormEvent } from "react";
 import { supabase } from "@/integrations/supabase/client";
 import { clampAllowedCompanions, normalizeGuestName } from "@/lib/invited-guests";
+import { notifyMessageWallChanged } from "@/lib/message-wall";
 import { WEDDING } from "@/lib/wedding";
 
 type Rsvp = {
@@ -249,12 +250,30 @@ function Dashboard() {
     if (messagesResult.data) setMessages(messagesResult.data);
   }
 
+  async function loadMessages() {
+    const { data } = await supabase
+      .from("messages")
+      .select("*")
+      .order("created_at", { ascending: false });
+
+    if (data) setMessages(data);
+  }
+
   async function setMessageApproval(id: string, approved: boolean) {
-    const { error } = await supabase.from("messages").update({ approved }).eq("id", id);
-    if (error) return;
+    const { data, error } = await supabase
+      .from("messages")
+      .update({ approved })
+      .eq("id", id)
+      .select("id, approved")
+      .maybeSingle();
+
+    if (error || !data) return;
+
     setMessages((current) =>
       current.map((message) => (message.id === id ? { ...message, approved } : message)),
     );
+    notifyMessageWallChanged();
+    void loadMessages();
   }
 
   function sortGuests(guests: InvitedGuest[]) {
