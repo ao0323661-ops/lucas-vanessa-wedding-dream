@@ -9,7 +9,6 @@ const schema = z.object({
   attending: z.enum(["yes", "no"]),
   companions: z.number().min(0).max(10),
   phone: z.string().trim().max(40).optional().or(z.literal("")),
-  dietary_restrictions: z.string().trim().max(300).optional().or(z.literal("")),
   message: z.string().trim().max(600).optional().or(z.literal("")),
 });
 
@@ -88,7 +87,6 @@ export function RsvpForm({ invitedGuest }: RsvpFormProps) {
       attending,
       companions,
       phone: String(fd.get("phone") || ""),
-      dietary_restrictions: String(fd.get("dietary_restrictions") || ""),
       message: String(fd.get("message") || ""),
     });
 
@@ -106,7 +104,7 @@ export function RsvpForm({ invitedGuest }: RsvpFormProps) {
         parsed.data.attending === "yes" ? Math.min(parsed.data.companions, maxCompanions) : 0,
       invited_guest_id: invitedGuest.id,
       phone: parsed.data.phone || null,
-      dietary_restrictions: parsed.data.dietary_restrictions || null,
+      dietary_restrictions: null,
       message: parsed.data.message || null,
     });
 
@@ -254,20 +252,9 @@ export function RsvpForm({ invitedGuest }: RsvpFormProps) {
         )}
       </AnimatePresence>
 
-      <div className="grid gap-6 sm:grid-cols-2">
-        <Field label="Telefone / WhatsApp">
-          <input name="phone" maxLength={40} placeholder="(00) 00000-0000" className={inputCls} />
-        </Field>
-
-        <Field label="Restrição alimentar">
-          <input
-            name="dietary_restrictions"
-            maxLength={300}
-            placeholder="Ex: Alérgico a camarão"
-            className={inputCls}
-          />
-        </Field>
-      </div>
+      <Field label="Telefone / WhatsApp">
+        <input name="phone" maxLength={40} placeholder="(00) 00000-0000" className={inputCls} />
+      </Field>
 
       <Field label="Mensagem para os noivos">
         <textarea
